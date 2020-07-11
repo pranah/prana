@@ -7,6 +7,7 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 //prana main contract.
 
+//IMPORTANT: edit out abstract!!!!!
 abstract contract prana is ERC1155 {
     //The abstract status must be changed as the functions are added.
     //currently added to avoid showing up error as the contract is written.
@@ -41,6 +42,12 @@ abstract contract prana is ERC1155 {
     // mapping for all books
     // ISBN is the key, its corresponding details is the value
     mapping(uint256 => BookInfo) internal booksInfo;
+
+
+    //Event to emit when a new book is published with its ISBN and publisher address
+    event BookPublished(address indexed publisher, uint256 indexed isbn, uint256 indexed price);
+
+
 
 
 
