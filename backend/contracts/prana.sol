@@ -25,6 +25,9 @@ abstract contract prana is ERC1155 {
        _;
     }
 
+    // A nonce to ensure unique id for each new token.
+    uint256 public nonce;  // might need more work
+
     // struct to store book details. For each new title.
     // bytes32(encryptedBookDataHash) - the actual content of the book
     // This is where the linkage of the contract with storage mechanisms happen
