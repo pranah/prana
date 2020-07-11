@@ -43,6 +43,31 @@ abstract contract prana is ERC1155 {
     // ISBN is the key, its corresponding details is the value
     mapping(uint256 => BookInfo) internal booksInfo;
 
+    // struct for token details and transactions
+    // uint256(isbn) binds the token to the book it points to
+    // uint256(copyNumber) to count which copy of the book the token is
+    // so that people can brag about owning the 1st copy, 100th copy etc, add sell them at a premium
+    // uint256(resalePrice) is the price that tokenOwner asks to sell the token
+    // bool(isUpForResale) is to advertise that the token is for sale
+    // uint(rentingPrice) is the price for renting that the tokenOwner sets
+    // bool (isUpForRenting) is to advertise that the token is for renting
+    // address(rentee) so that the tokenOwner doesn't change and the token comes back after a while
+    struct TokenDetails{
+        uint256 isbn;
+        uint256 copyNumber;
+        // resale aspects
+        uint256 resalePrice;
+        bool isUpForResale;
+        //Renting aspects (gonna be hard to properly figure out renting)
+        uint256 rentingPrice;
+        bool isUpForRenting;
+        address rentee;
+    }
+
+
+    //tokenID to TokenDetails mapping
+    mapping (uint256 => TokenDetails) internal tokenData;
+
 
     //Event to emit when a new book is published with its ISBN and publisher address
     event BookPublished(address indexed publisher, uint256 indexed isbn, uint256 indexed price);
