@@ -36,7 +36,8 @@ abstract contract prana is ERC1155 {
         bytes32 encryptedBookDataHash;  
         address publisherAddress;
         uint256 bookPrice;   
-        uint256 transactionCut;    
+        uint256 transactionCut; 
+        uint256 bookSales;   
     }
 
     // mapping for all books
@@ -85,6 +86,7 @@ abstract contract prana is ERC1155 {
         booksInfo[_isbn].publisherAddress = tx.origin;
         booksInfo[_isbn].bookPrice = _price;
         booksInfo[_isbn].transactionCut = _transactionCut;
+        booksInfo[_isbn].bookSales = 0;
         
         //event that serves as an advertisement, sort of.
         emit BookPublished(tx.origin, _isbn, _price);
