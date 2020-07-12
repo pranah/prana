@@ -91,7 +91,7 @@ abstract contract prana is ERC1155 {
         booksInfo[_isbn].transactionCut = _transactionCut;
         booksInfo[_isbn].bookSales = 0;
         
-        //event that serves as an advertisement, sort of.
+        //event that serves as an advertisement as well
         emit BookPublished(tx.origin, _isbn, _price);
 
     }
