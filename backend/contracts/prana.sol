@@ -79,7 +79,7 @@ abstract contract prana is ERC1155 {
 
     //function to add book details into the chain i.e. publish the book
     function publishBook(
-        bytes32 _encryptedBookDataHash, 
+        bytes32 _encryptedBookDataHash, //TOCHECK: bytes32 vs bytes memory
         uint256 _isbn, 
         uint256 _price, 
         uint256 _transactionCut) 
@@ -94,9 +94,26 @@ abstract contract prana is ERC1155 {
         //event that serves as an advertisement
         emit BookPublished(tx.origin, _isbn, _price);
 
-        //check commit
-
     }
+
+
+    function directPurchase(uint256 _isbn) public payable returns (bool) {
+        //to revert back if the buyer doesn't have the price set by the author.
+        require(booksInfo[_isbn].publisherAddress != address(0),"ISBN does not exist !");
+        require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
+        //a new tokenID is generated, and a new token is minted with that ID.
+        uint256 tokenid = ++nonce;
+        _mint(msg.sender, tokenid, 1, msg.data); //need to checkup on the fourth argument, data.
+        //once a token's succesfully minted, update the various details.
+        booksInfo[_isbn].bookSales++;
+
+        tokenData[tokenid].isbn = _isbn;
+        tokenData[tokenid].copyNumber = booksInfo[_isbn].bookSales;
+        tokenData[tokenid].isUpForResale = false;
+        tokenData[tokenid].isUpForRenting = false;
+        return true;
+    }
+
 
 
 
