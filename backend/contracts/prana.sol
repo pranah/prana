@@ -94,6 +94,8 @@ abstract contract prana is ERC1155 {
         //event that serves as an advertisement too
         emit BookPublished(tx.origin, _isbn, _price);
 
+        //check commit
+
     }
 
 
