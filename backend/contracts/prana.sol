@@ -79,6 +79,9 @@ abstract contract prana is ERC1155 {
     //Event to emit when a new book is published with its ISBN and publisher address
     event BookPublished(address indexed publisher, uint256 indexed isbn, uint256 indexed price);
 
+    //Event to emit when a tokenOwner puts out a token for sale
+    event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenid);
+
 
     //function to add book details into the chain i.e. publish the book
     function publishBook(
