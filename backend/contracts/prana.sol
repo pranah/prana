@@ -69,8 +69,11 @@ abstract contract prana is ERC1155 {
     }
 
 
-    //tokenID to TokenDetails mapping
+    // tokenID to TokenDetails mapping
     mapping (uint256 => TokenDetails) internal tokenData;
+
+    // account balances, for everyone involved.
+    mapping (address => uint256) internal accountBalance;
 
 
     //Event to emit when a new book is published with its ISBN and publisher address
@@ -103,7 +106,7 @@ abstract contract prana is ERC1155 {
         require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
         //a new tokenID is generated, and a new token is minted with that ID.
         uint256 tokenid = ++nonce;
-        _mint(msg.sender, tokenid, 1, msg.data); //need to checkup on the fourth argument, data.
+        _mint(msg.sender, tokenid, 1, msg.data); //need to checkup on the fourth argument, msg.data.
         //once a token's succesfully minted, update the various details.
         booksInfo[_isbn].bookSales++;
 
@@ -111,6 +114,11 @@ abstract contract prana is ERC1155 {
         tokenData[tokenid].copyNumber = booksInfo[_isbn].bookSales;
         tokenData[tokenid].isUpForResale = false;
         tokenData[tokenid].isUpForRenting = false;
+
+        // 5% of directPurchase money goes to the contractOwner, might be a bit controversial
+        accountBalance[owner] += (msg.value/100)*5;
+        // the rest goes to the publisher
+        accountBalance[booksInfo[_isbn].publisherAddress] += msg.value - ((msg.value/100)*5);
         return true;
     }
 
