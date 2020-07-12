@@ -115,10 +115,10 @@ abstract contract prana is ERC1155 {
         tokenData[tokenid].isUpForResale = false;
         tokenData[tokenid].isUpForRenting = false;
 
-        // 5% of directPurchase money goes to the contractOwner, might be a bit controversial
-        accountBalance[owner] += (msg.value/100)*5;
+        // 10% of directPurchase money goes to the contractOwner, might be a bit controversial
+        accountBalance[owner] += (msg.value/100)*10;
         // the rest goes to the publisher
-        accountBalance[booksInfo[_isbn].publisherAddress] += msg.value - ((msg.value/100)*5);
+        accountBalance[booksInfo[_isbn].publisherAddress] += msg.value - ((msg.value/100)*10);
         return true;
     }
 
