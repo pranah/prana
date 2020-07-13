@@ -139,5 +139,36 @@ abstract contract prana is ERC721 {
         emit TokenForSale(salePrice, tokenData[tokenId].isbn, tokenId);
     }
 
+    // To buy a token that's been put for sale.
+    function buyToken(uint256 tokenId) public payable {
+        require(tokenData[tokenId].isUpForResale == true, 
+        "This token hasn't been put for sale by the token owner");
+        
+        require(msg.value >= tokenData[tokenId].resalePrice, 
+        "Your price is too low for this token");
+
+        // 1% of resale money goes to the contractOwner, might be a bit controversial
+        accountBalance[owner] += (msg.value/100)*1;
+
+        // transactinCut for the author/publisher gets debited
+        accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] +=  
+        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
+
+        //the remaining money goes to the token owner
+        accountBalance[ownerOf(tokenId)] +=
+        msg.value - ((msg.value/100)*1 + 
+        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+
+        transferFrom(ownerOf(tokenId), msg.sender, tokenId);
+        tokenData[tokenId].isUpForResale = false;
+
+        //TODO: 
+        //msg.sender should be the approved helper contract
+        //and the token should be assigned to the third party
+
+
+
+    }
+
 
 }
