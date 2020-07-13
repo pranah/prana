@@ -2,13 +2,13 @@
 
 pragma solidity ^0.6.0;
 
-import "../../node_modules/@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "../../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
 //prana main contract.
 
 //IMPORTANT: edit out abstract!!!!!
-abstract contract prana is ERC1155 {
+abstract contract prana is ERC721 {
     //The abstract status must be changed as the functions are added.
     //currently added to avoid showing up error as the contract is written.
 
@@ -109,7 +109,7 @@ abstract contract prana is ERC1155 {
         require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
         //a new tokenID is generated, and a new token is minted with that ID.
         uint256 tokenid = ++nonce;
-        _mint(msg.sender, tokenid, 1, msg.data); //need to checkup on the fourth argument, msg.data.
+        _mint(msg.sender, tokenid); 
         //once a token's succesfully minted, update the various details.
         booksInfo[_isbn].bookSales++;
 
