@@ -69,7 +69,7 @@ abstract contract prana is ERC721 {
     }
 
 
-    // tokenID to TokenDetails mapping
+    // tokenId to TokenDetails mapping
     mapping (uint256 => TokenDetails) internal tokenData;
 
     // account balances, for everyone involved.
@@ -80,7 +80,7 @@ abstract contract prana is ERC721 {
     event BookPublished(address indexed publisher, uint256 indexed isbn, uint256 indexed price);
 
     //Event to emit when a tokenOwner puts out a token for sale
-    event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenid);
+    event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenId);
 
 
     //function to add book details into the chain i.e. publish the book
@@ -102,21 +102,22 @@ abstract contract prana is ERC721 {
 
     }
 
-
+    //function to purchase books directly from the publisher. 
+    //New tokens will be minted here.
     function directPurchase(uint256 _isbn) public payable returns (bool) {
         //to revert back if the buyer doesn't have the price set by the author.
         require(booksInfo[_isbn].publisherAddress != address(0),"ISBN does not exist !");
         require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
-        //a new tokenID is generated, and a new token is minted with that ID.
-        uint256 tokenid = ++nonce;
-        _mint(msg.sender, tokenid); 
+        //a new tokenId is generated, and a new token is minted with that ID.
+        uint256 tokenId = ++nonce;
+        _mint(msg.sender, tokenId); 
         //once a token's succesfully minted, update the various details.
         booksInfo[_isbn].bookSales++;
 
-        tokenData[tokenid].isbn = _isbn;
-        tokenData[tokenid].copyNumber = booksInfo[_isbn].bookSales;
-        tokenData[tokenid].isUpForResale = false;
-        tokenData[tokenid].isUpForRenting = false;
+        tokenData[tokenId].isbn = _isbn;
+        tokenData[tokenId].copyNumber = booksInfo[_isbn].bookSales;
+        tokenData[tokenId].isUpForResale = false;
+        tokenData[tokenId].isUpForRenting = false;
 
         // 10% of directPurchase money goes to the contractOwner, might be a bit controversial
         accountBalance[owner] += (msg.value/100)*10;
@@ -125,11 +126,18 @@ abstract contract prana is ERC721 {
         return true;
     }
 
+    // function to put a token for sale
+    function putTokenForSale(uint256 salePrice, uint256 tokenId) public {
+        require(msg.sender == ownerOf(tokenId), "You are not this token's owner");
+        tokenData[tokenId].resalePrice = salePrice;
+        tokenData[tokenId].isUpForResale = true;
 
-
-
-
-
+        //TODO:
+        //A helper contract that gets approved for token transfer when someone's ready to buy
+        //approve(pranaHelperAddress, tokenId);
+        // event that serves as advertisement for all
+        emit TokenForSale(salePrice, tokenData[tokenId].isbn, tokenId);
+    }
 
 
 }
