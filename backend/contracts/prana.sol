@@ -79,6 +79,7 @@ abstract contract prana is ERC721 {
         uint256 rentingPrice;
         bool isUpForRenting;
         address rentee;
+        uint256 rentedAtBlock;
     }
 
 
@@ -98,6 +99,8 @@ abstract contract prana is ERC721 {
     //Event to emit when the tokenOwner puts out a token for renting
     event TokenForRenting(uint256 indexed rentingPrice, uint256 indexed isbn, uint256 indexed tokenId);
 
+    //Event to emit when a token is rented
+    event TokenRented(uint256 indexed isbn, uint256 indexed tokenId, address indexed rentee);
 
     // overriding existing function to ensure good behavior
     // overriding transferFrom() function
@@ -132,6 +135,24 @@ abstract contract prana is ERC721 {
     // so that they may refer to each other. Crude version
     function setPranaHelperAddress(address _pranaHelperAddress) public onlyOwner{
         pranaHelperAddress = _pranaHelperAddress;
+    }
+
+    
+    // an internal function to update the balances for each monetary transaction
+    // not sure if msg.value works well with internal functions
+    function _updateAccountBalances(uint256 tokenId) internal {
+        // 1% of resale money goes to the contractOwner, might be a bit controversial
+        accountBalance[owner] += (msg.value/100)*1;
+
+        // transactinCut for the author/publisher gets debited
+        accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] +=  
+        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
+
+        //the remaining money goes to the token owner
+        accountBalance[ownerOf(tokenId)] +=
+        msg.value - ((msg.value/100)*1 + 
+        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+
     }
     
     //function to add book details into the chain i.e. publish the book
@@ -206,19 +227,11 @@ abstract contract prana is ERC721 {
         
         transferFrom(ownerOf(tokenId), _tokenRecipient, tokenId);
         
-        // TODO: All this is part of the transferFrom() TODO.
-        //  This goes into that function. Same for safeTransferFrom() as well, as it's resolved
-        // 1% of resale money goes to the contractOwner, might be a bit controversial
-        accountBalance[owner] += (msg.value/100)*1;
+        // TODO: 
+        // _updateAccountBalances(tokenId) should go into transferFrom()
+        // and safeTransferFrom() functions after mutability error resolution
 
-        // transactinCut for the author/publisher gets debited
-        accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] +=  
-        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
-
-        //the remaining money goes to the token owner
-        accountBalance[ownerOf(tokenId)] +=
-        msg.value - ((msg.value/100)*1 + 
-        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+        _updateAccountBalances(tokenId);
 
         tokenData[tokenId].isUpForResale = false;
         tokenData[tokenId].isUpForRenting = false;
@@ -234,5 +247,23 @@ abstract contract prana is ERC721 {
         tokenData[tokenId].isUpForRenting = true;
         tokenData[tokenId].rentee = address(0);//No one's rented it as of now
         emit TokenForRenting(_newPrice, tokenData[tokenId].isbn, tokenId);
+    }
+
+    //function to actually rent a copy for content consumption
+    function rentToken(uint256 tokenId) public payable {
+        require(tokenData[tokenId].isUpForRenting == true,
+        "This copy hasn't been put for renting by the owner");
+        require(tokenData[tokenId].rentee == address(0),
+        "This copy has been rented by someone already");
+        require(msg.value >= tokenData[tokenId].rentingPrice,
+        "Your price isn't sufficient to rent this copy");
+
+        tokenData[tokenId].rentee = msg.sender;
+        tokenData[tokenId].rentedAtBlock = block.number;
+
+        _updateAccountBalances(tokenId);
+
+        emit TokenRented(tokenData[tokenId].isbn, tokenId, msg.sender);
+
     }
 }
