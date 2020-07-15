@@ -3,6 +3,10 @@
 pragma solidity ^0.6.0;
 
 
+contract PranaInterface{
+    function buyToken(uint256 tokenid, address _tokenRecipient) public payable{}
+}
+
 contract pranaHelper {
 
 
@@ -25,4 +29,10 @@ contract pranaHelper {
     function setPranaAddress(address _pranaAddress) public onlyOwner{
         pranaAddress = _pranaAddress;
     }
+
+    function buyTokenFromPrana(uint tokenId) public payable{
+        PranaInterface P = PranaInterface(pranaAddress);
+        P.buyToken{value:msg.value}(tokenId, msg.sender);
+    }
+
 }

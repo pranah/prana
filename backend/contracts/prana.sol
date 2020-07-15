@@ -146,6 +146,7 @@ abstract contract prana is ERC721 {
         booksInfo[_isbn].bookSales = 0;
         
         //event that serves as an advertisement
+        //tx.origin vs msg.sender on the assumption that it's always going to be a human
         emit BookPublished(tx.origin, _isbn, _price);
 
     }
@@ -181,21 +182,22 @@ abstract contract prana is ERC721 {
         tokenData[tokenId].resalePrice = salePrice;
         tokenData[tokenId].isUpForResale = true;
 
-        //TODO:
-        //A helper contract that gets approved for token transfer when someone's ready to buy
-        //approve(pranaHelperAddress, tokenId);
+        // The helper contract gets approved for token transfer when someone's ready to buy
+        approve(pranaHelperAddress, tokenId);
         // event that serves as advertisement for all
         emit TokenForSale(salePrice, tokenData[tokenId].isbn, tokenId);
     }
 
     // To buy a token that's been put for sale.
-    function buyToken(uint256 tokenId) public payable {
+    function buyToken(uint256 tokenId, address _tokenRecipient) public payable {
         require(tokenData[tokenId].isUpForResale == true, 
         "This token hasn't been put for sale by the token owner");
         
         require(msg.value >= tokenData[tokenId].resalePrice, 
         "Your price is too low for this token");
 
+        
+        transferFrom(ownerOf(tokenId), _tokenRecipient, tokenId);
         
         // TODO: All this is part of the transferFrom() TODO.
         //  This goes into that function. Same for safeTransferFrom() as well, as it's resolved
@@ -213,14 +215,6 @@ abstract contract prana is ERC721 {
 
         tokenData[tokenId].isUpForResale = false;
         tokenData[tokenId].isUpForRenting = false;
-        
-        transferFrom(ownerOf(tokenId), msg.sender, tokenId);
-
-        //TODO: 
-        //msg.sender should be the approved helper contract
-        //and the token should be assigned to the third party
-
-
 
     }
 
