@@ -91,6 +91,35 @@ abstract contract prana is ERC721 {
     event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenId);
 
 
+    // overriding existing function to ensure good behavior
+    // overriding transferFrom() function
+    // error: Overriding function changes state mutability from "nonpayable" to "payable"
+    // TODO: resolve this error and make this the transferFrom() function
+    // function transferFrom(address from, address to, uint256 tokenId) public override payable {
+    //     //solhint-disable-next-line max-line-length
+    //     require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+
+    //     _transfer(from, to, tokenId);
+
+    //     // Added functionalities from here on.
+
+    //     // 1% of resale money goes to the contractOwner, might be a bit controversial
+    //     accountBalance[owner] += (msg.value/100)*1;
+
+    //     // transactinCut for the author/publisher gets debited
+    //     accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] +=  
+    //     booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
+
+    //     //the remaining money goes to the token owner
+    //     accountBalance[ownerOf(tokenId)] +=
+    //     msg.value - ((msg.value/100)*1 + 
+    //     booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+
+    //     tokenData[tokenId].isUpForResale = false;
+    //     tokenData[tokenId].isUpForRenting = false;
+
+    // }
+    
     //function to add book details into the chain i.e. publish the book
     function publishBook(
         bytes32 _encryptedBookDataHash, //TOCHECK: bytes32 vs bytes memory
@@ -156,6 +185,9 @@ abstract contract prana is ERC721 {
         require(msg.value >= tokenData[tokenId].resalePrice, 
         "Your price is too low for this token");
 
+        
+        // TODO: All this is part of the transferFrom() TODO.
+        //  This goes into that function. Same for safeTransferFrom() as well, as it's resolved
         // 1% of resale money goes to the contractOwner, might be a bit controversial
         accountBalance[owner] += (msg.value/100)*1;
 
@@ -168,8 +200,10 @@ abstract contract prana is ERC721 {
         msg.value - ((msg.value/100)*1 + 
         booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
 
-        transferFrom(ownerOf(tokenId), msg.sender, tokenId);
         tokenData[tokenId].isUpForResale = false;
+        tokenData[tokenId].isUpForRenting = false;
+        
+        transferFrom(ownerOf(tokenId), msg.sender, tokenId);
 
         //TODO: 
         //msg.sender should be the approved helper contract
