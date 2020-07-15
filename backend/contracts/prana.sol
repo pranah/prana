@@ -110,7 +110,7 @@ abstract contract prana is ERC721 {
         require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
         //a new tokenId is generated, and a new token is minted with that ID.
         uint256 tokenId = ++nonce;
-        _mint(msg.sender, tokenId); 
+        _safeMint(msg.sender, tokenId); 
         //once a token's succesfully minted, update the various details.
         booksInfo[_isbn].bookSales++;
 
