@@ -25,6 +25,9 @@ abstract contract prana is ERC721 {
     //address of the contract deployer
     address owner;
 
+    //address of the helper contract
+    address pranaHelperAddress;
+
     //Modifier for onlyOwner functions
     //this could be figured out with AccessControl if there's enough time
     modifier onlyOwner {
@@ -121,6 +124,12 @@ abstract contract prana is ERC721 {
     //     tokenData[tokenId].isUpForRenting = false;
 
     // }
+    
+    // function to pass in the adddresses of each of the contract
+    // so that they may refer to each other. Crude version
+    function setPranaHelperAddress(address _pranaHelperAddress) public onlyOwner{
+        pranaHelperAddress = _pranaHelperAddress;
+    }
     
     //function to add book details into the chain i.e. publish the book
     function publishBook(
