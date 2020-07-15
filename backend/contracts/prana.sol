@@ -38,6 +38,7 @@ abstract contract prana is ERC721 {
 
     // struct to store book details. For each new title.
     // bytes32(encryptedBookDataHash) - the actual content of the book
+    // bytes32(unencryptedBookDetailsCID) - cid to pull book cover and other details to show the world
     // This is where the linkage of the contract with storage mechanisms happen
     // address(publisherAddress) -  address of the content creator/publisher
     // uint256(bookPrice) - price of the book that the creator asks for direct purchase
@@ -45,6 +46,7 @@ abstract contract prana is ERC721 {
     // that the creator lay claim to. Stored as a percentage.
     struct BookInfo{
         bytes32 encryptedBookDataHash;  
+        bytes32 unencryptedBookDetailsCID;
         address publisherAddress;
         uint256 bookPrice;   
         uint256 transactionCut; 
