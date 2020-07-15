@@ -95,6 +95,9 @@ abstract contract prana is ERC721 {
     //Event to emit when a tokenOwner puts out a token for sale
     event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenId);
 
+    //Event to emit when the tokenOwner puts out a token for renting
+    event TokenForRenting(uint256 indexed rentingPrice, uint256 indexed isbn, uint256 indexed tokenId);
+
 
     // overriding existing function to ensure good behavior
     // overriding transferFrom() function
@@ -177,8 +180,11 @@ abstract contract prana is ERC721 {
     }
 
     // function to put a token for sale
+    // a user can update the resalePrice by just putting it up for sale again (may not be needed)
     function putTokenForSale(uint256 salePrice, uint256 tokenId) public {
         require(msg.sender == ownerOf(tokenId), "You are not this token's owner");
+        require(tokenData[tokenId].isUpForRenting == false,
+        "Can't put a token for sale while it's put for renting");
         tokenData[tokenId].resalePrice = salePrice;
         tokenData[tokenId].isUpForResale = true;
 
@@ -187,8 +193,9 @@ abstract contract prana is ERC721 {
         // event that serves as advertisement for all
         emit TokenForSale(salePrice, tokenData[tokenId].isbn, tokenId);
     }
-
+    
     // To buy a token that's been put for sale.
+    // function will always be called by pranaHelper as the approved address for tokenId
     function buyToken(uint256 tokenId, address _tokenRecipient) public payable {
         require(tokenData[tokenId].isUpForResale == true, 
         "This token hasn't been put for sale by the token owner");
@@ -218,5 +225,14 @@ abstract contract prana is ERC721 {
 
     }
 
-
+    // function to put a copy for renting, ownership doesn't change.
+    function putForRent(uint256 _newPrice, uint256 tokenId) public{
+        require(msg.sender == ownerOf(tokenId), "You are not this token's owner");
+        require(tokenData[tokenId].isUpForResale == false, 
+        "Can't put a copy up for renting if it's already on sale!");
+        tokenData[tokenId].rentingPrice = _newPrice;
+        tokenData[tokenId].isUpForRenting = true;
+        tokenData[tokenId].rentee = address(0);//No one's rented it as of now
+        emit TokenForRenting(_newPrice, tokenData[tokenId].isbn, tokenId);
+    }
 }
