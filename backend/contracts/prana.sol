@@ -2,6 +2,7 @@
 
 pragma solidity ^0.6.0;
 
+import "../../node_modules/@openzeppelin/contracts/utils/Counters.sol";
 import "../../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
@@ -12,6 +13,11 @@ abstract contract prana is ERC721 {
     //The abstract status must be changed as the functions are added.
     //currently added to avoid showing up error as the contract is written.
 
+    using Counters for Counters.Counter;
+    
+    //to automate tokenId generation
+    Counters.Counter private _tokenIdTracker;
+    
     constructor () public {
         owner = msg.sender;
     }
@@ -20,13 +26,15 @@ abstract contract prana is ERC721 {
     address owner;
 
     //Modifier for onlyOwner functions
+    //this could be figured out with AccessControl if there's enough time
     modifier onlyOwner {
        require(msg.sender == owner, 'You are not the contract owner to call this function!');
        _;
     }
 
     // A nonce to ensure unique id for each new token.
-    uint256 public nonce;  // might need more work
+    //deprecated in favor of _tokenIdTracker
+    // uint256 public nonce;  // might need more work
 
     // struct to store book details. For each new title.
     // bytes32(encryptedBookDataHash) - the actual content of the book
@@ -109,8 +117,9 @@ abstract contract prana is ERC721 {
         require(booksInfo[_isbn].publisherAddress != address(0),"ISBN does not exist !");
         require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
         //a new tokenId is generated, and a new token is minted with that ID.
-        uint256 tokenId = ++nonce;
+        uint256 tokenId = _tokenIdTracker.current();
         _safeMint(msg.sender, tokenId); 
+        _tokenIdTracker.increment();
         //once a token's succesfully minted, update the various details.
         booksInfo[_isbn].bookSales++;
 
