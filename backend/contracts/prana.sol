@@ -48,8 +48,8 @@ abstract contract prana is ERC721 {
     // uint256(transactionCut) - cut of further transactions on copies 
     // that the creator lay claim to. Stored as a percentage.
     struct BookInfo{
-        bytes32 encryptedBookDataHash;  
-        bytes32 unencryptedBookDetailsCID;
+        string encryptedBookDataHash;  
+        string unencryptedBookDetailsCID;
         address publisherAddress;
         uint256 bookPrice;   
         uint256 transactionCut; 
@@ -63,7 +63,8 @@ abstract contract prana is ERC721 {
     // struct for token details and transactions
     // uint256(isbn) binds the token to the book it points to
     // uint256(copyNumber) to count which copy of the book the token is
-    // so that people can brag about owning the 1st copy, 100th copy etc, add sell them at a premium
+    // so that people can brag about owning the 1st copy, 100th copy etc, 
+    // add sell them at a premium
     // uint256(resalePrice) is the price that tokenOwner asks to sell the token
     // bool(isUpForResale) is to advertise that the token is for sale
     // uint(rentingPrice) is the price for renting that the tokenOwner sets
@@ -111,20 +112,7 @@ abstract contract prana is ERC721 {
     //     require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
 
     //     _transfer(from, to, tokenId);
-
-    //     // Added functionalities from here on.
-
-    //     // 1% of resale money goes to the contractOwner, might be a bit controversial
-    //     accountBalance[owner] += (msg.value/100)*1;
-
-    //     // transactinCut for the author/publisher gets debited
-    //     accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] +=  
-    //     booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
-
-    //     //the remaining money goes to the token owner
-    //     accountBalance[ownerOf(tokenId)] +=
-    //     msg.value - ((msg.value/100)*1 + 
-    //     booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+    //     _updateAccountBalances(tokenId);
 
     //     tokenData[tokenId].isUpForResale = false;
     //     tokenData[tokenId].isUpForRenting = false;
@@ -157,10 +145,10 @@ abstract contract prana is ERC721 {
     
     //function to add book details into the chain i.e. publish the book
     function publishBook(
-        bytes32 _encryptedBookDataHash, //TOCHECK: bytes32 vs bytes memory
+        string memory _encryptedBookDataHash, //TOCHECK: bytes32 vs bytes memory
         uint256 _isbn, 
         uint256 _price,
-        bytes32 _unencryptedBookDetailsCID, 
+        string memory _unencryptedBookDetailsCID, 
         uint256 _transactionCut) 
         public {
         require(booksInfo[_isbn].publisherAddress==address(0), "This book has already been published!");
@@ -267,5 +255,21 @@ abstract contract prana is ERC721 {
 
         emit TokenRented(tokenData[tokenId].isbn, tokenId, msg.sender);
 
+    }
+
+    //function to actually consume the content  you've bought/rented
+    function consumeContent(uint256 tokenId) public view returns(string memory){
+        require(ownerOf(tokenId) == msg.sender || tokenData[tokenId].rentee == msg.sender, 
+        "You are not authorized to view this copy!");
+        if(ownerOf(tokenId) == msg.sender){
+            require(tokenData[tokenId].isUpForRenting == false, 
+            "You have put your copy for renting, please take it down to view the content");
+        }
+        else if(tokenData[tokenId].rentee == msg.sender){
+            // the copy is rented for a two-week period, which is 80640 blocks.
+            require(block.number <= tokenData[tokenId].rentedAtBlock + 80640,
+            "Your rental period has expired");
+        }
+        return booksInfo[tokenData[tokenId].isbn].encryptedBookDataHash;
     }
 }
