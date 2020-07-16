@@ -264,10 +264,15 @@ abstract contract prana is ERC721 {
         if(ownerOf(tokenId) == msg.sender){
             require(tokenData[tokenId].isUpForRenting == false, 
             "You have put your copy for renting, please take it down to view the content");
+            if(tokenData[tokenId].rentee!= address(0)){
+                // the copy is rented for a two-week period, which is 100800 blocks.
+                // assuming the block time is 12 seconds on average
+                require(block.number > tokenData[tokenId].rentedAtBlock + 100800,
+                "The renting period is not over yet for you to consume the content");
+            }
         }
         else if(tokenData[tokenId].rentee == msg.sender){
-            // the copy is rented for a two-week period, which is 80640 blocks.
-            require(block.number <= tokenData[tokenId].rentedAtBlock + 80640,
+            require(block.number <= tokenData[tokenId].rentedAtBlock + 100800,
             "Your rental period has expired");
         }
         return booksInfo[tokenData[tokenId].isbn].encryptedBookDataHash;
