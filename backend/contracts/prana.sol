@@ -182,6 +182,7 @@ abstract contract prana is ERC721 {
         tokenData[tokenId].copyNumber = booksInfo[_isbn].bookSales;
         tokenData[tokenId].isUpForResale = false;
         tokenData[tokenId].isUpForRenting = false;
+        tokenData[tokenId].rentee = address(0);
 
         // 10% of directPurchase money goes to the contractOwner, might be a bit controversial
         accountBalance[owner] += (msg.value/100)*10;
