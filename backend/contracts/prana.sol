@@ -159,13 +159,15 @@ abstract contract prana is ERC721 {
     function publishBook(
         bytes32 _encryptedBookDataHash, //TOCHECK: bytes32 vs bytes memory
         uint256 _isbn, 
-        uint256 _price, 
+        uint256 _price,
+        bytes32 _unencryptedBookDetailsCID, 
         uint256 _transactionCut) 
         public {
         require(booksInfo[_isbn].publisherAddress==address(0), "This book has already been published!");
         booksInfo[_isbn].encryptedBookDataHash = _encryptedBookDataHash;
         booksInfo[_isbn].publisherAddress = tx.origin;
         booksInfo[_isbn].bookPrice = _price;
+        booksInfo[_isbn].unencryptedBookDetailsCID = _unencryptedBookDetailsCID;
         booksInfo[_isbn].transactionCut = _transactionCut;
         booksInfo[_isbn].bookSales = 0;
         
