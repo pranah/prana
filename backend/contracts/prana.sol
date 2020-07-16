@@ -153,15 +153,14 @@ abstract contract prana is ERC721 {
         public {
         require(booksInfo[_isbn].publisherAddress==address(0), "This book has already been published!");
         booksInfo[_isbn].encryptedBookDataHash = _encryptedBookDataHash;
-        booksInfo[_isbn].publisherAddress = tx.origin;
+        booksInfo[_isbn].publisherAddress = msg.sender;
         booksInfo[_isbn].bookPrice = _price;
         booksInfo[_isbn].unencryptedBookDetailsCID = _unencryptedBookDetailsCID;
         booksInfo[_isbn].transactionCut = _transactionCut;
         booksInfo[_isbn].bookSales = 0;
         
         //event that serves as an advertisement
-        //tx.origin vs msg.sender on the assumption that it's always going to be a human
-        emit BookPublished(tx.origin, _isbn, _price);
+        emit BookPublished(msg.sender, _isbn, _price);
 
     }
 
