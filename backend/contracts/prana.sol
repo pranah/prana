@@ -102,22 +102,6 @@ abstract contract prana is ERC721 {
 
     //Event to emit when a token is rented
     event TokenRented(uint256 indexed isbn, uint256 indexed tokenId, address indexed rentee);
-
-    // overriding existing function to ensure good behavior
-    // overriding transferFrom() function
-    // error: Overriding function changes state mutability from "nonpayable" to "payable"
-    // TODO: resolve this error and make this the transferFrom() function
-    // function transferFrom(address from, address to, uint256 tokenId) public override payable {
-    //     //solhint-disable-next-line max-line-length
-    //     require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
-
-    //     _transfer(from, to, tokenId);
-    //     _updateAccountBalances(tokenId);
-
-    //     tokenData[tokenId].isUpForResale = false;
-    //     tokenData[tokenId].isUpForRenting = false;
-
-    // }
     
     // function to pass in the adddresses of each of the contract
     // so that they may refer to each other. Crude version
@@ -125,6 +109,14 @@ abstract contract prana is ERC721 {
         pranaHelperAddress = _pranaHelperAddress;
     }
 
+    // overriding _beforeTokenTransfer()
+    // this ensure good behavior whenever a token transfer happens with money involved.
+    // various actors get their cut before ownership is transfered
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal override {
+        if(from != address(0) && to != address(0)){
+            _updateAccountBalances(tokenId);
+        }
+     }
     
     // an internal function to update the balances for each monetary transaction
     // not sure if msg.value works well with internal functions
