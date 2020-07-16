@@ -216,7 +216,7 @@ abstract contract prana is ERC721 {
         "Your price is too low for this token");
 
         
-        transferFrom(ownerOf(tokenId), _tokenRecipient, tokenId);
+        safeTransferFrom(ownerOf(tokenId), _tokenRecipient, tokenId);
         
         // TODO: 
         // _updateAccountBalances(tokenId) should go into transferFrom()
