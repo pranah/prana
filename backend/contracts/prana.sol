@@ -183,6 +183,7 @@ abstract contract prana is ERC721 {
         tokenData[tokenId].isUpForResale = false;
         tokenData[tokenId].isUpForRenting = false;
         tokenData[tokenId].rentee = address(0);
+        tokenData[tokenId].rentedAtBlock = 0;
 
         // 10% of directPurchase money goes to the contractOwner, might be a bit controversial
         accountBalance[owner] += (msg.value/100)*10;
@@ -234,6 +235,12 @@ abstract contract prana is ERC721 {
         require(msg.sender == ownerOf(tokenId), "You are not this token's owner");
         require(tokenData[tokenId].isUpForResale == false, 
         "Can't put a copy up for renting if it's already on sale!");
+        if(tokenData[tokenId].rentee!= address(0)){
+                // the copy is rented for a two-week period, which is 100800 blocks.
+                // assuming the block time is 12 seconds on average
+                require(block.number > tokenData[tokenId].rentedAtBlock + 100800,
+                "The renting period is not over yet to put it for renting again");
+            }
         tokenData[tokenId].rentingPrice = _newPrice;
         tokenData[tokenId].isUpForRenting = true;
         tokenData[tokenId].rentee = address(0);//No one's rented it as of now
