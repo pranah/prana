@@ -154,6 +154,7 @@ contract prana is ERC721 {
 
     //function to purchase books directly from the publisher.
     //New tokens will be minted here.
+    //Could be assigned to Minter_Role in AccessControl and redirected from the helper contract
     function directPurchase(uint256 _isbn) public payable returns (bool) {
         //to revert back if the buyer doesn't have the price set by the author.
         require(booksInfo[_isbn].publisherAddress != address(0),"ISBN does not exist !");
