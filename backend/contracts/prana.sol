@@ -274,4 +274,18 @@ contract prana is ERC721 {
         }
         return booksInfo[tokenData[tokenId].isbn].encryptedBookDataHash;
     }
+
+    // function to get the balances stored in contract back into the respective owners' account
+    // this is to mainly to reduce the number of transactions and transaction cost associated with it.
+    // WARNING: Extensive testing required before this can be finalized!
+    function withdrawBalance() public payable{
+        require(accountBalance[msg.sender] > 0, "You don't have any balance to withdraw");
+        (msg.sender).transfer(accountBalance[msg.sender]);
+        accountBalance[msg.sender] = 0;
+    }
+
+    //function to view balance
+    function viewBalance() public view returns(uint256){
+        return accountBalance[msg.sender];
+    }
 }
