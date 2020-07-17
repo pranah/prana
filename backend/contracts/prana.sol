@@ -14,10 +14,10 @@ abstract contract prana is ERC721 {
     //currently added to avoid showing up error as the contract is written.
 
     using Counters for Counters.Counter;
-    
+
     //to automate tokenId generation
     Counters.Counter private _tokenIdTracker;
-    
+
     constructor () public {
         owner = msg.sender;
     }
@@ -45,15 +45,15 @@ abstract contract prana is ERC721 {
     // This is where the linkage of the contract with storage mechanisms happen
     // address(publisherAddress) -  address of the content creator/publisher
     // uint256(bookPrice) - price of the book that the creator asks for direct purchase
-    // uint256(transactionCut) - cut of further transactions on copies 
+    // uint256(transactionCut) - cut of further transactions on copies
     // that the creator lay claim to. Stored as a percentage.
     struct BookInfo{
-        string encryptedBookDataHash;  
+        string encryptedBookDataHash;
         string unencryptedBookDetailsCID;
         address publisherAddress;
-        uint256 bookPrice;   
-        uint256 transactionCut; 
-        uint256 bookSales;   
+        uint256 bookPrice;
+        uint256 transactionCut;
+        uint256 bookSales;
     }
 
     // mapping for all books
@@ -63,7 +63,7 @@ abstract contract prana is ERC721 {
     // struct for token details and transactions
     // uint256(isbn) binds the token to the book it points to
     // uint256(copyNumber) to count which copy of the book the token is
-    // so that people can brag about owning the 1st copy, 100th copy etc, 
+    // so that people can brag about owning the 1st copy, 100th copy etc,
     // add sell them at a premium
     // uint256(resalePrice) is the price that tokenOwner asks to sell the token
     // bool(isUpForResale) is to advertise that the token is for sale
@@ -102,7 +102,7 @@ abstract contract prana is ERC721 {
 
     //Event to emit when a token is rented
     event TokenRented(uint256 indexed isbn, uint256 indexed tokenId, address indexed rentee);
-    
+
     // function to pass in the adddresses of each of the contract
     // so that they may refer to each other. Crude version
     function setPranaHelperAddress(address _pranaHelperAddress) public onlyOwner{
@@ -117,7 +117,7 @@ abstract contract prana is ERC721 {
             _updateAccountBalances(tokenId);
         }
      }
-    
+
     // an internal function to update the balances for each monetary transaction
     // not sure if msg.value works well with internal functions
     function _updateAccountBalances(uint256 tokenId) internal {
@@ -125,23 +125,20 @@ abstract contract prana is ERC721 {
         accountBalance[owner] += (msg.value/100)*1;
 
         // transactinCut for the author/publisher gets debited
-        accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] +=  
-        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
+        accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] += booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
 
         //the remaining money goes to the token owner
-        accountBalance[ownerOf(tokenId)] +=
-        msg.value - ((msg.value/100)*1 + 
-        booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+        accountBalance[ownerOf(tokenId)] += msg.value - ((msg.value/100)*1 + booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
 
     }
-    
+
     //function to add book details into the chain i.e. publish the book
     function publishBook(
         string memory _encryptedBookDataHash, //TOCHECK: bytes32 vs bytes memory
-        uint256 _isbn, 
+        uint256 _isbn,
         uint256 _price,
-        string memory _unencryptedBookDetailsCID, 
-        uint256 _transactionCut) 
+        string memory _unencryptedBookDetailsCID,
+        uint256 _transactionCut)
         public {
         require(booksInfo[_isbn].publisherAddress==address(0), "This book has already been published!");
         booksInfo[_isbn].encryptedBookDataHash = _encryptedBookDataHash;
@@ -150,13 +147,13 @@ abstract contract prana is ERC721 {
         booksInfo[_isbn].unencryptedBookDetailsCID = _unencryptedBookDetailsCID;
         booksInfo[_isbn].transactionCut = _transactionCut;
         booksInfo[_isbn].bookSales = 0;
-        
+
         //event that serves as an advertisement
         emit BookPublished(msg.sender, _isbn, _price);
 
     }
 
-    //function to purchase books directly from the publisher. 
+    //function to purchase books directly from the publisher.
     //New tokens will be minted here.
     function directPurchase(uint256 _isbn) public payable returns (bool) {
         //to revert back if the buyer doesn't have the price set by the author.
@@ -164,7 +161,7 @@ abstract contract prana is ERC721 {
         require(msg.value >= booksInfo[_isbn].bookPrice,"Insufficient funds ! Please pay the price as set by the author.");
         //a new tokenId is generated, and a new token is minted with that ID.
         uint256 tokenId = _tokenIdTracker.current();
-        _safeMint(msg.sender, tokenId); 
+        _safeMint(msg.sender, tokenId);
         _tokenIdTracker.increment();
         //once a token's succesfully minted, update the various details.
         booksInfo[_isbn].bookSales++;
@@ -197,24 +194,25 @@ abstract contract prana is ERC721 {
         // event that serves as advertisement for all
         emit TokenForSale(salePrice, tokenData[tokenId].isbn, tokenId);
     }
-    
+
     // To buy a token that's been put for sale.
     // function will always be called by pranaHelper as the approved address for tokenId
     function buyToken(uint256 tokenId, address _tokenRecipient) public payable {
-        require(tokenData[tokenId].isUpForResale == true, 
+        require(tokenData[tokenId].isUpForResale == true,
         "This token hasn't been put for sale by the token owner");
-        
-        require(msg.value >= tokenData[tokenId].resalePrice, 
+
+        require(msg.value >= tokenData[tokenId].resalePrice,
         "Your price is too low for this token");
 
-        
+
         safeTransferFrom(ownerOf(tokenId), _tokenRecipient, tokenId);
-        
-        // TODO: 
+
+        // TODO:
         // _updateAccountBalances(tokenId) should go into transferFrom()
         // and safeTransferFrom() functions after mutability error resolution
 
-        _updateAccountBalances(tokenId);
+        //  This went into _beforeTokenTransfer()
+        // _updateAccountBalances(tokenId);
 
         tokenData[tokenId].isUpForResale = false;
         tokenData[tokenId].isUpForRenting = false;
@@ -224,9 +222,9 @@ abstract contract prana is ERC721 {
     // function to put a copy for renting, ownership doesn't change.
     function putForRent(uint256 _newPrice, uint256 tokenId) public{
         require(msg.sender == ownerOf(tokenId), "You are not this token's owner");
-        require(tokenData[tokenId].isUpForResale == false, 
+        require(tokenData[tokenId].isUpForResale == false,
         "Can't put a copy up for renting if it's already on sale!");
-        if(tokenData[tokenId].rentee!= address(0)){
+        if(tokenData[tokenId].rentee != address(0)){
                 // the copy is rented for a two-week period, which is 100800 blocks.
                 // assuming the block time is 12 seconds on average
                 require(block.number > tokenData[tokenId].rentedAtBlock + 100800,
@@ -258,12 +256,12 @@ abstract contract prana is ERC721 {
 
     //function to actually consume the content  you've bought/rented
     function consumeContent(uint256 tokenId) public view returns(string memory){
-        require(ownerOf(tokenId) == msg.sender || tokenData[tokenId].rentee == msg.sender, 
+        require(ownerOf(tokenId) == msg.sender || tokenData[tokenId].rentee == msg.sender,
         "You are not authorized to view this copy!");
         if(ownerOf(tokenId) == msg.sender){
-            require(tokenData[tokenId].isUpForRenting == false, 
+            require(tokenData[tokenId].isUpForRenting == false,
             "You have put your copy for renting, please take it down to view the content");
-            if(tokenData[tokenId].rentee!= address(0)){
+            if(tokenData[tokenId].rentee != address(0)){
                 // the copy is rented for a two-week period, which is 100800 blocks.
                 // assuming the block time is 12 seconds on average
                 require(block.number > tokenData[tokenId].rentedAtBlock + 100800,
