@@ -8,17 +8,15 @@ import "../../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 //prana main contract.
 
-//IMPORTANT: edit out abstract!!!!!
-abstract contract prana is ERC721 {
-    //The abstract status must be changed as the functions are added.
-    //currently added to avoid showing up error as the contract is written.
+
+contract prana is ERC721 {
 
     using Counters for Counters.Counter;
 
     //to automate tokenId generation
     Counters.Counter private _tokenIdTracker;
 
-    constructor () public {
+    constructor() ERC721("PranaBooks", "PTN") public {
         owner = msg.sender;
     }
 
