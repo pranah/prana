@@ -4,7 +4,13 @@
   "description": "Digital Content Destribution on Ethereum with NFTs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "export": "nuxt export",
+    "serve": "nuxt serve",
+    "generate": "nuxt build --spa --target-static && nuxt export"
   },
   "repository": {
     "type": "git",
@@ -17,6 +23,25 @@
   },
   "homepage": "https://github.com/pranah/prana#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^3.1.0"
+    "@openzeppelin/contracts": "^3.1.0",
+    "@fleekhq/space-client": "^0.1.5",
+    "@metamask/detect-provider": "^1.1.0",
+    "@nuxtjs/axios": "^5.11.0",
+    "child_process": "^1.0.2",
+    "fs": "0.0.1-security",
+    "libp2p": "^0.28.7",
+    "libp2p-bootstrap": "^0.11.0",
+    "libp2p-gossipsub": "^0.4.6",
+    "libp2p-mplex": "^0.9.5",
+    "libp2p-noise": "^1.1.2",
+    "libp2p-secio": "^0.12.6",
+    "libp2p-webrtc-star": "^0.18.6",
+    "libp2p-websockets": "^0.13.6",
+    "nuxt": "^2.13.0",
+    "path": "^0.12.7",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.2"
   }
 }
