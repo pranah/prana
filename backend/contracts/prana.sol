@@ -288,4 +288,11 @@ contract prana is ERC721 {
     function viewBalance() public view returns(uint256){
         return accountBalance[msg.sender];
     }
+
+    //function to get book details with the isbn
+    //returns CID of coverpic+bookname
+    function viewBookDetails(uint256 _isbn) public view returns (string memory) {
+        require(booksInfo[_isbn].publisherAddress!=address(0), "This book is not on the platform");
+        return booksInfo[_isbn].unencryptedBookDetailsCID;
+    }
 }
