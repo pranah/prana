@@ -120,14 +120,12 @@ contract prana is ERC721 {
     // an internal function to update the balances for each monetary transaction
     // not sure if msg.value works well with internal functions
     function _updateAccountBalances(uint256 tokenId) internal {
-        // 1% of resale money goes to the contractOwner, might be a bit controversial
-        accountBalance[owner] += (msg.value/100)*1;
 
         // transactinCut for the author/publisher gets debited
         accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] += booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
 
         //the remaining money goes to the token owner
-        accountBalance[ownerOf(tokenId)] += msg.value - ((msg.value/100)*1 + booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+        accountBalance[ownerOf(tokenId)] += msg.value - (booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
 
     }
 
@@ -173,10 +171,8 @@ contract prana is ERC721 {
         tokenData[tokenId].rentee = address(0);
         tokenData[tokenId].rentedAtBlock = 0;
 
-        // 10% of directPurchase money goes to the contractOwner, might be a bit controversial
-        accountBalance[owner] += (msg.value/100)*10;
-        // the rest goes to the publisher
-        accountBalance[booksInfo[_isbn].publisherAddress] += msg.value - ((msg.value/100)*10);
+        // the money goes to the plubisher's accountBalance.
+        accountBalance[booksInfo[_isbn].publisherAddress] += msg.value;
         return true;
     }
 
