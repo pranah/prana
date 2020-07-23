@@ -1,0 +1,23 @@
+[
+  {
+    "name": "collector",
+    "path": "/collector",
+    "component": "/home/foss/gits/prana/pages/collector.vue",
+    "chunkName": "pages/collector",
+    "_name": "_5c00019e"
+  },
+  {
+    "name": "publisher",
+    "path": "/publisher",
+    "component": "/home/foss/gits/prana/pages/publisher.vue",
+    "chunkName": "pages/publisher",
+    "_name": "_192b878d"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/foss/gits/prana/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_9061d03a"
+  }
+]
