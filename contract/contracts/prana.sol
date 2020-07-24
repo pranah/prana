@@ -138,6 +138,7 @@ contract prana is ERC721 {
         uint256 _transactionCut)
         public {
         require(booksInfo[_isbn].publisherAddress==address(0), "This book has already been published!");
+        require(_transactionCut > 0 && _transactionCut < 80, "Your cut can't be more than 80% of the total");
         booksInfo[_isbn].encryptedBookDataHash = _encryptedBookDataHash;
         booksInfo[_isbn].publisherAddress = msg.sender;
         booksInfo[_isbn].bookPrice = _price;
