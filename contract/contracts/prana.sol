@@ -91,7 +91,7 @@ contract prana is ERC721 {
 
 
     //Event to emit when a new book is published with its ISBN and publisher address
-    event BookPublished(address indexed publisher, uint256 indexed isbn, uint256 indexed price);
+    event BookPublished(address indexed publisher, uint256 indexed isbn, string indexed bookCoverAndDetails);
 
     //Event to emit when a tokenOwner puts out a token for sale
     event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenId);
@@ -147,7 +147,8 @@ contract prana is ERC721 {
         booksInfo[_isbn].bookSales = 0;
 
         //event that serves as an advertisement
-        emit BookPublished(msg.sender, _isbn, _price);
+        //last argument might be needed to change back to price
+        emit BookPublished(msg.sender, _isbn, _unencryptedBookDetailsCID);
 
     }
 
