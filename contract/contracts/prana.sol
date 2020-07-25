@@ -17,7 +17,7 @@ contract prana is ERC721 {
     Counters.Counter private _tokenIdTracker;
 
     //AccessControl and Ownable can be added instead of owner if time permits
-    constructor() ERC721("PranaBooks", "PTN") public {
+    constructor() ERC721("PranaBooks", "PBT") public {
         owner = msg.sender;
     }
 
