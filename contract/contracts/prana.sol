@@ -56,7 +56,7 @@ contract prana is ERC721 {
     struct BookInfo{
         string encryptedBookDataHash;
         string unencryptedBookDetailsCID;
-        address publisherAddress;
+        address payable publisherAddress;
         uint256 bookPrice;
         uint256 transactionCut;
         uint256 bookSales;
@@ -94,7 +94,7 @@ contract prana is ERC721 {
     mapping (uint256 => TokenDetails) internal tokenData;
 
     // account balances, for everyone involved.
-    mapping (address => uint256) internal accountBalance;
+    // mapping (address => uint256) internal accountBalance;
 
 
     //Event to emit when a new book is published with its ISBN and publisher address
@@ -120,7 +120,9 @@ contract prana is ERC721 {
     // various actors get their cut before ownership is transfered
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal override {
         if(from != address(0) && to != address(0)){
-            _updateAccountBalances(tokenId);
+            if(msg.value>0){
+                _updateAccountBalances(tokenId);
+            }
         }
      }
 
@@ -129,10 +131,14 @@ contract prana is ERC721 {
     function _updateAccountBalances(uint256 tokenId) internal {
 
         // transactinCut for the author/publisher gets debited
-        accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] += booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
+        // accountBalance[booksInfo[tokenData[tokenId].isbn].publisherAddress] += booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100);
+        (booksInfo[tokenData[tokenId].isbn].publisherAddress).transfer(booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
 
         //the remaining money goes to the token owner
-        accountBalance[ownerOf(tokenId)] += msg.value - (booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+        // accountBalance[ownerOf(tokenId)] += msg.value - (booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100));
+        address payable tokenOwner = payable(ownerOf(tokenId));
+        (tokenOwner).transfer(msg.value - (booksInfo[tokenData[tokenId].isbn].transactionCut*(msg.value/100)));
+        //  a better way would be to use call.value()(), but using .transfer for now
 
     }
 
@@ -181,7 +187,8 @@ contract prana is ERC721 {
         tokenData[tokenId].rentedAtBlock = 0;
 
         // the money goes to the plubisher's accountBalance.
-        accountBalance[booksInfo[_isbn].publisherAddress] += msg.value;
+        // accountBalance[booksInfo[_isbn].publisherAddress] += msg.value;
+        (booksInfo[_isbn].publisherAddress).transfer(msg.value);
         return true;
     }
 
@@ -280,16 +287,16 @@ contract prana is ERC721 {
     // function to get the balances stored in contract back into the respective owners' account
     // this is to mainly to reduce the number of transactions and transaction cost associated with it.
     // WARNING: Extensive testing required before this can be finalized!
-    function withdrawBalance() public payable{
-        require(accountBalance[msg.sender] > 0, "You don't have any balance to withdraw");
-        (msg.sender).transfer(accountBalance[msg.sender]);
-        accountBalance[msg.sender] = 0;
-    }
+    // function withdrawBalance() public payable{
+    //     require(accountBalance[msg.sender] > 0, "You don't have any balance to withdraw");
+    //     (msg.sender).transfer(accountBalance[msg.sender]);
+    //     accountBalance[msg.sender] = 0;
+    // }
 
     //function to view balance
-    function viewBalance() public view returns(uint256){
-        return accountBalance[msg.sender];
-    }
+    // function viewBalance() public view returns(uint256){
+    //     return accountBalance[msg.sender];
+    // }
 
     //function to get book details with the tokenId
     //returns CID of coverpic+bookname
