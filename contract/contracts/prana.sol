@@ -302,4 +302,12 @@ contract prana is ERC721 {
         require(booksInfo[tokenData[_tokenId].isbn].publisherAddress!=address(0), "This book is not on the platform");
         return booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID;
     }
+
+    function numberofTokensForResale() public view returns(uint256){
+        return upForResaleTokens.length();
+    }
+
+    function tokenForResaleAtIndex(uint256 index) public view returns (uint256) {
+        return upForResaleTokens.at(index);
+    }
 }
