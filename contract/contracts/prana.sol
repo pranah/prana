@@ -124,6 +124,9 @@ contract prana is ERC721 {
                 _updateAccountBalances(tokenId);
             }
         }
+        // Resale and Renting flags updated to false at each Token Transfer
+        tokenData[tokenId].isUpForResale = false;
+        tokenData[tokenId].isUpForRenting = false;
      }
 
     // an internal function to update the balances for each monetary transaction
@@ -181,8 +184,6 @@ contract prana is ERC721 {
 
         tokenData[tokenId].isbn = _isbn;
         tokenData[tokenId].copyNumber = booksInfo[_isbn].bookSales;
-        tokenData[tokenId].isUpForResale = false;
-        tokenData[tokenId].isUpForRenting = false;
         tokenData[tokenId].rentee = address(0);
         tokenData[tokenId].rentedAtBlock = 0;
 
@@ -221,15 +222,7 @@ contract prana is ERC721 {
 
         safeTransferFrom(ownerOf(tokenId), _tokenRecipient, tokenId);
 
-        // TODO:
-        // _updateAccountBalances(tokenId) should go into transferFrom()
-        // and safeTransferFrom() functions after mutability error resolution
 
-        //  This went into _beforeTokenTransfer()
-        // _updateAccountBalances(tokenId);
-
-        tokenData[tokenId].isUpForResale = false;
-        tokenData[tokenId].isUpForRenting = false;
 
     }
 
