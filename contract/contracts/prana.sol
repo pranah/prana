@@ -34,6 +34,8 @@ contract prana is ERC721 {
     //address of the helper contract
     address pranaHelperAddress;
 
+    EnumerableSet.UintSet upForResaleTokens;
+
     //Modifier for onlyOwner functions
     //this could be figured out with AccessControl if there's enough time
     modifier onlyOwner {
@@ -127,6 +129,8 @@ contract prana is ERC721 {
         // Resale and Renting flags updated to false at each Token Transfer
         tokenData[tokenId].isUpForResale = false;
         tokenData[tokenId].isUpForRenting = false;
+
+        upForResaleTokens.remove(tokenId);
      }
 
     // an internal function to update the balances for each monetary transaction
@@ -206,6 +210,7 @@ contract prana is ERC721 {
 
         // The helper contract gets approved for token transfer when someone's ready to buy
         approve(pranaHelperAddress, tokenId);
+        upForResaleTokens.add(tokenId);
         // event that serves as advertisement for all
         emit TokenForSale(salePrice, tokenData[tokenId].isbn, tokenId);
     }
