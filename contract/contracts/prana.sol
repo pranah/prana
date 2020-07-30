@@ -100,7 +100,8 @@ contract prana is ERC721 {
 
 
     //Event to emit when a new book is published with its ISBN and publisher address
-    event BookPublished(address indexed publisher, uint256 indexed isbn, string indexed bookCoverAndDetails, uint256 price);
+    event BookPublished(address indexed publisher, uint256 indexed isbn,
+    string bookCoverAndDetails, uint256 indexed price, uint256 transactionCut);
 
     //Event to emit when a tokenOwner puts out a token for sale
     event TokenForSale(uint256 indexed resalePrice, uint256 indexed isbn, uint256 indexed tokenId);
@@ -168,7 +169,7 @@ contract prana is ERC721 {
 
         //event that serves as an advertisement
         //last argument might be needed to change back to price
-        emit BookPublished(msg.sender, _isbn, _unencryptedBookDetailsCID, _price);
+        emit BookPublished(msg.sender, _isbn, _unencryptedBookDetailsCID, _price, _transactionCut);
 
     }
 
@@ -204,7 +205,7 @@ contract prana is ERC721 {
         require(tokenData[tokenId].isUpForRenting == false,
         "Can't put a token for sale while it's put for renting");
         require(tokenData[tokenId].rentedAtBlock + rentedBlocks < block.number,
-        "The currnet renting period is not over yet");
+        "The current renting period is not over yet");
         tokenData[tokenId].resalePrice = salePrice;
         tokenData[tokenId].isUpForResale = true;
 
@@ -298,9 +299,10 @@ contract prana is ERC721 {
 
     //function to get book details with the tokenId
     //returns CID of coverpic+bookname
-    function viewTokenDetails(uint256 _tokenId) public view returns (uint256, string memory, uint256) {
+    function viewTokenDetails(uint256 _tokenId) public view returns (uint256, string memory, uint256, bool) {
         require(booksInfo[tokenData[_tokenId].isbn].publisherAddress!=address(0), "This book is not on the platform");
-        return (tokenData[_tokenId].isbn, booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID, tokenData[_tokenId].copyNumber);
+        return (tokenData[_tokenId].isbn, booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID,
+        tokenData[_tokenId].copyNumber, tokenData[_tokenId].isUpForResale);
     }
 
     function numberofTokensForResale() public view returns(uint256){
