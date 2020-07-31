@@ -300,7 +300,7 @@ contract prana is ERC721 {
     //function to get book details with the tokenId
     //returns CID of coverpic+bookname
     function viewTokenDetails(uint256 _tokenId) public view returns (uint256, string memory, uint256, bool) {
-        require(booksInfo[tokenData[_tokenId].isbn].publisherAddress!=address(0), "This book is not on the platform");
+        require(_exists(_tokenId), "Token doesn't  exist");
         return (tokenData[_tokenId].isbn, booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID,
         tokenData[_tokenId].copyNumber, tokenData[_tokenId].isUpForResale);
     }
