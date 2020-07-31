@@ -11,6 +11,12 @@
   "LazyCollection": {
     "description": "Auto imported from components/Collection.vue"
   },
+  "Content": {
+    "description": "Auto imported from components/Content.vue"
+  },
+  "LazyContent": {
+    "description": "Auto imported from components/Content.vue"
+  },
   "Hud": {
     "description": "Auto imported from components/Hud.vue"
   },
@@ -22,6 +28,12 @@
   },
   "LazyLogin": {
     "description": "Auto imported from components/Login.vue"
+  },
+  "MyCopy": {
+    "description": "Auto imported from components/MyCopy.vue"
+  },
+  "LazyMyCopy": {
+    "description": "Auto imported from components/MyCopy.vue"
   },
   "Publish": {
     "description": "Auto imported from components/Publish.vue"

@@ -1,10 +1,8 @@
 {
-  "name": "prana",
+  "name": "pyr-publisher",
   "version": "1.0.0",
-  "description": "Digital Content Destribution on Ethereum with NFTs",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
@@ -12,22 +10,14 @@
     "serve": "nuxt serve",
     "generate": "nuxt build --spa --target-static && nuxt export"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pranah/prana.git"
-  },
-  "author": "Richu A Kuttikattu, Austin Foss, Aiswarya Walter, Mansoor OP",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pranah/prana/issues"
-  },
-  "homepage": "https://github.com/pranah/prana#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^3.1.0",
     "@fleekhq/space-client": "^0.1.5",
     "@metamask/detect-provider": "^1.1.0",
     "@nuxtjs/axios": "^5.11.0",
+    "@openzeppelin/contracts": "^3.1.0",
     "child_process": "^1.0.2",
+    "eth-sig-util": "^2.5.3",
+    "ethereumjs-util": "^7.0.3",
     "fs": "0.0.1-security",
     "libp2p": "^0.28.7",
     "libp2p-bootstrap": "^0.11.0",
@@ -39,6 +29,8 @@
     "libp2p-websockets": "^0.13.6",
     "nuxt": "^2.13.0",
     "path": "^0.12.7",
+    "truffle": "^5.1.36",
+    "web3": "^1.2.11",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

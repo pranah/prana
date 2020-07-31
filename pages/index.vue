@@ -12,8 +12,8 @@
               Welcome!
             </v-card-title>
             <v-card-text>
-              <Login v-if="metaMaskConnected == false" />
-              <Welcome v-else/>
+              <Welcome v-if="currentAccount != null"/>
+              <Login v-else />              
             </v-card-text>
           </v-card>
         </v-col>
@@ -27,8 +27,8 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState([
-      'metaMaskConnected'
+    ...mapState('web3', [
+      'currentAccount'
     ])
   },
 }

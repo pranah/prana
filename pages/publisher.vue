@@ -7,7 +7,10 @@
       <v-card>
         <v-row>
           <v-col>
-            <v-btn color="success" @click="publisherPageSwitchFlip()">Publish/Published</v-btn>
+            <v-btn-toggle mandatory dense>
+              <v-btn dense color="green"@click="publisherPageSwitchFlip(false)">Publish</v-btn>
+              <v-btn dense color="green"@click="publisherPageSwitchFlip(true)">Published</v-btn>
+            </v-btn-toggle>
           </v-col>
         </v-row>
         <Publish v-if="publisherPageSwitch == false"/>
@@ -22,12 +25,12 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState([
+    ...mapState('fleek',[
       'publisherPageSwitch'
     ])
   },
   methods: {
-    ...mapMutations([
+    ...mapMutations('fleek',[
       'publisherPageSwitchFlip'
     ])
   }
