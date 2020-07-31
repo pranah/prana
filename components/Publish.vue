@@ -14,11 +14,6 @@
                     v-model="content.file"
                 />
                 <v-text-field 
-                    required
-                    label="Cover Image (file path)"
-                    v-model="content.coverImg"
-                />
-                <v-text-field 
                     type="number" 
                     min="0" 
                     max="9999999999999" 
@@ -45,7 +40,6 @@ export default {
     data: () => ({
         content: {
             title: '',
-            coverImg: '',
             file: '',
             isbn: 0,
             price: 0,

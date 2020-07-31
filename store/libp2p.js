@@ -76,14 +76,19 @@ export default {
             await libp2p.start()
 
         },
-        subscribeToContent: async ({state}, content) => {
+        subscribeToContent: async ({state, dispatch}, content) => {
             await state.p2pNode.pubsub.subscribe(content, (msg) => {
-                console.log(`Received: ${msg.data.toString()}`)
+                if(msg.from != state.p2pNode.peerId.toB58String()) {
+                    const verifyThis = {
+                        bucket: content,
+                        sig: msg.data.toString()
+                    }
+                    dispatch('web3/verifySig', verifyThis, {root: true});
+                }
             })
         },
         requestContentKey: ({state}, content) => {
-            console.log(content);
-            state.p2pNode.pubsub.publish(content, Buffer.from('Bird bird bird, bird is the word!'))
+            state.p2pNode.pubsub.publish(content.bucket, Buffer.from(content.signature))
         },
     }
 }

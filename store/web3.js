@@ -66,7 +66,7 @@ export default {
                 bucketAdresses[0].slice(-116),
                 toPublish.content.isbn,
                 toPublish.content.price,
-                toPublish.content.coverImg,
+                toPublish.content.title,
                 1 // Transacation cut
             ).send({ from: state.currentAccount, gas : 6000000 })
             .on('BookPublished', (event) => {
@@ -142,12 +142,24 @@ export default {
 
             }   
         },
-        signMessage: ({state}, signThis) => {
+        signMessage: ({state, dispatch}, signThis) => {
             state.web3.eth.personal.sign(signThis, state.currentAccount)
             .then(sig => {
-                state.web3.eth.personal.ecRecover(signThis, sig)
-                .then(console.log);
+                const content = {
+                    bucket: signThis,
+                    signature: sig
+                }
+                dispatch('libp2p/requestContentKey', content, {root: true})        
             })
-        }
+        },
+        verifySig: ({state}, verifyThis) => {
+            console.log(verifyThis);
+            state.web3.eth.personal.ecRecover(
+                verifyThis.bucket, 
+                verifyThis.sig
+            ).then(from => {
+                console.log("Messaged received from eth address: " + from);
+            })
+        },
     }
 }

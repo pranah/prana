@@ -26,9 +26,6 @@ export default {
         ])
     },
     methods: {
-        ...mapActions('libp2p', [
-            'requestContentKey'
-        ]),
         ...mapActions('web3', [
             'signMessage'
         ])
