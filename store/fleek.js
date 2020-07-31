@@ -95,5 +95,17 @@ export default {
             const location = openFileRes.getLocation();
             console.log(location); // "/path/to/the/copied/file"
         },
+        shareBucket: ({state, dispatch}, bucket) => {
+            state.client.shareBucket({ bucket: bucket })
+            .then((res) => {
+                const threadInfo = res.getThreadinfo();
+                console.log('key:', threadInfo.getKey());
+                console.log('addresses:', threadInfo.getAddressesList());
+                dispatch('libp2p/sendSharedBucket', {}, {root: true})
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
     }
 }

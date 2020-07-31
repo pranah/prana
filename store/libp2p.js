@@ -90,5 +90,8 @@ export default {
         requestContentKey: ({state}, content) => {
             state.p2pNode.pubsub.publish(content.bucket, Buffer.from(content.signature))
         },
+        sendSharedBucket: ({state}) => {
+            console.log("responding with content");
+        },
     }
 }

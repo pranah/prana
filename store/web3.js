@@ -152,14 +152,59 @@ export default {
                 dispatch('libp2p/requestContentKey', content, {root: true})        
             })
         },
-        verifySig: ({state}, verifyThis) => {
-            console.log(verifyThis);
+        verifySig: ({state, dispatch}, verifyThis) => {
             state.web3.eth.personal.ecRecover(
                 verifyThis.bucket, 
                 verifyThis.sig
             ).then(from => {
-                console.log("Messaged received from eth address: " + from);
+                const verifyOwner = {
+                    owner: from,
+                    content: verifyThis.bucket
+                }
+                dispatch('verifyOwner', verifyOwner)
             })
         },
+        verifyOwner: async ({state, dispatch}, verifyOwner) => {
+            let tokenCount;
+            let tokenId;
+            let owned = false;
+            await state.pranaContract.methods.balanceOf(verifyOwner.owner)
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+            for (let i=0; i<tokenCount; i++){
+                console.log("counting");
+                state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
+                .call({ from: state.currentAccount})
+                .then((id) => {
+                    tokenId = id
+                    state.pranaContract.methods.consumeContent(id)
+                    .call({ from: state.currentAccount})
+                    .then((hash) => {
+                        console.log(hash);
+                        console.log(verifyOwner.content);
+                        if(hash == verifyOwner.content) {
+                            owned = true;                    
+                        }
+                        if(i+1 >= tokenCount && owned == true) {
+                            state.pranaContract.methods.viewTokenDetails(tokenId).call({from: state.currentAccount})
+                            .then(details => {
+                                console.log();
+                                dispatch('fleek/shareBucket', details[1], {root: true});    
+                            })
+                        }
+                    })
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+
+            } 
+        }
     }
 }
