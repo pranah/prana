@@ -7,7 +7,10 @@
       <v-card>
         <v-row>
           <v-col>
-            <v-btn color="success" @click="collectorPageSwitchFlip()">Collection/Collect</v-btn>
+            <v-btn-toggle mandatory dense>
+              <v-btn dense color="green"@click="collectorPageSwitchFlip(false)">Collect</v-btn>
+              <v-btn dense color="green"@click="collectorPageSwitchFlip(true)">Collection</v-btn>
+            </v-btn-toggle>
           </v-col>
         </v-row>
         <v-row>
@@ -24,12 +27,12 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState([
+    ...mapState('fleek',[
       'collectorPageSwitch'
     ])
   },
   methods: {
-    ...mapMutations([
+    ...mapMutations('fleek',[
       'collectorPageSwitchFlip'
     ])
   }

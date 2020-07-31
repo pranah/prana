@@ -1,23 +1,35 @@
 <template>
     <v-col>
         <h3>Personal Collection</h3>
-        <v-list>
+        <v-list v-for="content in collectedContent" :key="collectedContent.indexOf(content)">
             <v-list-item>
-            Book 1: <v-btn color="success">Download?</v-btn>
-            </v-list-item>
-            <v-list-item>
-            Book 2: <v-btn color="success">Download?</v-btn>
-            </v-list-item>
-            <v-list-item>
-            Book 5: <v-btn color="success">Download?</v-btn>
+                <v-row>
+                    <v-col>
+                        <span>{{ content.tokenId }}</span>    
+                    </v-col>  
+                    <MyCopy v-bind:bucket="content.bucket"/>                 
+                    <v-col>
+                        <v-btn color="green" @click="signMessage(content.bucket)">Download</v-btn>
+                    </v-col>
+                </v-row>                    
             </v-list-item>
         </v-list>
     </v-col>        
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
-
+    computed: {
+        ...mapState('fleek', [
+            'collectedContent'
+        ])
+    },
+    methods: {
+        ...mapActions('web3', [
+            'signMessage'
+        ])
+    }
 }
 </script>
 
