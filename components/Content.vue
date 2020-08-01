@@ -10,8 +10,8 @@
             > -->
                 <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title><b>ISBN: {{content.returnValues.isbn}}</b></v-list-item-title>
-                    <v-list-item-subtitle>by {{content.returnValues.publisher}}</v-list-item-subtitle>
+                    <v-list-item-title><b>ISBN: {{content.isbn}}</b></v-list-item-title>
+                    <v-list-item-subtitle>by {{content.publisher}}</v-list-item-subtitle>
                 </v-list-item-content>
                 </v-list-item>
 
@@ -22,8 +22,8 @@
 
                 <v-card-text class="text-left">
                 <!-- Visit ten places on our planet that are undergoing the biggest changes today.<br> -->
-                Price: {{content.returnValues.price}}<br>
-                Publisher: {{content.returnValues.publisher}}<br>
+                Price: {{content.price}}<br>
+                Publisher: {{content.publisher}}<br>
                 </v-card-text>
 
                 <!-- <v-card-actions> -->

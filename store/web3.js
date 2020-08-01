@@ -103,8 +103,8 @@ export default {
         },
         //mints a new token and pushes the tokendata to collectedContent array
         purchase: async ({state, dispatch},content) => {
-            let price = content.returnValues.price
-            let isbn = content.returnValues.isbn
+            let price = content.price
+            let isbn = content.isbn
             //contract call to mint a new token
             await state.pranaContract.methods.directPurchase(isbn)
             .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(price, 'ether') })
@@ -121,7 +121,6 @@ export default {
         //pushes token data of all the tokens owned by an address to collectedContent array
         myCollection: async({state, commit, dispatch}) => {
             let tokenCount
-            let tokenId
             //contract call to get the number of tokens owned by an address
             await state.pranaContract.methods.balanceOf(state.currentAccount)
             .call({from: state.currentAccount})
