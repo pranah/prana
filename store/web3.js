@@ -44,6 +44,7 @@ export default {
                 } 
             });
         },
+        //getting account details
         getAccount: async ({commit, dispatch}) => {
             const accounts = await ethereum.enable()
             await commit('updateAccountDetails', accounts[0])
