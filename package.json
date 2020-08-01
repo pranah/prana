@@ -19,6 +19,8 @@
     "eth-sig-util": "^2.5.3",
     "ethereumjs-util": "^7.0.3",
     "fs": "0.0.1-security",
+    "it-concat": "^1.0.0",
+    "it-pipe": "^1.1.0",
     "libp2p": "^0.28.7",
     "libp2p-bootstrap": "^0.11.0",
     "libp2p-gossipsub": "^0.4.6",
@@ -29,7 +31,7 @@
     "libp2p-websockets": "^0.13.6",
     "nuxt": "^2.13.0",
     "path": "^0.12.7",
-    "truffle": "^5.1.36",
+    "truffle": "^5.1.37",
     "web3": "^1.2.11",
     "xmlhttprequest": "^1.8.0"
   },

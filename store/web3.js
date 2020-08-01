@@ -41,16 +41,14 @@ export default {
                     commit('setWeb3', provider);
                     const contract = new state.web3.eth.Contract(state.contractAbi, state.contractAddress);       
                     commit('setContract', contract);
-                    dispatch('myPublished');
-
                 } 
             });
         },
         getAccount: async ({commit, dispatch}) => {
             const accounts = await ethereum.enable()
             await commit('updateAccountDetails', accounts[0])
-            dispatch('myCollection')
-
+            dispatch('myCollection');
+            dispatch('myPublished');
         },
         initEth: async({commit, dispatch}) => {
             if (window.ethereum) {        
@@ -82,7 +80,6 @@ export default {
                 fromBlock:0,
                 toBlock:'latest'
             },(err,events)=>{
-                console.log("====>events",events)
                 commit('fleek/publishedContent', events, { root: true })
             });
         },
@@ -143,26 +140,38 @@ export default {
             }   
         },
         signMessage: ({state, dispatch}, signThis) => {
-            state.web3.eth.personal.sign(signThis, state.currentAccount)
-            .then(sig => {
-                const content = {
-                    bucket: signThis,
-                    signature: sig
-                }
-                dispatch('libp2p/requestContentKey', content, {root: true})        
-            })
+            state.web3.eth.getBlock("latest")
+            .then(block => {
+                state.web3.eth.personal.sign(block.hash, state.currentAccount)
+                .then(sig => {
+                    const content = {
+                        bucket: signThis,
+                        signature: sig,
+                        block: block.number
+                    }
+                    dispatch('libp2p/requestContentKey', content, {root: true})        
+                });
+            });            
         },
         verifySig: ({state, dispatch}, verifyThis) => {
-            state.web3.eth.personal.ecRecover(
-                verifyThis.bucket, 
-                verifyThis.sig
-            ).then(from => {
-                const verifyOwner = {
-                    owner: from,
-                    content: verifyThis.bucket
+            state.web3.eth.getBlock("latest")
+            .then(block => {
+                // If the signature is greater than 20blocks, ~5min, ignore
+                if(block.number - verifyThis.block <= 20) {
+                    state.web3.eth.personal.ecRecover(
+                        verifyThis.bucket, 
+                        verifyThis.sig
+                    ).then(from => {
+                        const verifyOwner = {
+                            owner: from,
+                            content: verifyThis.bucket,
+                            requester: verifyThis.requester
+                        }
+                        dispatch('verifyOwner', verifyOwner)
+                    })
                 }
-                dispatch('verifyOwner', verifyOwner)
             })
+            
         },
         verifyOwner: async ({state, dispatch}, verifyOwner) => {
             let tokenCount;
@@ -177,8 +186,7 @@ export default {
                 console.error(err);
             });
 
-            for (let i=0; i<tokenCount; i++){
-                console.log("counting");
+            for (let i=0; i<=tokenCount; i++){
                 state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
                 .call({ from: state.currentAccount})
                 .then((id) => {
@@ -186,16 +194,13 @@ export default {
                     state.pranaContract.methods.consumeContent(id)
                     .call({ from: state.currentAccount})
                     .then((hash) => {
-                        console.log(hash);
-                        console.log(verifyOwner.content);
                         if(hash == verifyOwner.content) {
                             owned = true;                    
                         }
                         if(i+1 >= tokenCount && owned == true) {
                             state.pranaContract.methods.viewTokenDetails(tokenId).call({from: state.currentAccount})
                             .then(details => {
-                                console.log();
-                                dispatch('fleek/shareBucket', details[1], {root: true});    
+                                dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester}, {root: true});    
                             })
                         }
                     })

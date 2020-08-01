@@ -77,35 +77,57 @@ export default {
                 }
             });
         },
-        getContent: async ({}, content) => {
-            console.log(content.title);
-            const bucket = content.title;
-            
-            const dirRes = await state().client.listDirectories({
+        getContent: async ({state}, title) => { 
+            const bucket = title;           
+            const dirRes = await state.client.listDirectories({
                 bucket,
             });
-            
             const entriesList = dirRes.getEntriesList();
-            
-            const openFileRes = await state().client.openFile({
+
+            const openFileRes = await state.client.openFile({
                 bucket,
                 path: entriesList[0].getPath(),
             });
-            
+            console.log(openFileRes);
             const location = openFileRes.getLocation();
             console.log(location); // "/path/to/the/copied/file"
         },
         shareBucket: ({state, dispatch}, bucket) => {
-            state.client.shareBucket({ bucket: bucket })
+            state.client.shareBucket({ bucket: bucket.bucket })
             .then((res) => {
                 const threadInfo = res.getThreadinfo();
-                console.log('key:', threadInfo.getKey());
-                console.log('addresses:', threadInfo.getAddressesList());
-                dispatch('libp2p/sendSharedBucket', {}, {root: true})
+                const sharedBucket = JSON.stringify({
+                    key: threadInfo.getKey(),
+                    addresses: threadInfo.getAddressesList(),
+                    title: bucket.bucket
+                })
+                dispatch('libp2p/sendSharedBucket', {requester: bucket.requester, package: sharedBucket}, {root: true})
             })
             .catch((err) => {
               console.error(err);
             });
-        }
+        },
+        joinBucket: ({state, dispatch}, thread) => {
+            state.client
+            .joinBucket({
+                bucket: thread.title,
+                threadInfo: {
+                    key: thread.key,
+                    addresses: thread.addresses,
+                }
+            })
+            .then((res) => {
+                dispatch('getContent', thread.title)
+            })
+            .catch((err) => {
+                if(err.code == 2) {
+                    // bucket already added
+                    dispatch('getContent', thread.title)
+                } else {
+                    console.error(err);
+                }
+            });
+        },
+
     }
 }

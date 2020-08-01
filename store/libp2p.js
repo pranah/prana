@@ -6,6 +6,8 @@ import Secio from 'libp2p-secio'
 import Mplex from 'libp2p-mplex'
 import Boostrap from 'libp2p-bootstrap'
 import Gossipsub from 'libp2p-gossipsub';
+import pipe from 'it-pipe'
+import concat from 'it-concat'
 
 export default {
     state: () => ({
@@ -19,7 +21,7 @@ export default {
         },
     },
     actions: {
-        initLibP2P: async ({ commit }) => {
+        initLibP2P: async ({ commit, dispatch }) => {
             const libp2p = await Libp2p.create({
             addresses: {
                 listen: [
@@ -52,25 +54,32 @@ export default {
             })
             console.log(libp2p);
             commit('syncNode', libp2p)
-            console.log(`libp2p id is ${libp2p.peerId.toB58String()}`);
             
+            libp2p.handle('/sharedBucket', async ({ stream }) => {
+                const result = await pipe(
+                  stream,
+                  concat
+                )
+                dispatch('fleek/joinBucket', JSON.parse(result.toString()), {root: true})
+              })
+
             // Listen for new peers
             libp2p.on('peer:discovery', (peerId) => {
                 commit('syncNode', libp2p)
-                console.log(`Found peer ${peerId.toB58String()}`)
+                // console.log(`Found peer ${peerId.toB58String()}`)
             })
     
             // Listen for new connections to peers
             libp2p.connectionManager.on('peer:connect', (connection) => {
                 commit('syncNode', libp2p)
                 libp2p.pubsub.publish("onlineCheckIn1", Buffer.from('LibP2P Node Checking In!'))
-                console.log(`Connected to ${connection.remotePeer.toB58String()}`)
+                // console.log(`Connected to ${connection.remotePeer.toB58String()}`)
             })
     
             // Listen for peers disconnecting
             libp2p.connectionManager.on('peer:disconnect', (connection) => {
                 commit('syncNode', libp2p)           
-                console.log(`Disconnected from ${connection.remotePeer.toB58String()}`)
+                // console.log(`Disconnected from ${connection.remotePeer.toB58String()}`)
             })
 
             await libp2p.start()
@@ -79,19 +88,31 @@ export default {
         subscribeToContent: async ({state, dispatch}, content) => {
             await state.p2pNode.pubsub.subscribe(content, (msg) => {
                 if(msg.from != state.p2pNode.peerId.toB58String()) {
+                    console.log('got message');
+                    const received = JSON.parse(msg.data.toString())
                     const verifyThis = {
-                        bucket: content,
-                        sig: msg.data.toString()
+                        bucket: received.bucket,
+                        sig: received.signature,
+                        block: received.block,
+                        requester: msg.from
                     }
                     dispatch('web3/verifySig', verifyThis, {root: true});
                 }
             })
         },
         requestContentKey: ({state}, content) => {
-            state.p2pNode.pubsub.publish(content.bucket, Buffer.from(content.signature))
+            state.p2pNode.pubsub.publish(content.bucket, Buffer.from(JSON.stringify(content)))
         },
-        sendSharedBucket: ({state}) => {
-            console.log("responding with content");
+        sendSharedBucket: async ({state}, content) => {
+            // console.log(state.p2pNode.registrar.peerStore.addressBook.data.get(content.requester))
+            const { stream } = await state.p2pNode.dialProtocol(
+                '/p2p/'+content.requester,
+                '/sharedBucket'
+            );
+            await pipe(
+              [content.package],
+              stream
+            )
         },
     }
 }
