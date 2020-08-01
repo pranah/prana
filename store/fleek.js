@@ -36,8 +36,15 @@ export default {
                 state.publishedContent.push({isbn, publisher, price, transactionCut, metadata});
             }
         },
-        collectContent: (state, content) => {
-            state.collectedContent.push(content);
+        collectContent: (state, token) => {
+            let tokenId = token.tokenId
+            let bucket = token.bucket
+            let isbn = token.content[0]
+            let metadata = token.content[1]
+            let copyNumber = token.content[2]
+            let isUpForResale = token.content[3]
+            state.collectedContent.push({tokenId, bucket, isbn, metadata, copyNumber, isUpForResale})
+            console.log(state.collectedContent)
         },
         collectableContent: (state, contentList) => {
             //could add more properties if needed
