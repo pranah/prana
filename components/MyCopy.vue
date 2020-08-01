@@ -1,5 +1,5 @@
 <template>
-  <v-col>{{ bucket }}</v-col>
+  <v-col>Bucket: {{ bucket }}</v-col>
 </template>
 
 <script>

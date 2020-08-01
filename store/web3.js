@@ -47,8 +47,10 @@ export default {
         getAccount: async ({commit, dispatch}) => {
             const accounts = await ethereum.enable()
             await commit('updateAccountDetails', accounts[0])
-            dispatch('myCollection');
             dispatch('myPublished');
+            dispatch('myCollection')
+            dispatch('getCollectables')
+
         },
         initEth: async({commit, dispatch}) => {
             if (window.ethereum) {        
@@ -136,7 +138,6 @@ export default {
                 .catch((err) => {
                     console.error(err);
                 });
-
             }   
         },
         signMessage: ({state, dispatch}, signThis) => {
