@@ -41,7 +41,6 @@ export default {
                     commit('setWeb3', provider);
                     const contract = new state.web3.eth.Contract(state.contractAbi, state.contractAddress);       
                     commit('setContract', contract);
-                    dispatch('myPublished');
 
                 } 
             });
@@ -49,7 +48,9 @@ export default {
         getAccount: async ({commit, dispatch}) => {
             const accounts = await ethereum.enable()
             await commit('updateAccountDetails', accounts[0])
+            dispatch('myPublished');
             dispatch('myCollection')
+            dispatch('getCollectables')
 
         },
         initEth: async({commit, dispatch}) => {
@@ -139,7 +140,6 @@ export default {
                 .catch((err) => {
                     console.error(err);
                 });
-
             }   
         },
         signMessage: ({state, dispatch}, signThis) => {

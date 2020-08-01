@@ -17,6 +17,7 @@
                     type="number" 
                     min="0" 
                     max="9999999999999" 
+                    required
                     label="ISBN"
                     v-model="content.isbn"
                 />
@@ -24,6 +25,7 @@
                     type="number"
                     min="0" 
                     max="999999" 
+                    required
                     label="Price in ETH"
                     v-model="content.price"
                 />

@@ -5,7 +5,7 @@
             <v-list-item>
                 <v-row>
                     <v-col>
-                        <span>{{ content.tokenId }}</span>    
+                        <span>TokenId: {{ content.tokenId }}</span>    
                     </v-col>  
                     <MyCopy v-bind:bucket="content.bucket"/>                 
                     <v-col>
