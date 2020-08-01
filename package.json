@@ -21,7 +21,7 @@
     "fs": "0.0.1-security",
     "it-concat": "^1.0.0",
     "it-pipe": "^1.1.0",
-    "libp2p": "^0.28.7",
+    "libp2p": "^0.28.9",
     "libp2p-bootstrap": "^0.11.0",
     "libp2p-gossipsub": "^0.4.6",
     "libp2p-mplex": "^0.9.5",
