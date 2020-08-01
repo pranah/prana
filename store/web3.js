@@ -1,5 +1,6 @@
 import Web3 from 'web3';
-import contractJson from "../contract/build/contracts/prana.json";
+import pranaJson from "../contract/build/contracts/prana.json";
+import pranahelperJson from "../contract/build/contracts/pranaHelper.json";
 import detectEthereumProvider from '@metamask/detect-provider';
 import Vue from 'vue';
 var sigUtil = require('eth-sig-util')
@@ -11,17 +12,22 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        contractAddress: contractJson.networks['5777'].address,
-        contractAbi: contractJson.abi,
+        pranaAddress: pranaJson.networks['5777'].address,
+        pranaAbi: pranaJson.abi,
+        pranahelperContract: null,
+        pranahelperAddress: pranahelperJson.networks['5777'].address,
+        pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
         setWeb3: (state, provider) => {
             state.web3 = provider;
             console.log(state.web3);
         },
-        setContract: (state, contract) => {
-            Vue.set(state, 'pranaContract', contract);
+        setContract: (state, contracts) => {
+            Vue.set(state, 'pranaContract', contracts.pranaContract);
+            Vue.set(state, 'pranahelperContract', contracts.pranahelperContract);
             console.log(state.pranaContract);
+            console.log(state.pranahelperContract);
         },
         fetchedProvider: (state, isMetaMask) => {
             state.isMetaMaskProvided = isMetaMask
@@ -39,8 +45,9 @@ export default {
                 if(res.isMetaMask==true) { 
                     const provider = new Web3(res);
                     commit('setWeb3', provider);
-                    const contract = new state.web3.eth.Contract(state.contractAbi, state.contractAddress);       
-                    commit('setContract', contract);
+                    const pranaContract = new state.web3.eth.Contract(state.pranaAbi, state.pranaAddress);       
+                    const pranahelperContract = new state.web3.eth.Contract(state.pranahelperAbi, state.pranahelperAddress);       
+                    commit('setContract', {pranaContract, pranahelperContract});
                 } 
             });
         },
