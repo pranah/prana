@@ -9,7 +9,6 @@
                 class="ma-3"
             > -->
                 <v-list-item>
-                <!-- <v-list-item-avatar color="green"></v-list-item-avatar> -->
                 <v-list-item-content>
                     <v-list-item-title><b>ISBN: {{content.returnValues.isbn}}</b></v-list-item-title>
                     <v-list-item-subtitle>by {{content.returnValues.publisher}}</v-list-item-subtitle>
