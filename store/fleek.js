@@ -24,7 +24,6 @@ export default {
             state.publishedContent = contentList;
         },
         collectContent: (state, content) => {
-            state.collectContent = null
             state.collectedContent.push(content);
         },
         collectableContent: (state, content) => {

@@ -101,11 +101,12 @@ export default {
                 commit('fleek/collectableContent', res, {root: true})
             }).catch(err => {console.log(err);})
         },
+        //mints a new token and pushes the tokendata to collectedContent array
         purchase: async ({state, dispatch},content) => {
             let price = content.returnValues.price
             let isbn = content.returnValues.isbn
+            //contract call to mint a new token
             await state.pranaContract.methods.directPurchase(isbn)
-            // .send({from: state.currentAccount, gas: 6000000})
             .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(price, 'ether') })
             .on('transactionHash', (hash) => {
                 console.log("Minting is Successful !")
@@ -114,39 +115,53 @@ export default {
             .then(receipt => {
                 console.log(receipt);
                 let tokenId = receipt.events.Transfer.returnValues.tokenId
-                dispatch('myCollection')
+                dispatch('pushToken', tokenId)
             }).catch(err => {console.log(err);})
         },
-        myCollection: async({state, commit}) => {
+        //pushes token data of all the tokens owned by an address to collectedContent array
+        myCollection: async({state, commit, dispatch}) => {
             let tokenCount
             let tokenId
+            //contract call to get the number of tokens owned by an address
             await state.pranaContract.methods.balanceOf(state.currentAccount)
-                .call({from: state.currentAccount})
-                .then(count => {
-                    tokenCount = count
-                    console.log(`Number of tokens: ${tokenCount}`)
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+                console.log(`Number of tokens: ${tokenCount}`)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
             for(let i=0; i<tokenCount; i++){
-
-                state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
+                //contract call to get the tokenId at index i
+                await state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
                 .call({ from: state.currentAccount})
-                .then((id) => {
-                tokenId = id
-                state.pranaContract.methods.consumeContent(id)
-                .call({ from: state.currentAccount})
-                .then((hash) => {
-                    commit('fleek/collectContent', {tokenId: id, bucket: hash}, {root: true})
-                    console.log(`EncryptedCID of tokenid ${id}: ${hash}`);
-                })
+                .then((tokenId) => {
+                    dispatch('pushToken', tokenId)
                 })
                 .catch((err) => {
-                    console.error(err);
-                });
+                    console.error(err)
+                })
             }   
+        },
+        //pushes the tokendata of a tokenId to collectedContent array
+        pushToken: async({state, commit}, tokenId) => {
+            let bucket
+            //contract call to get the encrypted cid of a tokenId
+            state.pranaContract.methods.consumeContent(tokenId)
+            .call({ from: state.currentAccount})
+            .then((hash) => {
+                bucket = hash
+                console.log(`EncryptedCID of tokenid ${tokenId}: ${hash}`)
+            })
+            //contract call to get the book details of a tokenId
+            state.pranaContract.methods.viewTokenDetails(tokenId)
+            .call({ from: state.currentAccount})
+            .then((content) => {
+                console.log(`Book details of tokenid ${tokenId}:`)
+                console.log(content)
+                commit('fleek/collectContent', {tokenId, bucket, content}, {root: true})
+            })          
         },
         signMessage: ({state, dispatch}, signThis) => {
             state.web3.eth.getBlock("latest")
