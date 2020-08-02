@@ -55,9 +55,10 @@ export default {
         getAccount: async ({commit, dispatch}) => {
             const accounts = await ethereum.enable()
             await commit('updateAccountDetails', accounts[0])
-            dispatch('myPublished');
+            dispatch('myPublished')
             dispatch('myCollection')
             dispatch('getCollectables')
+            dispatch('getResaleTokens')
 
         },
         initEth: async({commit, dispatch}) => {
@@ -136,7 +137,7 @@ export default {
             .then(receipt => {
                 console.log(receipt);
                 let tokenId = receipt.events.Transfer.returnValues.tokenId
-                dispatch('pushToken', tokenId)
+                dispatch('pushMyToken', tokenId)
             }).catch(err => {console.log(err);})
         },
         //pushes token data of all the tokens owned by an address to collectedContent array
@@ -157,15 +158,15 @@ export default {
                 await state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
                 .call({ from: state.currentAccount})
                 .then((tokenId) => {
-                    dispatch('pushToken', tokenId)
+                    dispatch('pushMyToken', tokenId)
                 })
                 .catch((err) => {
                     console.error(err)
                 })
             }   
         },
-        //pushes the tokendata of a tokenId to collectedContent array
-        pushToken: async({state, commit}, tokenId) => {
+        //pushes the token details of a tokenId to collectedContent array
+        pushMyToken: async({state, commit}, tokenId) => {
             let bucket
             //contract call to get the encrypted cid of a tokenId
             state.pranaContract.methods.consumeContent(tokenId)
@@ -174,7 +175,7 @@ export default {
                 bucket = hash
                 console.log(`EncryptedCID of tokenid ${tokenId}: ${hash}`)
             })
-            //contract call to get the book details of a tokenId
+            //contract call to get the token details of a tokenId
             state.pranaContract.methods.viewTokenDetails(tokenId)
             .call({ from: state.currentAccount})
             .then((content) => {
@@ -183,8 +184,9 @@ export default {
                 let isbn = content[0]
                 let metadata = content[1]
                 let copyNumber = content[2]
-                let isUpForResale = content[3]
-                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, isUpForResale}, {root: true})
+                let resalePrice = content[3]
+                let isUpForResale = content[4]
+                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, resalePrice, isUpForResale}, {root: true})
             })          
         },
         signMessage: ({state, dispatch}, signThis) => {
@@ -233,7 +235,6 @@ export default {
             .catch((err) => {
                 console.error(err);
             });
-
             for (let i=0; i<=tokenCount; i++){
                 state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
                 .call({ from: state.currentAccount})
@@ -256,8 +257,70 @@ export default {
                 .catch((err) => {
                     console.error(err);
                 });
-
             } 
+        },
+        //to put a token for resale
+        putForResale: async({state, commit, dispatch}, resaleData) => {
+            let resalePrice = resaleData.resalePrice
+            let tokenId = resaleData.tokenId
+            await state.pranaContract.methods.putTokenForSale(resalePrice, tokenId)
+            .send({ from: state.currentAccount, gas : 6000000 })
+            .on('TokenForSale', (event) => {
+                console.log('TokenForSale')
+                console.log(event)
+            }).then((receipt) => {
+                console.log('receipt')
+                console.log(receipt)
+            console.log('executing putforresale action...')
+                dispatch('pushResaleToken', tokenId)
+                console.log(tokenId)
+                // commit('fleek/removeMyToken', tokenId)
+                // .then( dispatch('pushMyToken', tokenId))
+            }).catch(err => console.log(err))
+        },
+
+        getResaleTokens: async({state, commit, dispatch}) => {
+            let tokenCount
+            //contract call to get the number of resale tokens 
+            await state.pranaContract.methods.numberofTokensForResale()
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+                console.log(`Number of resale tokens: ${tokenCount}`)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            for(let i=0; i<tokenCount; i++){
+                //contract call to get the resale tokenId at index i
+                await state.pranaContract.methods.tokenForResaleAtIndex(i)
+                .call({ from: state.currentAccount})
+                .then((tokenId) => {
+                    dispatch('pushResaleToken', tokenId)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            }
+        },
+
+        pushResaleToken: async({state, commit, dispatch}, tokenId) => {
+            console.log('executing pushResaleToken action...')
+            console.log(tokenId)
+            //contract call to get the token details of a tokenId
+            state.pranaContract.methods.viewTokenDetails(tokenId)
+            .call({ from: state.currentAccount})
+            .then((content) => {
+                console.log(`Book details of tokenid ${tokenId}:`)
+                console.log(content)
+                let isbn = content[0]
+                let metadata = content[1]
+                let copyNumber = content[2]
+                let resalePrice = content[3]
+                let isUpForResale = content[4]
+                commit('fleek/resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale}, {root: true})
+            })
         }
+
     }
 }

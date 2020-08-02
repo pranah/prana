@@ -9,6 +9,7 @@ export default {
         publishedContent: [],
         collectedContent: [],
         collectableContent: [],
+        resaleTokens: [],
     }),
     mutations: {
         initSpaceClient: (state, client) => {
@@ -23,12 +24,18 @@ export default {
         publishedContent: (state, contentList) => {
             state.publishedContent = contentList
         },
-        collectContent: (state, token) => {
-            state.collectedContent.push(token)
-        },
         collectableContent: (state, contentList) => {
             state.collectableContent = contentList
         },
+        collectContent: (state, token) => {
+            state.collectedContent.push(token)
+            console.log(state.collectedContent)
+        },
+        resaleTokens: (state, token) => {
+            state.resaleTokens.push(token)
+            console.log(state.resaleTokens)
+        }
+        
     },
     actions: {
         initSpaceClient: ({state, commit}) => {
