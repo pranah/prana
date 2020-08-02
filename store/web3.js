@@ -82,6 +82,7 @@ export default {
             }).then((receipt) => {
                 console.log(receipt)
                 dispatch('myPublished')
+                dispatch('getCollectables')
             }).catch(err => console.log(err))
         },
         myPublished: async ({state, commit}) => {
@@ -89,16 +90,36 @@ export default {
                 filter:{publisher:state.currentAccount},
                 fromBlock:0,
                 toBlock:'latest'
-            },(err,events)=>{
-                commit('fleek/publishedContent', events, { root: true })
+            },(err, events)=>{
+                let isbn, price, publisher, metadata, transactionCut
+                let contentList = []
+                for(let i=0; i<events.length; i++){
+                    isbn = events[i].returnValues.isbn
+                    price = events[i].returnValues.price
+                    publisher = events[i].returnValues.publisher
+                    metadata = events[i].returnValues.bookCoverAndDetails
+                    transactionCut = events[i].returnValues.transactionCut
+                    contentList.push({isbn, publisher, price, transactionCut, metadata});
+                }
+                commit('fleek/publishedContent', contentList, { root: true })
             });
         },
         getCollectables: async ({state, commit}) => {
             await state.pranaContract.getPastEvents('BookPublished', {
                 fromBlock: 0,
                 toBlock: 'latest'
-            }).then(res => {
-                commit('fleek/collectableContent', res, {root: true})
+            }).then(events => {
+                let isbn, price, publisher, metadata, transactionCut
+                let contentList = []
+                for(let i=0; i<events.length; i++){
+                    isbn = events[i].returnValues.isbn
+                    price = events[i].returnValues.price
+                    publisher = events[i].returnValues.publisher
+                    metadata = events[i].returnValues.bookCoverAndDetails
+                    transactionCut = events[i].returnValues.transactionCut
+                    contentList.push({isbn, publisher, price, transactionCut, metadata});
+                }
+                commit('fleek/collectableContent', contentList, {root: true})
             }).catch(err => {console.log(err);})
         },
         //mints a new token and pushes the tokendata to collectedContent array
@@ -159,7 +180,11 @@ export default {
             .then((content) => {
                 console.log(`Book details of tokenid ${tokenId}:`)
                 console.log(content)
-                commit('fleek/collectContent', {tokenId, bucket, content}, {root: true})
+                let isbn = content[0]
+                let metadata = content[1]
+                let copyNumber = content[2]
+                let isUpForResale = content[3]
+                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, isUpForResale}, {root: true})
             })          
         },
         signMessage: ({state, dispatch}, signThis) => {

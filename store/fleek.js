@@ -21,46 +21,13 @@ export default {
             state.collectorPageSwitch = page;
         },
         publishedContent: (state, contentList) => {
-            //could add more properties if needed
-            let isbn
-            let price
-            let publisher
-            let metadata
-            let transactionCut
-            for(let i=0; i<contentList.length; i++){
-                isbn = contentList[i].returnValues.isbn
-                price = contentList[i].returnValues.price
-                publisher = contentList[i].returnValues.publisher
-                metadata = contentList[i].returnValues.bookCoverAndDetails
-                transactionCut = contentList[i].returnValues.transactionCut
-                state.publishedContent.push({isbn, publisher, price, transactionCut, metadata});
-            }
+            state.publishedContent = contentList
         },
         collectContent: (state, token) => {
-            let tokenId = token.tokenId
-            let bucket = token.bucket
-            let isbn = token.content[0]
-            let metadata = token.content[1]
-            let copyNumber = token.content[2]
-            let isUpForResale = token.content[3]
-            state.collectedContent.push({tokenId, bucket, isbn, metadata, copyNumber, isUpForResale})
-            console.log(state.collectedContent)
+            state.collectedContent.push(token)
         },
         collectableContent: (state, contentList) => {
-            //could add more properties if needed
-            let isbn
-            let price
-            let publisher
-            let metadata
-            let transactionCut
-            for(let i=0; i<contentList.length; i++){
-                isbn = contentList[i].returnValues.isbn
-                price = contentList[i].returnValues.price
-                publisher = contentList[i].returnValues.publisher
-                metadata = contentList[i].returnValues.bookCoverAndDetails
-                transactionCut = contentList[i].returnValues.transactionCut
-                state.collectableContent.push({isbn, publisher, price, transactionCut, metadata});
-            }
+            state.collectableContent = contentList
         },
     },
     actions: {
