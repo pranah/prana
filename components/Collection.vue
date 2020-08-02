@@ -3,13 +3,16 @@
         <h3>Personal Collection</h3>
         <v-list v-for="content in collectedContent" :key="collectedContent.indexOf(content)">
             <v-list-item>
-                <v-row>
+                <v-row> 
+                    <MyCopy v-bind:content="content"/>                 
                     <v-col>
-                        <span>TokenId: {{ content.tokenId }}</span>    
-                    </v-col>  
-                    <MyCopy v-bind:bucket="content.bucket"/>                 
-                    <v-col>
-                        <v-btn color="green" @click="signMessage(content.bucket)">Download</v-btn>
+                        <v-btn small outlined color="green" @click="signMessage(content.bucket)">Download</v-btn>
+                        <v-btn 
+                        v-if = "content.isUpForResale === false"
+                        small 
+                        outlined 
+                        color="green" 
+                        @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn>
                     </v-col>
                 </v-row>                    
             </v-list-item>
@@ -27,7 +30,8 @@ export default {
     },
     methods: {
         ...mapActions('web3', [
-            'signMessage'
+            'signMessage',
+            'putForResale'
         ])
     }
 }
