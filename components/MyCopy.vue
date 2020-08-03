@@ -51,7 +51,7 @@ export default {
         ])
     },
     created() {
-        this.subscribeToContent(this.bucket);
+        this.subscribeToContent(this.content.bucket);
     },
     data: () => ({
       items: [

@@ -2,7 +2,7 @@
     <v-row>
         <v-col>  
             <h3>Publish Work</h3>
-            <v-form style="margin: 5%;">
+            <v-form class="publishForm">
                 <v-text-field 
                     required
                     label="Title"
@@ -29,7 +29,7 @@
                     label="Price in ETH"
                     v-model="content.price"
                 />
-                <v-btn color="green" @click="publish(content)">Publish</v-btn>
+                <v-btn small outlined color="green" @click="publish(content)">Publish</v-btn>
             </v-form>
         </v-col>
     </v-row>    
@@ -65,5 +65,5 @@ export default {
 </script>
 
 <style>
-
+    .publishForm {margin: 5%;}
 </style>

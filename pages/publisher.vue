@@ -7,9 +7,9 @@
       <v-card>
         <v-row>
           <v-col>
-            <v-btn-toggle mandatory dense>
-              <v-btn dense color="green"@click="publisherPageSwitchFlip(false)">Publish</v-btn>
-              <v-btn dense color="green"@click="publisherPageSwitchFlip(true)">Published</v-btn>
+            <v-btn-toggle mandatory >
+              <v-btn small outlined color="green"@click="publisherPageSwitchFlip(false)">Publish</v-btn>
+              <v-btn small outlined color="green"@click="publisherPageSwitchFlip(true)">Published</v-btn>
             </v-btn-toggle>
           </v-col>
         </v-row>

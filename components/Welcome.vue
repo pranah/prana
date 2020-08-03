@@ -1,9 +1,9 @@
 <template>
 
   <v-row>
-    <v-col><v-btn color="green" to="/publisher">Publisher</v-btn></v-col>
+    <v-col><v-btn small outlined color="green" to="/publisher">Publisher</v-btn></v-col>
     <v-spacer/>
-    <v-col><v-btn color="green" to="/collector">Collector</v-btn></v-col>
+    <v-col><v-btn small outlined color="green" to="/collector">Collector</v-btn></v-col>
   </v-row>
  
 </template>

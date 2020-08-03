@@ -94,9 +94,9 @@ export default {
                 bucket,
                 path: entriesList[0].getPath(),
             });
-            console.log(openFileRes);
             const location = openFileRes.getLocation();
             console.log(location); // "/path/to/the/copied/file"
+            window.open("file://" + location, "_blank");
         },
         shareBucket: ({state, dispatch}, bucket) => {
             state.client.shareBucket({ bucket: bucket.bucket })

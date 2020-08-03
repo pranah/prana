@@ -88,7 +88,6 @@ export default {
         subscribeToContent: async ({state, dispatch}, content) => {
             await state.p2pNode.pubsub.subscribe(content, (msg) => {
                 if(msg.from != state.p2pNode.peerId.toB58String()) {
-                    console.log('got message');
                     const received = JSON.parse(msg.data.toString())
                     const verifyThis = {
                         bucket: received.bucket,
