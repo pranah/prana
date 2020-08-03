@@ -93,6 +93,7 @@ export default {
                         bucket: received.bucket,
                         sig: received.signature,
                         block: received.block,
+                        tokenId: received.tokenId,
                         requester: msg.from
                     }
                     dispatch('web3/verifySig', verifyThis, {root: true});

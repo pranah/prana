@@ -6,7 +6,8 @@
                 <v-row> 
                     <MyCopy v-bind:content="content"/>                 
                     <v-col>
-                        <v-btn small outlined color="green" @click="signMessage(content.bucket)">Download</v-btn>
+                        <p v-if="content.loadingContent==true">Loading</p>
+                        <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn>
                         <v-btn 
                         v-if = "content.isUpForResale === false"
                         small 
@@ -25,7 +26,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
     computed: {
         ...mapState('fleek', [
-            'collectedContent'
+            'collectedContent',
         ])
     },
     methods: {

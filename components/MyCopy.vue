@@ -27,6 +27,8 @@
                             <v-card-subtitle>Bucket: {{ content.bucket }}</v-card-subtitle>
                             <v-card-subtitle>Metadata: {{ content.metadata }}</v-card-subtitle>
                             <v-card-subtitle>Copy Number: {{ content.copyNumber }}</v-card-subtitle>
+                            <v-card-subtitle v-if="content.pathToFile.length> 1" >Path to file: {{ "file://" + content.pathToFile }}</v-card-subtitle>
+                            <v-card-subtitle v-else>Path to file: Please Download Content</v-card-subtitle>
                         </div>
                     </div>
                 </v-card>

@@ -27,7 +27,8 @@ export default {
     computed: {
         ...mapState('web3', [
             'currentAccount'
-        ])
+        ]),
+        
     },
    
 }

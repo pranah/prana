@@ -92,7 +92,7 @@ export default {
                 fromBlock:0,
                 toBlock:'latest'
             },(err, events)=>{
-                let isbn, price, publisher, metadata, transactionCut
+                let isbn, price, publisher, metadata, transactionCut, bucketHash
                 let contentList = []
                 for(let i=0; i<events.length; i++){
                     isbn = events[i].returnValues.isbn
@@ -100,9 +100,14 @@ export default {
                     publisher = events[i].returnValues.publisher
                     metadata = events[i].returnValues.bookCoverAndDetails
                     transactionCut = events[i].returnValues.transactionCut
-                    contentList.push({isbn, publisher, price, transactionCut, metadata});
+                    state.pranaContract.methods.viewBookDetails(isbn)
+                    .call({ from: state.currentAccount})
+                    .then((content) => {
+                        bucketHash = content[0]
+                        contentList.push({isbn, publisher, price, transactionCut, metadata, bucketHash});
+                        commit('fleek/publishedContent', contentList, { root: true })
+                    })
                 }
-                commit('fleek/publishedContent', contentList, { root: true })
             });
         },
         getCollectables: async ({state, commit}) => {
@@ -169,14 +174,14 @@ export default {
         pushMyToken: async({state, commit}, tokenId) => {
             let bucket
             //contract call to get the encrypted cid of a tokenId
-            state.pranaContract.methods.consumeContent(tokenId)
+            await state.pranaContract.methods.consumeContent(tokenId)
             .call({ from: state.currentAccount})
             .then((hash) => {
                 bucket = hash
                 console.log(`EncryptedCID of tokenid ${tokenId}: ${hash}`)
             })
             //contract call to get the token details of a tokenId
-            state.pranaContract.methods.viewTokenDetails(tokenId)
+            await state.pranaContract.methods.viewTokenDetails(tokenId)
             .call({ from: state.currentAccount})
             .then((content) => {
                 console.log(`Book details of tokenid ${tokenId}:`)
@@ -186,19 +191,23 @@ export default {
                 let copyNumber = content[2]
                 let resalePrice = content[3]
                 let isUpForResale = content[4]
-                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, resalePrice, isUpForResale}, {root: true})
+                const loadingContent = false
+                const pathToFile = String
+                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile}, {root: true})
             })          
         },
-        signMessage: ({state, dispatch}, signThis) => {
+        signMessage: ({state, dispatch, commit}, signThis) => {
             state.web3.eth.getBlock("latest")
             .then(block => {
                 state.web3.eth.personal.sign(block.hash, state.currentAccount)
                 .then(sig => {
                     const content = {
-                        bucket: signThis,
+                        bucket: signThis.bucket,
                         signature: sig,
-                        block: block.number
+                        block: block.number,
+                        tokenId: signThis.tokenId
                     }
+                    commit('fleek/loadingContent', signThis, {root:true})
                     dispatch('libp2p/requestContentKey', content, {root: true})        
                 });
             });            
@@ -215,7 +224,8 @@ export default {
                         const verifyOwner = {
                             owner: from,
                             content: verifyThis.bucket,
-                            requester: verifyThis.requester
+                            requester: verifyThis.requester,
+                            tokenId: verifyThis.tokenId
                         }
                         dispatch('verifyOwner', verifyOwner)
                     })
@@ -249,7 +259,7 @@ export default {
                         if(i+1 >= tokenCount && owned == true) {
                             state.pranaContract.methods.viewTokenDetails(tokenId).call({from: state.currentAccount})
                             .then(details => {
-                                dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester}, {root: true});    
+                                dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
                             })
                         }
                     })

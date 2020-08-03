@@ -34,7 +34,10 @@ export default {
         resaleTokens: (state, token) => {
             state.resaleTokens.push(token)
             console.log(state.resaleTokens)
-        }
+        },
+        loadingContent: (state, content) => {
+            state.collectedContent[state.collectedContent.indexOf(content)].loadingContent = !state.collectedContent[state.collectedContent.indexOf(content)].loadingContent
+        },
         
     },
     actions: {
@@ -83,8 +86,8 @@ export default {
                 }
             });
         },
-        getContent: async ({state}, title) => { 
-            const bucket = title;           
+        getContent: async ({state}, received) => { 
+            const bucket = received.bucketName;     
             const dirRes = await state.client.listDirectories({
                 bucket,
             });
@@ -95,8 +98,11 @@ export default {
                 path: entriesList[0].getPath(),
             });
             const location = openFileRes.getLocation();
-            console.log(location); // "/path/to/the/copied/file"
-            window.open("file://" + location, "_blank");
+            const index = state.collectedContent.findIndex(function(content) {
+                return content.tokenId == received.tokenId
+            })
+            state.collectedContent[index].pathToFile = location
+            state.collectedContent[index].loadingContent = false
         },
         shareBucket: ({state, dispatch}, bucket) => {
             state.client.shareBucket({ bucket: bucket.bucket })
@@ -105,7 +111,8 @@ export default {
                 const sharedBucket = JSON.stringify({
                     key: threadInfo.getKey(),
                     addresses: threadInfo.getAddressesList(),
-                    title: bucket.bucket
+                    title: bucket.bucket,
+                    tokenId: bucket.tokenId
                 })
                 dispatch('libp2p/sendSharedBucket', {requester: bucket.requester, package: sharedBucket}, {root: true})
             })
@@ -123,12 +130,12 @@ export default {
                 }
             })
             .then((res) => {
-                dispatch('getContent', thread.title)
+                dispatch('getContent', {bucketName: thread.title, tokenId: thread.tokenId})
             })
             .catch((err) => {
                 if(err.code == 2) {
                     // bucket already added
-                    dispatch('getContent', thread.title)
+                    dispatch('getContent', {bucketName: thread.title, tokenId: thread.tokenId})
                 } else {
                     console.error(err);
                 }
