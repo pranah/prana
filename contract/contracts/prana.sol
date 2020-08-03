@@ -22,7 +22,7 @@ contract prana is ERC721 {
         // edit rentedBlocks to appropriate time/number of blocks before final version
         // for a two-week rental period, the rentedBlocks would be 100800 blocks.
         // assuming the block time is 12 seconds on average.
-        rentedBlocks = 10;
+        rentedBlocks = 100;
     }
 
     //address of the contract deployer
