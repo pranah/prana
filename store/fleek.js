@@ -33,12 +33,12 @@ export default {
         },
         resaleTokens: (state, token) => {
             state.resaleTokens.push(token)
+            console.log('resaleTokens')
             console.log(state.resaleTokens)
         },
         loadingContent: (state, content) => {
             state.collectedContent[state.collectedContent.indexOf(content)].loadingContent = !state.collectedContent[state.collectedContent.indexOf(content)].loadingContent
-        },
-        
+        },   
     },
     actions: {
         initSpaceClient: ({state, commit}) => {

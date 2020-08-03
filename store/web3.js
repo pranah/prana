@@ -184,8 +184,6 @@ export default {
             await state.pranaContract.methods.viewTokenDetails(tokenId)
             .call({ from: state.currentAccount})
             .then((content) => {
-                console.log(`Book details of tokenid ${tokenId}:`)
-                console.log(content)
                 let isbn = content[0]
                 let metadata = content[1]
                 let copyNumber = content[2]
@@ -316,12 +314,11 @@ export default {
 
         pushResaleToken: async({state, commit, dispatch}, tokenId) => {
             console.log('executing pushResaleToken action...')
-            console.log(tokenId)
             //contract call to get the token details of a tokenId
             state.pranaContract.methods.viewTokenDetails(tokenId)
             .call({ from: state.currentAccount})
             .then((content) => {
-                console.log(`Book details of tokenid ${tokenId}:`)
+                console.log(`Book details of resale tokenid ${tokenId}:`)
                 console.log(content)
                 let isbn = content[0]
                 let metadata = content[1]

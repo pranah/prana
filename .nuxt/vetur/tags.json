@@ -47,6 +47,12 @@
   "LazyPublished": {
     "description": "Auto imported from components/Published.vue"
   },
+  "ResaleToken": {
+    "description": "Auto imported from components/ResaleToken.vue"
+  },
+  "LazyResaleToken": {
+    "description": "Auto imported from components/ResaleToken.vue"
+  },
   "Welcome": {
     "description": "Auto imported from components/Welcome.vue"
   },
