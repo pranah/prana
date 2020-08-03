@@ -1,10 +1,9 @@
 <template>
     <v-col>
         <h3>Collectable Works</h3>
-        <v-btn small outlined color="green" @click="getCollectables()">Get Collectables</v-btn>
         <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg3 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
-                <v-card max-width="344" class="ma-3">
+            <v-flex xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
+                <v-card max-width="344" class="ma-3" color = "grey darken-3">
                     <Content v-bind:content="content"/>  
                     <v-card-actions>
                         <v-spacer></v-spacer>

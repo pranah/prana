@@ -1,11 +1,12 @@
 <template>
     <v-col>
         <h3>Personal Collection</h3>
-        <v-list v-for="content in collectedContent" :key="collectedContent.indexOf(content)">
-            <v-list-item>
-                <v-row> 
-                    <MyCopy v-bind:content="content"/>                 
-                    <v-col>
+        <v-layout row wrap>
+            <v-flex xs12 sm6 md4 lg4 v-for="content in collectedContent" :key="collectedContent.indexOf(content)">
+                <v-card max-width="344" class="ma-3" color = "grey darken-3">
+                    <MyCopy v-bind:content="content"/> 
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
                         <p v-if="content.loadingContent==true">Loading</p>
                         <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn>
                         <v-btn 
@@ -14,10 +15,11 @@
                         outlined 
                         color="green" 
                         @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn>
-                    </v-col>
-                </v-row>                    
-            </v-list-item>
-        </v-list>
+                        
+                    </v-card-actions>
+                </v-card>
+            </v-flex>
+        </v-layout>
     </v-col>        
 </template>
 

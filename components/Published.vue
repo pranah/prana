@@ -1,11 +1,10 @@
 <template>
     <v-row>
         <v-col>       
-            <h3>Published Work: {{ publishedContent.length }}</h3>
-            <v-btn small outlined color="green" @click="myPublished()">Refresh List</v-btn>
+            <h3>Published Works : {{ publishedContent.length }}</h3>
             <v-layout row wrap>
-                <v-flex xs12 sm6 md4 lg3 v-for="content in publishedContent" :key="publishedContent.indexOf(content)">
-                    <v-card max-width="344" class="ma-3">
+                <v-flex xs12 sm6 md4 lg4 v-for="content in publishedContent" :key="publishedContent.indexOf(content)">
+                    <v-card max-width="344" class="ma-3" color = "grey darken-3">
                         <Content v-bind:content="content"/> 
                         <v-card-actions>
                             <v-spacer></v-spacer>

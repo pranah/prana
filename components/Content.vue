@@ -3,19 +3,17 @@
         <v-list-item>
         <v-list-item-content>
             <v-list-item-title><b>ISBN: {{content.isbn}}</b></v-list-item-title>
-            <v-list-item-subtitle>by {{content.publisher}}</v-list-item-subtitle>
         </v-list-item-content>
         </v-list-item>
-
-        <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+        <!-- https://cdn.vuetifyjs.com/images/cards/mountain.jpg -->
+        <!-- <v-img
+        src="https://images.unsplash.com/photo-1558677949-260173506bbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80"
         height="194"
-        ></v-img>
+        ></v-img> -->
 
         <v-card-text class="text-left">
-        <!-- Visit ten places on our planet that are undergoing the biggest changes today.<br> -->
-        Price: {{content.price}}<br>
-        Publisher: {{content.publisher}}<br>
+        <b>Price: </b>{{content.price}} ETH<br><br>
+        <b>Publisher: </b>{{content.publisher}}<br>
         </v-card-text>  
     </div>    
 </template>
