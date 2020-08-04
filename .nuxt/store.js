@@ -21,6 +21,7 @@ let store = {};
 
   resolveStoreModules(require('../store/fleek.js'), 'fleek.js')
   resolveStoreModules(require('../store/libp2p.js'), 'libp2p.js')
+  resolveStoreModules(require('../store/textile.js'), 'textile.js')
   resolveStoreModules(require('../store/web3.js'), 'web3.js')
 
   // If the environment supports hot reloading...
@@ -31,6 +32,7 @@ let store = {};
       '../store/fleek.js',
       '../store/index.js',
       '../store/libp2p.js',
+      '../store/textile.js',
       '../store/web3.js',
     ], () => {
       // Update `root.modules` with the latest definitions.

@@ -76,14 +76,18 @@ export default {
         initLibP2P: 'libp2p/initLibP2P',
         fetchProvider: 'web3/fetchProvider',
         initSpaceClient: 'fleek/initSpaceClient',
-        getAccount: 'web3/getAccount'
+        getAccount: 'web3/getAccount',
+        initPowergate: 'textile/initPowergate',
+        setFFS: 'textile/setFFS',
       })
   },
   created() {
-    this.initLibP2P();
-    this.fetchProvider();
-    this.initSpaceClient();
-    this.getAccount();
+    this.initPowergate();
+    // this.setFFS();
+    // this.initLibP2P();
+    // this.fetchProvider();
+    // this.initSpaceClient();
+    // this.getAccount();
   } 
 }
 </script>

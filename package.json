@@ -15,10 +15,14 @@
     "@metamask/detect-provider": "^1.1.0",
     "@nuxtjs/axios": "^5.11.0",
     "@openzeppelin/contracts": "^3.1.0",
+    "@textile/hub": "^0.4.1",
+    "@textile/powergate-client": "^0.2.0",
+    "@textile/threads-core": "^0.1.33",
     "child_process": "^1.0.2",
     "eth-sig-util": "^2.5.3",
     "ethereumjs-util": "^7.0.3",
     "fs": "0.0.1-security",
+    "isomorphic-ws": "^4.0.1",
     "it-concat": "^1.0.0",
     "it-pipe": "^1.1.0",
     "libp2p": "^0.28.9",
@@ -33,6 +37,7 @@
     "path": "^0.12.7",
     "truffle": "^5.1.37",
     "web3": "^1.2.11",
+    "ws": "^7.3.1",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
