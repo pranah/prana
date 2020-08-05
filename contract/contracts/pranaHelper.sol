@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.0;
+pragma solidity >=0.4.16 <0.8.0;
 
 
 contract PranaInterface{
@@ -11,7 +11,7 @@ contract PranaInterface{
 contract pranaHelper {
 
 
-    constructor () public {
+    constructor () {
         owner = msg.sender;
     }
 
