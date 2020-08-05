@@ -12,8 +12,8 @@
 import { mapActions, mapState } from 'vuex'
 export default {
     computed: {
-      ...mapState('libp2p', [
-      ]),
+      // ...mapState('libp2p', [
+      // ]),
     },
 }
 </script>

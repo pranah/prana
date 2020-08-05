@@ -19,6 +19,8 @@
     "eth-sig-util": "^2.5.3",
     "ethereumjs-util": "^7.0.3",
     "fs": "0.0.1-security",
+    "ipfs-api": "^26.1.2",
+    "ipfs-http-client": "^45.0.0",
     "it-concat": "^1.0.0",
     "it-pipe": "^1.1.0",
     "libp2p": "^0.28.9",

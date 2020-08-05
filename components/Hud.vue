@@ -22,9 +22,9 @@ export default {
       ...mapState('libp2p', [
         'p2pNode'
       ]),
-      ...mapState('web3', [
-        'web3'
-      ])
+      // ...mapState('web3', [
+      //   'web3'
+      // ])
     },
     created() {
     }      

@@ -8,11 +8,11 @@
                     label="Title"
                     v-model="content.title"
                 />
-                <v-text-field 
+                <!-- <v-text-field 
                     required
                     label="Content to Publish (file path)"
                     v-model="content.file"
-                />
+                /> -->
                 <v-text-field 
                     type="number" 
                     min="0" 
@@ -21,6 +21,14 @@
                     label="ISBN"
                     v-model="content.isbn"
                 />
+                <v-file-input
+                accept=".txt, .rtf, .pdf"
+                placeholder="Content to Publish"
+                label="File"
+                v-model="file"
+                v-on:change="fileUpload()"
+                ></v-file-input>
+
                 <v-text-field 
                     type="number"
                     min="0" 
@@ -29,6 +37,7 @@
                     label="Price in ETH"
                     v-model="content.price"
                 />
+                <!-- <v-btn small outlined color="green" @click="publish(content)">Publish</v-btn> -->
                 <v-btn small outlined color="green" @click="publish(content)">Publish</v-btn>
             </v-form>
         </v-col>
@@ -42,11 +51,12 @@ export default {
     data: () => ({
         content: {
             title: '',
-            file: '',
+            file: null,
             isbn: 0,
             price: 0,
             transactionCut: 0
-        }
+        },
+        file: null
     }),
     computed: {
         ...mapState('fleek',[
@@ -54,12 +64,20 @@ export default {
         ]),
         ...mapState('web3', [
             'prana'
-        ])
+        ]),
     },
     methods: {
-        ...mapActions('fleek',[
+        ...mapActions('ipfs',[
             'publish'
-        ])
+        ]),
+        fileUpload(){
+            var reader = new FileReader()
+            reader.readAsArrayBuffer(this.file);
+            reader.onloadend = () => {
+            this.content.file = Buffer(reader.result)
+            console.log(this.content.file)
+            }
+        }
     },
 }
 </script>

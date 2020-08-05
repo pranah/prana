@@ -28,7 +28,7 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
     computed: {
-        ...mapState("fleek",[
+        ...mapState("web3",[
             'publishedContent'
         ])
     },

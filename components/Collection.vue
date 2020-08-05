@@ -8,7 +8,8 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <p v-if="content.loadingContent==true">Loading</p>
-                        <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn>
+                        <!-- <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn> -->
+                        <v-btn v-else small outlined color="green" @click="requestContent(content)">Download</v-btn>
                         <v-btn 
                         v-if = "content.isUpForResale === false"
                         small 
@@ -27,15 +28,16 @@
 import { mapState, mapActions } from 'vuex'
 export default {
     computed: {
-        ...mapState('fleek', [
+        ...mapState('web3', [
             'collectedContent',
         ])
     },
     methods: {
-        ...mapActions('web3', [
-            'signMessage',
-            'putForResale'
-        ])
+        ...mapActions({
+            signMessage: 'web3/signMessage',
+            putForResale: 'web3/putForResale',
+            requestContent: 'ipfs/requestContent'
+        })
     }
 }
 </script>

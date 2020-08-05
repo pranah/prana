@@ -14,7 +14,7 @@
 
     <v-card-text class="text-left">
       <b>Copy Number: {{ content.copyNumber }}</b><br><br>
-      <b>Bucket: </b>{{ content.bucket }}<br><br>
+      <b>Hash: </b>{{ content.hash }}<br><br>
     </v-card-text>
     <v-card-subtitle v-if="content.pathToFile.length> 1" class="text-left"><b>Path to file: </b>{{ "file://" + content.pathToFile }}</v-card-subtitle>
     <v-card-subtitle v-else class="text-left"><b>Path to file:</b> Please Download Content</v-card-subtitle>
@@ -28,23 +28,13 @@ import { mapActions } from 'vuex'
 export default {
     props: ['content'],
     methods: {
-        ...mapActions('libp2p', [
-            'subscribeToContent'
-        ])
+        // ...mapActions('libp2p', [
+        //     'subscribeToContent'
+        // ])
     },
     created() {
-        this.subscribeToContent(this.content.bucket);
+        // this.subscribeToContent(this.content.bucket);
     },
-    data: () => ({
-      items: [
-        {
-          color: '#1F7087',
-          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
-          artist: 'Foster the People',
-        },
-      ],
-    }),
 }
 </script>
 

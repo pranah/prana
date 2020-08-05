@@ -8,6 +8,13 @@ import ethUtil from 'ethereumjs-util'
 
 export default {
     state: () => ({
+        collectorPageSwitch: false,
+        publisherPageSwitch: false,
+        publishedContent: [],
+        collectedContent: [],
+        collectableContent: [],
+        resaleTokens: [],
+
         isMetaMaskProvided: Boolean,
         currentAccount: null,
         web3: null,
@@ -19,6 +26,30 @@ export default {
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
+        publisherPageSwitchFlip: (state, page) => {
+            state.publisherPageSwitch = page;
+        },
+        collectorPageSwitchFlip: (state, page) => {
+            state.collectorPageSwitch = page;
+        },
+        publishedContent: (state, contentList) => {
+            state.publishedContent = contentList
+        },
+        collectableContent: (state, contentList) => {
+            state.collectableContent = contentList
+        },
+        collectContent: (state, token) => {
+            state.collectedContent.push(token)
+            console.log(state.collectedContent)
+        },
+        resaleTokens: (state, token) => {
+            state.resaleTokens.push(token)
+            console.log('resaleTokens')
+            console.log(state.resaleTokens)
+        },
+        loadingContent: (state, content) => {
+            state.collectedContent[state.collectedContent.indexOf(content)].loadingContent = !state.collectedContent[state.collectedContent.indexOf(content)].loadingContent
+        },
         setWeb3: (state, provider) => {
             state.web3 = provider;
             console.log(state.web3);
@@ -70,9 +101,9 @@ export default {
             }
         },
         publish: async ({state, dispatch}, toPublish) => {
-            const bucketAdresses = toPublish.bucket.getAddressesList();
+            // const bucketAdresses = toPublish.bucket.getAddressesList();
             await state.pranaContract.methods.publishBook(
-                bucketAdresses[0].slice(-116),
+                toPublish.hash,
                 toPublish.content.isbn,
                 toPublish.content.price,
                 toPublish.content.title,
@@ -104,10 +135,10 @@ export default {
                     .call({ from: state.currentAccount})
                     .then((content) => {
                         bucketHash = content[0]
-                        contentList.push({isbn, publisher, price, transactionCut, metadata, bucketHash});
-                        commit('fleek/publishedContent', contentList, { root: true })
                     })
+                    contentList.push({isbn, publisher, price, transactionCut, metadata, bucketHash});
                 }
+                commit('publishedContent', contentList)
             });
         },
         getCollectables: async ({state, commit}) => {
@@ -125,7 +156,7 @@ export default {
                     transactionCut = events[i].returnValues.transactionCut
                     contentList.push({isbn, publisher, price, transactionCut, metadata});
                 }
-                commit('fleek/collectableContent', contentList, {root: true})
+                commit('collectableContent', contentList)
             }).catch(err => {console.log(err);})
         },
         //mints a new token and pushes the tokendata to collectedContent array
@@ -172,12 +203,12 @@ export default {
         },
         //pushes the token details of a tokenId to collectedContent array
         pushMyToken: async({state, commit}, tokenId) => {
-            let bucket
+            let hash
             //contract call to get the encrypted cid of a tokenId
             await state.pranaContract.methods.consumeContent(tokenId)
             .call({ from: state.currentAccount})
-            .then((hash) => {
-                bucket = hash
+            .then((bookHash) => {
+                hash = bookHash
                 console.log(`EncryptedCID of tokenid ${tokenId}: ${hash}`)
             })
             //contract call to get the token details of a tokenId
@@ -191,7 +222,7 @@ export default {
                 let isUpForResale = content[4]
                 const loadingContent = false
                 const pathToFile = String
-                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile}, {root: true})
+                commit('collectContent', {tokenId, hash, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile})
             })          
         },
         signMessage: ({state, dispatch, commit}, signThis) => {
@@ -200,13 +231,13 @@ export default {
                 state.web3.eth.personal.sign(block.hash, state.currentAccount)
                 .then(sig => {
                     const content = {
-                        bucket: signThis.bucket,
+                        hash: signThis.hash,
                         signature: sig,
                         block: block.number,
                         tokenId: signThis.tokenId
                     }
-                    commit('fleek/loadingContent', signThis, {root:true})
-                    dispatch('libp2p/requestContentKey', content, {root: true})        
+                    commit('loadingContent', signThis)
+                    // dispatch('libp2p/requestContentKey', content, {root: true})        
                 });
             });            
         },
@@ -257,7 +288,7 @@ export default {
                         if(i+1 >= tokenCount && owned == true) {
                             state.pranaContract.methods.viewTokenDetails(tokenId).call({from: state.currentAccount})
                             .then(details => {
-                                dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
+                                // dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
                             })
                         }
                     })
@@ -311,7 +342,6 @@ export default {
                 })
             }
         },
-
         pushResaleToken: async({state, commit, dispatch}, tokenId) => {
             console.log('executing pushResaleToken action...')
             //contract call to get the token details of a tokenId
@@ -325,7 +355,7 @@ export default {
                 let copyNumber = content[2]
                 let resalePrice = content[3]
                 let isUpForResale = content[4]
-                commit('fleek/resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale}, {root: true})
+                commit('resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale})
             })
         }
 

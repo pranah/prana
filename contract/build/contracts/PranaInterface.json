@@ -38,30 +38,30 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x986ed03d51e372ebb8bd2e06acf99d5cd75f86ab5b72d4bbd93544cbe5aa49ec\",\"license\":\"ISC\",\"urls\":[\"bzz-raw://3663f837cc4402db5b07016d1c9093d3d37f59d7377c45a2f31cad33bbfbb976\",\"dweb:/ipfs/QmXXABpBux1NFAF8vSdVuXkQVhZv6Vv7SonHSvXVYNFy9R\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060ff8061001f6000396000f3fe60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea264697066735822122045d3668298fca256aeeb5f25d8e2eb3126ffe79753d5a9215eda8382a92eec0d64736f6c634300060c0033",
-  "deployedBytecode": "0x60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea264697066735822122045d3668298fca256aeeb5f25d8e2eb3126ffe79753d5a9215eda8382a92eec0d64736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x4dd2a364776b97c2c4a82984038cc808c2e94455bbd4e4948acc6d7bd7f65918\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b2ee6b985f38ad3459af0fb2705fbe072d29df22d5b3f30353f1b49b7ee0099e\",\"dweb:/ipfs/QmfB64CYuJzrzczX2iXzT2DwZXrcUuhc3a4vfNkRSw8bNU\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ff8061001f6000396000f3fe60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220296839a6c072a0adcb14be314527863f91495bb4950093724b1a1d35d9dfdb9b64736f6c634300060c0033",
+  "deployedBytecode": "0x60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220296839a6c072a0adcb14be314527863f91495bb4950093724b1a1d35d9dfdb9b64736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "59:206:2:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "59:206:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;169:94;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;88:76;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;169:94;;;:::o;88:76::-;;;:::o",
-  "source": "// SPDX-License-Identifier: ISC\n\npragma solidity ^0.6.0;\n\n\ncontract PranaInterface{\n    function buyToken(uint256 tokenid, address _tokenRecipient) public payable{}\n    function  buyTokenAsTheSpecialBuyer(uint256 tokenid, address _tokenRecipient) public payable{}\n}\n\ncontract pranaHelper {\n\n\n    constructor () public {\n        owner = msg.sender;\n    }\n\n    //address of the contract deployer.\n    address owner;\n\n    //address of the prana contract\n    address pranaAddress;\n\n    //Modifier for onlyOwner functions\n    modifier onlyOwner {\n       require(msg.sender == owner, 'You are not the contract owner to call this function!');\n       _;\n    }\n\n    function setPranaAddress(address _pranaAddress) public onlyOwner{\n        pranaAddress = _pranaAddress;\n    }\n\n    function buyTokenFromPrana(uint256 tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyToken{value:msg.value}(tokenId, msg.sender);\n    }\n\n    function buyTokenFromPranaAsSpecialBuyer(uint256 _tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyTokenAsTheSpecialBuyer{value:msg.value}(_tokenId, msg.sender);\n    }\n\n}",
+  "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.6.0;\n\n\ncontract PranaInterface{\n    function buyToken(uint256 tokenid, address _tokenRecipient) public payable{}\n    function  buyTokenAsTheSpecialBuyer(uint256 tokenid, address _tokenRecipient) public payable{}\n}\n\ncontract pranaHelper {\n\n\n    constructor () public {\n        owner = msg.sender;\n    }\n\n    //address of the contract deployer.\n    address owner;\n\n    //address of the prana contract\n    address pranaAddress;\n\n    //Modifier for onlyOwner functions\n    modifier onlyOwner {\n       require(msg.sender == owner, 'You are not the contract owner to call this function!');\n       _;\n    }\n\n    function setPranaAddress(address _pranaAddress) public onlyOwner{\n        pranaAddress = _pranaAddress;\n    }\n\n    function buyTokenFromPrana(uint256 tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyToken{value:msg.value}(tokenId, msg.sender);\n    }\n\n    function buyTokenFromPranaAsSpecialBuyer(uint256 _tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyTokenAsTheSpecialBuyer{value:msg.value}(_tokenId, msg.sender);\n    }\n\n}",
   "sourcePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
   "ast": {
     "absolutePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
     "exportedSymbols": {
       "PranaInterface": [
-        1079
+        1085
       ],
       "pranaHelper": [
-        1163
+        1169
       ]
     },
-    "id": 1164,
-    "license": "ISC",
+    "id": 1170,
+    "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1062,
+        "id": 1068,
         "literals": [
           "solidity",
           "^",
@@ -78,23 +78,23 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1079,
+        "id": 1085,
         "linearizedBaseContracts": [
-          1079
+          1085
         ],
         "name": "PranaInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1069,
+              "id": 1075,
               "nodeType": "Block",
               "src": "162:2:2",
               "statements": []
             },
             "documentation": null,
             "functionSelector": "9134709e",
-            "id": 1070,
+            "id": 1076,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -102,17 +102,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1067,
+              "id": 1073,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1064,
+                  "id": 1070,
                   "mutability": "mutable",
                   "name": "tokenid",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1070,
+                  "scope": 1076,
                   "src": "106:15:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -121,7 +121,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1063,
+                    "id": 1069,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "106:7:2",
@@ -135,12 +135,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1066,
+                  "id": 1072,
                   "mutability": "mutable",
                   "name": "_tokenRecipient",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1070,
+                  "scope": 1076,
                   "src": "123:23:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -149,7 +149,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1065,
+                    "id": 1071,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "123:7:2",
@@ -166,12 +166,12 @@
               "src": "105:42:2"
             },
             "returnParameters": {
-              "id": 1068,
+              "id": 1074,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "162:0:2"
             },
-            "scope": 1079,
+            "scope": 1085,
             "src": "88:76:2",
             "stateMutability": "payable",
             "virtual": false,
@@ -179,14 +179,14 @@
           },
           {
             "body": {
-              "id": 1077,
+              "id": 1083,
               "nodeType": "Block",
               "src": "261:2:2",
               "statements": []
             },
             "documentation": null,
             "functionSelector": "5437c7fa",
-            "id": 1078,
+            "id": 1084,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -194,17 +194,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1075,
+              "id": 1081,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1072,
+                  "id": 1078,
                   "mutability": "mutable",
                   "name": "tokenid",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1078,
+                  "scope": 1084,
                   "src": "205:15:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -213,7 +213,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1071,
+                    "id": 1077,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:2",
@@ -227,12 +227,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1074,
+                  "id": 1080,
                   "mutability": "mutable",
                   "name": "_tokenRecipient",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1078,
+                  "scope": 1084,
                   "src": "222:23:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -241,7 +241,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1073,
+                    "id": 1079,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "222:7:2",
@@ -258,19 +258,19 @@
               "src": "204:42:2"
             },
             "returnParameters": {
-              "id": 1076,
+              "id": 1082,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "261:0:2"
             },
-            "scope": 1079,
+            "scope": 1085,
             "src": "169:94:2",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1164,
+        "scope": 1170,
         "src": "59:206:2"
       },
       {
@@ -280,34 +280,34 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1163,
+        "id": 1169,
         "linearizedBaseContracts": [
-          1163
+          1169
         ],
         "name": "pranaHelper",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1087,
+              "id": 1093,
               "nodeType": "Block",
               "src": "318:35:2",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 1085,
+                    "id": 1091,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 1082,
+                      "id": 1088,
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1090,
+                      "referencedDeclaration": 1096,
                       "src": "328:5:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -320,7 +320,7 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 1083,
+                        "id": 1089,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -331,7 +331,7 @@
                           "typeString": "msg"
                         }
                       },
-                      "id": 1084,
+                      "id": 1090,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -351,14 +351,14 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 1086,
+                  "id": 1092,
                   "nodeType": "ExpressionStatement",
                   "src": "328:18:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 1088,
+            "id": 1094,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -366,18 +366,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1080,
+              "id": 1086,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "308:2:2"
             },
             "returnParameters": {
-              "id": 1081,
+              "id": 1087,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "318:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "296:57:2",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -385,12 +385,12 @@
           },
           {
             "constant": false,
-            "id": 1090,
+            "id": 1096,
             "mutability": "mutable",
             "name": "owner",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 1163,
+            "scope": 1169,
             "src": "399:13:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -399,7 +399,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 1089,
+              "id": 1095,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "399:7:2",
@@ -414,12 +414,12 @@
           },
           {
             "constant": false,
-            "id": 1092,
+            "id": 1098,
             "mutability": "mutable",
             "name": "pranaAddress",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 1163,
+            "scope": 1169,
             "src": "455:20:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -428,7 +428,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 1091,
+              "id": 1097,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "455:7:2",
@@ -443,7 +443,7 @@
           },
           {
             "body": {
-              "id": 1103,
+              "id": 1109,
               "nodeType": "Block",
               "src": "540:111:2",
               "statements": [
@@ -457,7 +457,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 1098,
+                        "id": 1104,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -466,7 +466,7 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 1095,
+                            "id": 1101,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -477,7 +477,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 1096,
+                          "id": 1102,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -495,11 +495,11 @@
                         "operator": "==",
                         "rightExpression": {
                           "argumentTypes": null,
-                          "id": 1097,
+                          "id": 1103,
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1090,
+                          "referencedDeclaration": 1096,
                           "src": "571:5:2",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -515,7 +515,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "596f7520617265206e6f742074686520636f6e7472616374206f776e657220746f2063616c6c20746869732066756e6374696f6e21",
-                        "id": 1099,
+                        "id": 1105,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -542,7 +542,7 @@
                           "typeString": "literal_string \"You are not the contract owner to call this function!\""
                         }
                       ],
-                      "id": 1094,
+                      "id": 1100,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -556,7 +556,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 1100,
+                    "id": 1106,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -571,24 +571,24 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1101,
+                  "id": 1107,
                   "nodeType": "ExpressionStatement",
                   "src": "549:85:2"
                 },
                 {
-                  "id": 1102,
+                  "id": 1108,
                   "nodeType": "PlaceholderStatement",
                   "src": "643:1:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 1104,
+            "id": 1110,
             "name": "onlyOwner",
             "nodeType": "ModifierDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1093,
+              "id": 1099,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "540:0:2"
@@ -599,25 +599,25 @@
           },
           {
             "body": {
-              "id": 1115,
+              "id": 1121,
               "nodeType": "Block",
               "src": "721:45:2",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 1113,
+                    "id": 1119,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 1111,
+                      "id": 1117,
                       "name": "pranaAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1092,
+                      "referencedDeclaration": 1098,
                       "src": "731:12:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -628,11 +628,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 1112,
+                      "id": 1118,
                       "name": "_pranaAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1106,
+                      "referencedDeclaration": 1112,
                       "src": "746:13:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -645,7 +645,7 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 1114,
+                  "id": 1120,
                   "nodeType": "ExpressionStatement",
                   "src": "731:28:2"
                 }
@@ -653,20 +653,20 @@
             },
             "documentation": null,
             "functionSelector": "a9fbf5c4",
-            "id": 1116,
+            "id": 1122,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 1109,
+                "id": 1115,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 1108,
+                  "id": 1114,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1104,
+                  "referencedDeclaration": 1110,
                   "src": "712:9:2",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -681,17 +681,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1107,
+              "id": 1113,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1106,
+                  "id": 1112,
                   "mutability": "mutable",
                   "name": "_pranaAddress",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1116,
+                  "scope": 1122,
                   "src": "682:21:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -700,7 +700,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1105,
+                    "id": 1111,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "682:7:2",
@@ -717,12 +717,12 @@
               "src": "681:23:2"
             },
             "returnParameters": {
-              "id": 1110,
+              "id": 1116,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "721:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "657:109:2",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -730,39 +730,39 @@
           },
           {
             "body": {
-              "id": 1138,
+              "id": 1144,
               "nodeType": "Block",
               "src": "830:122:2",
               "statements": [
                 {
                   "assignments": [
-                    1122
+                    1128
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1122,
+                      "id": 1128,
                       "mutability": "mutable",
                       "name": "P",
                       "nodeType": "VariableDeclaration",
                       "overrides": null,
-                      "scope": 1138,
+                      "scope": 1144,
                       "src": "840:16:2",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                        "typeIdentifier": "t_contract$_PranaInterface_$1085",
                         "typeString": "contract PranaInterface"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 1121,
+                        "id": 1127,
                         "name": "PranaInterface",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 1079,
+                        "referencedDeclaration": 1085,
                         "src": "840:14:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                          "typeIdentifier": "t_contract$_PranaInterface_$1085",
                           "typeString": "contract PranaInterface"
                         }
                       },
@@ -770,17 +770,17 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1126,
+                  "id": 1132,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1124,
+                        "id": 1130,
                         "name": "pranaAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1092,
+                        "referencedDeclaration": 1098,
                         "src": "874:12:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -795,18 +795,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 1123,
+                      "id": 1129,
                       "name": "PranaInterface",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1079,
+                      "referencedDeclaration": 1085,
                       "src": "859:14:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1079_$",
+                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1085_$",
                         "typeString": "type(contract PranaInterface)"
                       }
                     },
-                    "id": 1125,
+                    "id": 1131,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -817,7 +817,7 @@
                     "src": "859:28:2",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                      "typeIdentifier": "t_contract$_PranaInterface_$1085",
                       "typeString": "contract PranaInterface"
                     }
                   },
@@ -830,11 +830,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1133,
+                        "id": 1139,
                         "name": "tokenId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1118,
+                        "referencedDeclaration": 1124,
                         "src": "925:7:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -845,7 +845,7 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1134,
+                          "id": 1140,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -856,7 +856,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 1135,
+                        "id": 1141,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -895,32 +895,32 @@
                         ],
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1127,
+                          "id": 1133,
                           "name": "P",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1122,
+                          "referencedDeclaration": 1128,
                           "src": "897:1:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                            "typeIdentifier": "t_contract$_PranaInterface_$1085",
                             "typeString": "contract PranaInterface"
                           }
                         },
-                        "id": 1129,
+                        "id": 1135,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "buyToken",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1070,
+                        "referencedDeclaration": 1076,
                         "src": "897:10:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_external_payable$_t_uint256_$_t_address_$returns$__$",
                           "typeString": "function (uint256,address) payable external"
                         }
                       },
-                      "id": 1132,
+                      "id": 1138,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -934,7 +934,7 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 1130,
+                            "id": 1136,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -945,7 +945,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 1131,
+                          "id": 1137,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -966,7 +966,7 @@
                         "typeString": "function (uint256,address) payable external"
                       }
                     },
-                    "id": 1136,
+                    "id": 1142,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -981,7 +981,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1137,
+                  "id": 1143,
                   "nodeType": "ExpressionStatement",
                   "src": "897:48:2"
                 }
@@ -989,7 +989,7 @@
             },
             "documentation": null,
             "functionSelector": "f60d0104",
-            "id": 1139,
+            "id": 1145,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -997,17 +997,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1119,
+              "id": 1125,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1118,
+                  "id": 1124,
                   "mutability": "mutable",
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1139,
+                  "scope": 1145,
                   "src": "799:15:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1016,7 +1016,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1117,
+                    "id": 1123,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "799:7:2",
@@ -1032,12 +1032,12 @@
               "src": "798:17:2"
             },
             "returnParameters": {
-              "id": 1120,
+              "id": 1126,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "830:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "772:180:2",
             "stateMutability": "payable",
             "virtual": false,
@@ -1045,39 +1045,39 @@
           },
           {
             "body": {
-              "id": 1161,
+              "id": 1167,
               "nodeType": "Block",
               "src": "1031:140:2",
               "statements": [
                 {
                   "assignments": [
-                    1145
+                    1151
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1145,
+                      "id": 1151,
                       "mutability": "mutable",
                       "name": "P",
                       "nodeType": "VariableDeclaration",
                       "overrides": null,
-                      "scope": 1161,
+                      "scope": 1167,
                       "src": "1041:16:2",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                        "typeIdentifier": "t_contract$_PranaInterface_$1085",
                         "typeString": "contract PranaInterface"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 1144,
+                        "id": 1150,
                         "name": "PranaInterface",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 1079,
+                        "referencedDeclaration": 1085,
                         "src": "1041:14:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                          "typeIdentifier": "t_contract$_PranaInterface_$1085",
                           "typeString": "contract PranaInterface"
                         }
                       },
@@ -1085,17 +1085,17 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1149,
+                  "id": 1155,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1147,
+                        "id": 1153,
                         "name": "pranaAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1092,
+                        "referencedDeclaration": 1098,
                         "src": "1075:12:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1110,18 +1110,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 1146,
+                      "id": 1152,
                       "name": "PranaInterface",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1079,
+                      "referencedDeclaration": 1085,
                       "src": "1060:14:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1079_$",
+                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1085_$",
                         "typeString": "type(contract PranaInterface)"
                       }
                     },
-                    "id": 1148,
+                    "id": 1154,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1132,7 +1132,7 @@
                     "src": "1060:28:2",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                      "typeIdentifier": "t_contract$_PranaInterface_$1085",
                       "typeString": "contract PranaInterface"
                     }
                   },
@@ -1145,11 +1145,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1156,
+                        "id": 1162,
                         "name": "_tokenId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1141,
+                        "referencedDeclaration": 1147,
                         "src": "1143:8:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1160,7 +1160,7 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1157,
+                          "id": 1163,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -1171,7 +1171,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 1158,
+                        "id": 1164,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1210,32 +1210,32 @@
                         ],
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1150,
+                          "id": 1156,
                           "name": "P",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1145,
+                          "referencedDeclaration": 1151,
                           "src": "1098:1:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                            "typeIdentifier": "t_contract$_PranaInterface_$1085",
                             "typeString": "contract PranaInterface"
                           }
                         },
-                        "id": 1152,
+                        "id": 1158,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "buyTokenAsTheSpecialBuyer",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1078,
+                        "referencedDeclaration": 1084,
                         "src": "1098:27:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_external_payable$_t_uint256_$_t_address_$returns$__$",
                           "typeString": "function (uint256,address) payable external"
                         }
                       },
-                      "id": 1155,
+                      "id": 1161,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1249,7 +1249,7 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 1153,
+                            "id": 1159,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1260,7 +1260,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 1154,
+                          "id": 1160,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1281,7 +1281,7 @@
                         "typeString": "function (uint256,address) payable external"
                       }
                     },
-                    "id": 1159,
+                    "id": 1165,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1296,7 +1296,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1160,
+                  "id": 1166,
                   "nodeType": "ExpressionStatement",
                   "src": "1098:66:2"
                 }
@@ -1304,7 +1304,7 @@
             },
             "documentation": null,
             "functionSelector": "3eec2778",
-            "id": 1162,
+            "id": 1168,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1312,17 +1312,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1142,
+              "id": 1148,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1141,
+                  "id": 1147,
                   "mutability": "mutable",
                   "name": "_tokenId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1162,
+                  "scope": 1168,
                   "src": "999:16:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1331,7 +1331,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1140,
+                    "id": 1146,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "999:7:2",
@@ -1347,19 +1347,19 @@
               "src": "998:18:2"
             },
             "returnParameters": {
-              "id": 1143,
+              "id": 1149,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1031:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "958:213:2",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1164,
+        "scope": 1170,
         "src": "267:907:2"
       }
     ],
@@ -1369,18 +1369,18 @@
     "absolutePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
     "exportedSymbols": {
       "PranaInterface": [
-        1079
+        1085
       ],
       "pranaHelper": [
-        1163
+        1169
       ]
     },
-    "id": 1164,
-    "license": "ISC",
+    "id": 1170,
+    "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1062,
+        "id": 1068,
         "literals": [
           "solidity",
           "^",
@@ -1397,23 +1397,23 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1079,
+        "id": 1085,
         "linearizedBaseContracts": [
-          1079
+          1085
         ],
         "name": "PranaInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1069,
+              "id": 1075,
               "nodeType": "Block",
               "src": "162:2:2",
               "statements": []
             },
             "documentation": null,
             "functionSelector": "9134709e",
-            "id": 1070,
+            "id": 1076,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1421,17 +1421,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1067,
+              "id": 1073,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1064,
+                  "id": 1070,
                   "mutability": "mutable",
                   "name": "tokenid",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1070,
+                  "scope": 1076,
                   "src": "106:15:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1440,7 +1440,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1063,
+                    "id": 1069,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "106:7:2",
@@ -1454,12 +1454,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1066,
+                  "id": 1072,
                   "mutability": "mutable",
                   "name": "_tokenRecipient",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1070,
+                  "scope": 1076,
                   "src": "123:23:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1468,7 +1468,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1065,
+                    "id": 1071,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "123:7:2",
@@ -1485,12 +1485,12 @@
               "src": "105:42:2"
             },
             "returnParameters": {
-              "id": 1068,
+              "id": 1074,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "162:0:2"
             },
-            "scope": 1079,
+            "scope": 1085,
             "src": "88:76:2",
             "stateMutability": "payable",
             "virtual": false,
@@ -1498,14 +1498,14 @@
           },
           {
             "body": {
-              "id": 1077,
+              "id": 1083,
               "nodeType": "Block",
               "src": "261:2:2",
               "statements": []
             },
             "documentation": null,
             "functionSelector": "5437c7fa",
-            "id": 1078,
+            "id": 1084,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1513,17 +1513,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1075,
+              "id": 1081,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1072,
+                  "id": 1078,
                   "mutability": "mutable",
                   "name": "tokenid",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1078,
+                  "scope": 1084,
                   "src": "205:15:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1532,7 +1532,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1071,
+                    "id": 1077,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "205:7:2",
@@ -1546,12 +1546,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1074,
+                  "id": 1080,
                   "mutability": "mutable",
                   "name": "_tokenRecipient",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1078,
+                  "scope": 1084,
                   "src": "222:23:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1560,7 +1560,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1073,
+                    "id": 1079,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "222:7:2",
@@ -1577,19 +1577,19 @@
               "src": "204:42:2"
             },
             "returnParameters": {
-              "id": 1076,
+              "id": 1082,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "261:0:2"
             },
-            "scope": 1079,
+            "scope": 1085,
             "src": "169:94:2",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1164,
+        "scope": 1170,
         "src": "59:206:2"
       },
       {
@@ -1599,34 +1599,34 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1163,
+        "id": 1169,
         "linearizedBaseContracts": [
-          1163
+          1169
         ],
         "name": "pranaHelper",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1087,
+              "id": 1093,
               "nodeType": "Block",
               "src": "318:35:2",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 1085,
+                    "id": 1091,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 1082,
+                      "id": 1088,
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1090,
+                      "referencedDeclaration": 1096,
                       "src": "328:5:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1639,7 +1639,7 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 1083,
+                        "id": 1089,
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -1650,7 +1650,7 @@
                           "typeString": "msg"
                         }
                       },
-                      "id": 1084,
+                      "id": 1090,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1670,14 +1670,14 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 1086,
+                  "id": 1092,
                   "nodeType": "ExpressionStatement",
                   "src": "328:18:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 1088,
+            "id": 1094,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -1685,18 +1685,18 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1080,
+              "id": 1086,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "308:2:2"
             },
             "returnParameters": {
-              "id": 1081,
+              "id": 1087,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "318:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "296:57:2",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -1704,12 +1704,12 @@
           },
           {
             "constant": false,
-            "id": 1090,
+            "id": 1096,
             "mutability": "mutable",
             "name": "owner",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 1163,
+            "scope": 1169,
             "src": "399:13:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1718,7 +1718,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 1089,
+              "id": 1095,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "399:7:2",
@@ -1733,12 +1733,12 @@
           },
           {
             "constant": false,
-            "id": 1092,
+            "id": 1098,
             "mutability": "mutable",
             "name": "pranaAddress",
             "nodeType": "VariableDeclaration",
             "overrides": null,
-            "scope": 1163,
+            "scope": 1169,
             "src": "455:20:2",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1747,7 +1747,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 1091,
+              "id": 1097,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "455:7:2",
@@ -1762,7 +1762,7 @@
           },
           {
             "body": {
-              "id": 1103,
+              "id": 1109,
               "nodeType": "Block",
               "src": "540:111:2",
               "statements": [
@@ -1776,7 +1776,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 1098,
+                        "id": 1104,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1785,7 +1785,7 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 1095,
+                            "id": 1101,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -1796,7 +1796,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 1096,
+                          "id": 1102,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1814,11 +1814,11 @@
                         "operator": "==",
                         "rightExpression": {
                           "argumentTypes": null,
-                          "id": 1097,
+                          "id": 1103,
                           "name": "owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1090,
+                          "referencedDeclaration": 1096,
                           "src": "571:5:2",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1834,7 +1834,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "596f7520617265206e6f742074686520636f6e7472616374206f776e657220746f2063616c6c20746869732066756e6374696f6e21",
-                        "id": 1099,
+                        "id": 1105,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1861,7 +1861,7 @@
                           "typeString": "literal_string \"You are not the contract owner to call this function!\""
                         }
                       ],
-                      "id": 1094,
+                      "id": 1100,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
@@ -1875,7 +1875,7 @@
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 1100,
+                    "id": 1106,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1890,24 +1890,24 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1101,
+                  "id": 1107,
                   "nodeType": "ExpressionStatement",
                   "src": "549:85:2"
                 },
                 {
-                  "id": 1102,
+                  "id": 1108,
                   "nodeType": "PlaceholderStatement",
                   "src": "643:1:2"
                 }
               ]
             },
             "documentation": null,
-            "id": 1104,
+            "id": 1110,
             "name": "onlyOwner",
             "nodeType": "ModifierDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1093,
+              "id": 1099,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "540:0:2"
@@ -1918,25 +1918,25 @@
           },
           {
             "body": {
-              "id": 1115,
+              "id": 1121,
               "nodeType": "Block",
               "src": "721:45:2",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 1113,
+                    "id": 1119,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 1111,
+                      "id": 1117,
                       "name": "pranaAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1092,
+                      "referencedDeclaration": 1098,
                       "src": "731:12:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1947,11 +1947,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 1112,
+                      "id": 1118,
                       "name": "_pranaAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1106,
+                      "referencedDeclaration": 1112,
                       "src": "746:13:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1964,7 +1964,7 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 1114,
+                  "id": 1120,
                   "nodeType": "ExpressionStatement",
                   "src": "731:28:2"
                 }
@@ -1972,20 +1972,20 @@
             },
             "documentation": null,
             "functionSelector": "a9fbf5c4",
-            "id": 1116,
+            "id": 1122,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 1109,
+                "id": 1115,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 1108,
+                  "id": 1114,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 1104,
+                  "referencedDeclaration": 1110,
                   "src": "712:9:2",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
@@ -2000,17 +2000,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1107,
+              "id": 1113,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1106,
+                  "id": 1112,
                   "mutability": "mutable",
                   "name": "_pranaAddress",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1116,
+                  "scope": 1122,
                   "src": "682:21:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2019,7 +2019,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1105,
+                    "id": 1111,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "682:7:2",
@@ -2036,12 +2036,12 @@
               "src": "681:23:2"
             },
             "returnParameters": {
-              "id": 1110,
+              "id": 1116,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "721:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "657:109:2",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -2049,39 +2049,39 @@
           },
           {
             "body": {
-              "id": 1138,
+              "id": 1144,
               "nodeType": "Block",
               "src": "830:122:2",
               "statements": [
                 {
                   "assignments": [
-                    1122
+                    1128
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1122,
+                      "id": 1128,
                       "mutability": "mutable",
                       "name": "P",
                       "nodeType": "VariableDeclaration",
                       "overrides": null,
-                      "scope": 1138,
+                      "scope": 1144,
                       "src": "840:16:2",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                        "typeIdentifier": "t_contract$_PranaInterface_$1085",
                         "typeString": "contract PranaInterface"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 1121,
+                        "id": 1127,
                         "name": "PranaInterface",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 1079,
+                        "referencedDeclaration": 1085,
                         "src": "840:14:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                          "typeIdentifier": "t_contract$_PranaInterface_$1085",
                           "typeString": "contract PranaInterface"
                         }
                       },
@@ -2089,17 +2089,17 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1126,
+                  "id": 1132,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1124,
+                        "id": 1130,
                         "name": "pranaAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1092,
+                        "referencedDeclaration": 1098,
                         "src": "874:12:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2114,18 +2114,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 1123,
+                      "id": 1129,
                       "name": "PranaInterface",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1079,
+                      "referencedDeclaration": 1085,
                       "src": "859:14:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1079_$",
+                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1085_$",
                         "typeString": "type(contract PranaInterface)"
                       }
                     },
-                    "id": 1125,
+                    "id": 1131,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2136,7 +2136,7 @@
                     "src": "859:28:2",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                      "typeIdentifier": "t_contract$_PranaInterface_$1085",
                       "typeString": "contract PranaInterface"
                     }
                   },
@@ -2149,11 +2149,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1133,
+                        "id": 1139,
                         "name": "tokenId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1118,
+                        "referencedDeclaration": 1124,
                         "src": "925:7:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2164,7 +2164,7 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1134,
+                          "id": 1140,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2175,7 +2175,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 1135,
+                        "id": 1141,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2214,32 +2214,32 @@
                         ],
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1127,
+                          "id": 1133,
                           "name": "P",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1122,
+                          "referencedDeclaration": 1128,
                           "src": "897:1:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                            "typeIdentifier": "t_contract$_PranaInterface_$1085",
                             "typeString": "contract PranaInterface"
                           }
                         },
-                        "id": 1129,
+                        "id": 1135,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "buyToken",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1070,
+                        "referencedDeclaration": 1076,
                         "src": "897:10:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_external_payable$_t_uint256_$_t_address_$returns$__$",
                           "typeString": "function (uint256,address) payable external"
                         }
                       },
-                      "id": 1132,
+                      "id": 1138,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2253,7 +2253,7 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 1130,
+                            "id": 1136,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2264,7 +2264,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 1131,
+                          "id": 1137,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2285,7 +2285,7 @@
                         "typeString": "function (uint256,address) payable external"
                       }
                     },
-                    "id": 1136,
+                    "id": 1142,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2300,7 +2300,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1137,
+                  "id": 1143,
                   "nodeType": "ExpressionStatement",
                   "src": "897:48:2"
                 }
@@ -2308,7 +2308,7 @@
             },
             "documentation": null,
             "functionSelector": "f60d0104",
-            "id": 1139,
+            "id": 1145,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2316,17 +2316,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1119,
+              "id": 1125,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1118,
+                  "id": 1124,
                   "mutability": "mutable",
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1139,
+                  "scope": 1145,
                   "src": "799:15:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2335,7 +2335,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1117,
+                    "id": 1123,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "799:7:2",
@@ -2351,12 +2351,12 @@
               "src": "798:17:2"
             },
             "returnParameters": {
-              "id": 1120,
+              "id": 1126,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "830:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "772:180:2",
             "stateMutability": "payable",
             "virtual": false,
@@ -2364,39 +2364,39 @@
           },
           {
             "body": {
-              "id": 1161,
+              "id": 1167,
               "nodeType": "Block",
               "src": "1031:140:2",
               "statements": [
                 {
                   "assignments": [
-                    1145
+                    1151
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1145,
+                      "id": 1151,
                       "mutability": "mutable",
                       "name": "P",
                       "nodeType": "VariableDeclaration",
                       "overrides": null,
-                      "scope": 1161,
+                      "scope": 1167,
                       "src": "1041:16:2",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                        "typeIdentifier": "t_contract$_PranaInterface_$1085",
                         "typeString": "contract PranaInterface"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 1144,
+                        "id": 1150,
                         "name": "PranaInterface",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 1079,
+                        "referencedDeclaration": 1085,
                         "src": "1041:14:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                          "typeIdentifier": "t_contract$_PranaInterface_$1085",
                           "typeString": "contract PranaInterface"
                         }
                       },
@@ -2404,17 +2404,17 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1149,
+                  "id": 1155,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1147,
+                        "id": 1153,
                         "name": "pranaAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1092,
+                        "referencedDeclaration": 1098,
                         "src": "1075:12:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2429,18 +2429,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 1146,
+                      "id": 1152,
                       "name": "PranaInterface",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1079,
+                      "referencedDeclaration": 1085,
                       "src": "1060:14:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1079_$",
+                        "typeIdentifier": "t_type$_t_contract$_PranaInterface_$1085_$",
                         "typeString": "type(contract PranaInterface)"
                       }
                     },
-                    "id": 1148,
+                    "id": 1154,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2451,7 +2451,7 @@
                     "src": "1060:28:2",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                      "typeIdentifier": "t_contract$_PranaInterface_$1085",
                       "typeString": "contract PranaInterface"
                     }
                   },
@@ -2464,11 +2464,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1156,
+                        "id": 1162,
                         "name": "_tokenId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1141,
+                        "referencedDeclaration": 1147,
                         "src": "1143:8:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2479,7 +2479,7 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1157,
+                          "id": 1163,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -2490,7 +2490,7 @@
                             "typeString": "msg"
                           }
                         },
-                        "id": 1158,
+                        "id": 1164,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2529,32 +2529,32 @@
                         ],
                         "expression": {
                           "argumentTypes": null,
-                          "id": 1150,
+                          "id": 1156,
                           "name": "P",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1145,
+                          "referencedDeclaration": 1151,
                           "src": "1098:1:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_PranaInterface_$1079",
+                            "typeIdentifier": "t_contract$_PranaInterface_$1085",
                             "typeString": "contract PranaInterface"
                           }
                         },
-                        "id": 1152,
+                        "id": 1158,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "buyTokenAsTheSpecialBuyer",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1078,
+                        "referencedDeclaration": 1084,
                         "src": "1098:27:2",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_external_payable$_t_uint256_$_t_address_$returns$__$",
                           "typeString": "function (uint256,address) payable external"
                         }
                       },
-                      "id": 1155,
+                      "id": 1161,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2568,7 +2568,7 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 1153,
+                            "id": 1159,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
@@ -2579,7 +2579,7 @@
                               "typeString": "msg"
                             }
                           },
-                          "id": 1154,
+                          "id": 1160,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2600,7 +2600,7 @@
                         "typeString": "function (uint256,address) payable external"
                       }
                     },
-                    "id": 1159,
+                    "id": 1165,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2615,7 +2615,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1160,
+                  "id": 1166,
                   "nodeType": "ExpressionStatement",
                   "src": "1098:66:2"
                 }
@@ -2623,7 +2623,7 @@
             },
             "documentation": null,
             "functionSelector": "3eec2778",
-            "id": 1162,
+            "id": 1168,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -2631,17 +2631,17 @@
             "nodeType": "FunctionDefinition",
             "overrides": null,
             "parameters": {
-              "id": 1142,
+              "id": 1148,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1141,
+                  "id": 1147,
                   "mutability": "mutable",
                   "name": "_tokenId",
                   "nodeType": "VariableDeclaration",
                   "overrides": null,
-                  "scope": 1162,
+                  "scope": 1168,
                   "src": "999:16:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2650,7 +2650,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1140,
+                    "id": 1146,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "999:7:2",
@@ -2666,19 +2666,19 @@
               "src": "998:18:2"
             },
             "returnParameters": {
-              "id": 1143,
+              "id": 1149,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1031:0:2"
             },
-            "scope": 1163,
+            "scope": 1169,
             "src": "958:213:2",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 1164,
+        "scope": 1170,
         "src": "267:907:2"
       }
     ],
@@ -2690,7 +2690,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.0",
-  "updatedAt": "2020-08-02T12:08:04.002Z",
+  "updatedAt": "2020-08-05T17:50:34.413Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

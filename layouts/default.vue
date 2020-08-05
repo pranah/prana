@@ -73,17 +73,19 @@ export default {
   },
   methods: {
       ...mapActions({
-        initLibP2P: 'libp2p/initLibP2P',
+        // initLibP2P: 'libp2p/initLibP2P',
         fetchProvider: 'web3/fetchProvider',
-        initSpaceClient: 'fleek/initSpaceClient',
-        getAccount: 'web3/getAccount'
+        // initSpaceClient: 'fleek/initSpaceClient',
+        getAccount: 'web3/getAccount',
       })
   },
   created() {
-    this.initLibP2P();
+    // this.initLibP2P();
+    // this.initSpaceClient();
     this.fetchProvider();
-    this.initSpaceClient();
     this.getAccount();
-  } 
+  },
+  async fetch() {
+  }
 }
 </script>
