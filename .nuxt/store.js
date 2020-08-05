@@ -20,6 +20,7 @@ let store = {};
   store.modules = store.modules || {}
 
   resolveStoreModules(require('../store/fleek.js'), 'fleek.js')
+  resolveStoreModules(require('../store/hub.js'), 'hub.js')
   resolveStoreModules(require('../store/libp2p.js'), 'libp2p.js')
   resolveStoreModules(require('../store/textile.js'), 'textile.js')
   resolveStoreModules(require('../store/web3.js'), 'web3.js')
@@ -30,6 +31,7 @@ let store = {};
     // Whenever any Vuex module is updated...
     module.hot.accept([
       '../store/fleek.js',
+      '../store/hub.js',
       '../store/index.js',
       '../store/libp2p.js',
       '../store/textile.js',

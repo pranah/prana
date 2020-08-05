@@ -77,12 +77,17 @@ export default {
         fetchProvider: 'web3/fetchProvider',
         initSpaceClient: 'fleek/initSpaceClient',
         getAccount: 'web3/getAccount',
+
         initPowergate: 'textile/initPowergate',
         setFFS: 'textile/setFFS',
+        getIdentity: 'hub/getIdentity',
+        getBucketKey: 'hub/getBucketKey'
       })
   },
   created() {
-    this.initPowergate();
+    this.getIdentity()
+    this.getBucketKey()
+    // this.initPowergate();
     // this.setFFS();
     // this.initLibP2P();
     // this.fetchProvider();
