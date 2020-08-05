@@ -341,4 +341,11 @@ contract prana is ERC721 {
         booksInfo[_isbn].bookPrice, booksInfo[_isbn].transactionCut, booksInfo[_isbn].bookSales);
 
     }
+
+    function viewMyBookDetails(uint256 _isbn) public view returns(string memory, string memory, address, uint256, uint256, uint256) {
+        require(booksInfo[_isbn].publisherAddress!=address(0), "This book is not on the platform");
+        require(msg.sender == booksInfo[_isbn].publisherAddress, "You are not this book's author");
+        return (booksInfo[_isbn].encryptedBookDataHash, booksInfo[_isbn].unencryptedBookDetailsCID, booksInfo[_isbn].publisherAddress,
+        booksInfo[_isbn].bookPrice, booksInfo[_isbn].transactionCut, booksInfo[_isbn].bookSales);
+    }
 }
