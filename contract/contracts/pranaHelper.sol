@@ -11,7 +11,7 @@ contract PranaInterface{
 contract pranaHelper {
 
 
-    constructor () {
+    constructor () public {
         owner = msg.sender;
     }
 
