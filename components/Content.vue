@@ -2,7 +2,8 @@
     <div>
         <v-list-item>
         <v-list-item-content>
-            <v-list-item-title><b>ISBN: {{content.isbn}}</b></v-list-item-title>
+            <v-list-item-title><b>TITLE: {{content.metadata}}</b></v-list-item-title><br><br>
+            <v-list-item-title class="text-left"><b>ISBN: {{content.isbn}}</b></v-list-item-title>
         </v-list-item-content>
         </v-list-item>
         <!-- https://cdn.vuetifyjs.com/images/cards/mountain.jpg -->

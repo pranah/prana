@@ -1,13 +1,23 @@
-// import ipfsClient from 'ipfs-http-client'
 import ipfsAPI from 'ipfs-api'
 import ipfs from '../util/ipfs'
 import Vue from 'vue';
+import pipe from 'it-pipe'
+if (process.server) {
+    const fs = require('fs');
+    // some code with fs
+  }
 
 
 export default {
     state: () => ({
+        textFile: null
     }),
     mutations: {
+        getFile: (state, file) => {
+            state.textFile = file
+            console.log(typeof(state.textFile))
+            console.log('getFile')
+        }
     },
     actions: {
         publish: async({state, commit, dispatch}, content) => {
@@ -21,43 +31,30 @@ export default {
             })
         },
         requestContent: async({state, commit, dispatch}, hash) => {
-            console.log('requestContent...')
+            let textFile
             let ipfsPath = `https://ipfs.io/ipfs/${hash}`
-            console.log(ipfsPath)
-
-            // ipfs.files.cat(hash, function (err, stream) {
-            //     console.log("Received stream for file '" + rootHash + "/" +
-            //       fileName + "'")
-            //     if (err) return callback(err)
-            //     stream.on('data', function (chunk) {
-            //       console.log("Received " + chunk.length + " bytes for file '" +
-            //         rootHash + "/" + fileName + "'")
-            //       bufView.set(chunk, offs)
-            //       offs += chunk.length
-            //     });
-            //     stream.on('error', function (err) {
-            //       callback(err, null)
-            //     });
-            //     stream.on('end', function () {
-            //       callback(null, resBuf)
-            //     });
-            //   })
-
-                ipfs.cat(hash, { buffer: true }, function(err, res) {
+            console.log(ipfsPath);
+                ipfs.cat(hash, function(err, res) {
                   if(err || !res) return console.error("ipfs cat error", err, res);
                   if(res.readable) {
                     console.error('unhandled: cat result is a pipe', res);
                   } else {
                     console.log(res)
-                    console.log(res.toString())
+                    textFile = res.toString()
+                    commit('getFile', textFile)
+
+                    // console.log(Buffer(res))
+                    // let json = JSON.stringify(res)
+                    // console.log(json)
+                    // let bufferOriginal = Buffer.from(JSON.parse(json).data);
+                    // console.log(bufferOriginal) 
+                    // console.log(bufferOriginal.toString('utf8'))
                   }
-                });
+                })
             
-            // const chunks = []
-            // for await (const chunk of ipfs.cat(hash)) {
-            //   chunks.push(chunk)
-            // }
-            // console.log(Buffer.concat(chunks).toString())
+  
+
+        
         }  
     }
 }

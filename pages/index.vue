@@ -4,8 +4,8 @@
     align-center
     column
   >
-    <v-flex>
-      <v-row>
+    <v-flex xs12 sm12 md12 lg12>
+      <!-- <v-row> -->
         <v-col>
           <v-card>
             <v-card-title class="headline">
@@ -17,7 +17,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-      </v-row>
+      <!-- </v-row> -->
     </v-flex>
   </v-layout>
 </template>

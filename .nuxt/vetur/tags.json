@@ -17,6 +17,12 @@
   "LazyContent": {
     "description": "Auto imported from components/Content.vue"
   },
+  "File": {
+    "description": "Auto imported from components/File.vue"
+  },
+  "LazyFile": {
+    "description": "Auto imported from components/File.vue"
+  },
   "Hud": {
     "description": "Auto imported from components/Hud.vue"
   },
