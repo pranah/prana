@@ -207,6 +207,7 @@ contract prana is ERC721 {
         require(msg.sender == ownerOf(tokenId), "You are not this token's owner");
         require(tokenData[tokenId].isUpForRenting == false,
         "Can't put a token for sale while it's put for renting");
+        require(salePrice >= 0, "Price can't be negative");
         require(tokenData[tokenId].rentedAtBlock + rentedBlocks < block.number,
         "The current renting period is not over yet");
         tokenData[tokenId].resalePrice = salePrice;
