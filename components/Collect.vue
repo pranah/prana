@@ -25,7 +25,7 @@
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="blue"
                         @click="purchase(content)"
                         >
                         Collect
@@ -45,7 +45,7 @@
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="blue"
                         @click="purchase(content)"
                         >
                         Collect
@@ -66,7 +66,7 @@
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="blue"
                         @click="purchase(content)"
                         >
                         Collect

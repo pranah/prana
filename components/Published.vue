@@ -11,7 +11,7 @@
                             <v-btn
                             outlined
                             small
-                            color="green"
+                            color="blue"
                             >
                             Read
                             </v-btn> 

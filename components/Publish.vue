@@ -37,8 +37,8 @@
                     label="Price in ETH"
                     v-model="content.price"
                 />
-                <!-- <v-btn small outlined color="green" @click="publish(content)">Publish</v-btn> -->
-                <v-btn small outlined color="green" @click="publish(content)">Publish</v-btn>
+                <!-- <v-btn small outlined color="blue" @click="publish(content)">Publish</v-btn> -->
+                <v-btn small outlined color="blue" @click="publish(content)">Publish</v-btn>
             </v-form>
         </v-col>
     </v-row>    

@@ -3,7 +3,7 @@
     <v-btn
       outlined 
       small
-      color="#0779e4" 
+      color="blue" 
       dark
       @click.stop="dialog = true"
     >

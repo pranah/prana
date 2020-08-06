@@ -176,6 +176,23 @@ export default {
                 dispatch('pushMyToken', tokenId)
             }).catch(err => {console.log(err);})
         },
+        //Giveaway books to friends
+        giveaway: async ({state},payload) => {
+            let address = payload.address
+            let tokenId = payload.tokenId
+            console.log(address)
+            console.log(tokenId)
+
+            let owner = state.currentAccount;
+            //contract call to safe transfer token from
+            await state.pranaContract.methods.safeTransferFrom(owner,address,tokenId)
+            .send({ from: state.currentAccount, gas : 6000000 })
+            .on('transactionHash', (hash) => {
+                console.log("Successfully gaveaway")
+                console.log(hash)
+                })
+            .catch(err => {console.log(err);})
+            },
         //pushes token data of all the tokens owned by an address to collectedContent array
         myCollection: async({state, commit, dispatch}) => {
             let tokenCount

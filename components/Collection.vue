@@ -7,20 +7,22 @@
                     <MyCopy v-bind:content="content"/> 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <p v-if="content.loadingContent==true">Loading</p>
-                        <!-- <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn> -->
-                        <v-btn v-else small outlined color="green" @click="requestFile(content.hash)">Read</v-btn>
+                        <!-- <p v-if="content.loadingContent==true">Loading</p> -->
+                        <!-- <v-btn v-else small outlined color="blue" @click="signMessage(content)">Download</v-btn> -->
+                        <!-- <v-btn v-else small outlined color="blue" @click="requestFile(content.hash)">Read</v-btn> -->
                         <v-row justify="center">
                             <v-dialog v-model="dialog" scrollable max-width="600px">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn
                                     color="blue"
                                     dark
+                                    small
+                                    outlined
                                     v-bind="attrs"
                                     v-on="on"
                                     @click="requestFile(content.hash)"
                                     >
-                                    Open Dialog
+                                    Read
                                     </v-btn>
                                 </template>
                                 <v-card>
@@ -34,15 +36,13 @@
                                 </v-card>
                             </v-dialog>
                         </v-row>
-
-
-
                         <v-btn 
                         v-if = "content.isUpForResale === false"
                         small 
                         outlined 
-                        color="green" 
+                        color="blue" 
                         @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn>
+                        <Dialog v-bind:content="content"/>
                     </v-card-actions>
                 </v-card>
             </v-flex>

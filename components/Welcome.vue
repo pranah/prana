@@ -20,9 +20,9 @@ All forms of digital content (movies, e-books, tv series, comics, music, games, 
   </v-card>
   </v-flex>
   <v-row>
-    <v-col><v-btn small outlined color="green" to="/publisher">as an author</v-btn></v-col>
+    <v-col><v-btn small outlined color="blue" to="/publisher">as an author</v-btn></v-col>
     <v-spacer/>
-    <v-col><v-btn small outlined color="green" to="/collector">as a reader</v-btn></v-col>
+    <v-col><v-btn small outlined color="blue" to="/collector">as a reader</v-btn></v-col>
   </v-row>
 
 

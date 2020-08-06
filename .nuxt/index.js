@@ -12,9 +12,9 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_e6f78246 from 'nuxt_plugin_plugin_e6f78246' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_6e95ba31 from 'nuxt_plugin_plugin_6e95ba31' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_axios_55d00d73 from 'nuxt_plugin_axios_55d00d73' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_a4679b74 from 'nuxt_plugin_plugin_a4679b74' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_33f8b130 from 'nuxt_plugin_plugin_33f8b130' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_axios_2e23165c from 'nuxt_plugin_axios_2e23165c' // Source: ./axios.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -190,16 +190,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_e6f78246 === 'function') {
-    await nuxt_plugin_plugin_e6f78246(app.context, inject)
+  if (typeof nuxt_plugin_plugin_a4679b74 === 'function') {
+    await nuxt_plugin_plugin_a4679b74(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_6e95ba31 === 'function') {
-    await nuxt_plugin_plugin_6e95ba31(app.context, inject)
+  if (typeof nuxt_plugin_plugin_33f8b130 === 'function') {
+    await nuxt_plugin_plugin_33f8b130(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_55d00d73 === 'function') {
-    await nuxt_plugin_axios_55d00d73(app.context, inject)
+  if (typeof nuxt_plugin_axios_2e23165c === 'function') {
+    await nuxt_plugin_axios_2e23165c(app.context, inject)
   }
 
   // Lock enablePreview in context
