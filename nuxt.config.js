@@ -30,8 +30,7 @@ export default {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+//  css: ['@/assets/main.css'],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
@@ -65,23 +64,35 @@ export default {
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
   */
-  vuetify: {
-    customVariables: ['~/assets/variables.scss'],
-    theme: {
-      dark: true,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
+ vuetify: {
+  customVariables: ['~/assets/variables.scss'],
+  theme: {
+    dark: true,
+    light: false,
+    themes: {
+      dark: {
+        primary: colors.blue,
+        secondary: colors.teal.darken4,
+        accent: colors.teal.accent4,
+
+        error: colors.deepOrange.accent2,
+        info: colors.grey.darken3,
+        success: colors.green.accent3,
+        warning: colors.amber.base,
+      },
+      light: {
+        primary: '#1976D2',
+        secondary: colors.teal.lighten3,
+        accent: colors.teal.accent4,
+
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        warning: '#FFC107',
       }
     }
-  },
+  }
+},
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

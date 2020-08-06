@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-btn small outlined v-if="isMetaMaskProvided==true" color="green" @click="initEth()">Connect MetaMask</v-btn>
-    <v-btn small outlined v-else color="green">Please Install MetaMask</v-btn>    
+    <v-btn small outlined v-if="isMetaMaskProvided==true" color="#0779e4" @click="initEth()">Connect MetaMask</v-btn>
+    <v-btn small outlined v-else color="#0779e4">Please Install MetaMask</v-btn>    
   </div>
 </template>
 

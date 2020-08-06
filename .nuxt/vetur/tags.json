@@ -17,6 +17,12 @@
   "LazyContent": {
     "description": "Auto imported from components/Content.vue"
   },
+  "Dialog": {
+    "description": "Auto imported from components/Dialog.vue"
+  },
+  "LazyDialog": {
+    "description": "Auto imported from components/Dialog.vue"
+  },
   "Hud": {
     "description": "Auto imported from components/Hud.vue"
   },

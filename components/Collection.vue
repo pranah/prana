@@ -8,15 +8,15 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <p v-if="content.loadingContent==true">Loading</p>
-                        <!-- <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn> -->
-                        <v-btn v-else small outlined color="green" @click="requestContent(content.hash)">Read</v-btn>
+                        <!-- <v-btn v-else small outlined color="#0779e4" @click="signMessage(content)">Download</v-btn> -->
+                        <v-btn v-else small outlined color="#0779e4" @click="requestContent(content.hash)">Read</v-btn>
                         <v-btn 
                         v-if = "content.isUpForResale === false"
                         small 
                         outlined 
-                        color="green" 
+                        color="#0779e4" 
                         @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn>
-                        
+                        <Dialog v-bind:content="content"/>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -25,8 +25,14 @@
 </template>
 
 <script>
+
 import { mapState, mapActions } from 'vuex'
 export default {
+    data () {
+      return {
+        dialog: false,
+      }
+    },
     data: () => ({
         textFile: null,
         ipfsPath: null

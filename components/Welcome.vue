@@ -1,9 +1,9 @@
 <template>
 
   <v-row>
-    <v-col><v-btn small outlined color="green" to="/publisher">as an author</v-btn></v-col>
+    <v-col><v-btn small outlined color="#0779e4" to="/publisher">as an author</v-btn></v-col>
     <v-spacer/>
-    <v-col><v-btn small outlined color="green" to="/collector">as a reader</v-btn></v-col>
+    <v-col><v-btn small outlined color="#0779e4" to="/collector">as a reader</v-btn></v-col>
   </v-row>
  
 </template>

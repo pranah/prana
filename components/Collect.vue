@@ -25,7 +25,7 @@
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="#0779e4"
                         @click="purchase(content)"
                         >
                         Collect
@@ -45,7 +45,7 @@
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="#0779e4"
                         @click="purchase(content)"
                         >
                         Collect
@@ -59,14 +59,14 @@
   </v-card>
         <!-- <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
-                <v-card max-width="344" class="ma-3" color = "grey darken-3">
+                <v-card max-width="344" class="ma-3" color = "#77d8d8">
                     <Content v-bind:content="content"/>  
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn
                         outlined
                         small
-                        color="green"
+                        color="#0779e4"
                         @click="purchase(content)"
                         >
                         Collect

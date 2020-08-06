@@ -5,6 +5,7 @@
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
+      color="blue"
       app
     >
       <v-layout
@@ -15,17 +16,17 @@
         <v-flex>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/">Prana</v-btn>
+              <v-btn outlined color="white" to="/">Prana</v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/publisher">As an author </v-btn>
+              <v-btn outlined color="white" to="/publisher">As an author </v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/collector">As a reader</v-btn>
+              <v-btn outlined color="white" to="/collector">As a reader</v-btn>
             </v-col>            
           </v-row>
         </v-flex>
