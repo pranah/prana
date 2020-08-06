@@ -13,7 +13,7 @@
 
         <v-card-text class="text-left">
         <b>Price: </b>{{content.price}} ETH<br><br>
-        <b>Publisher: </b>{{content.publisher}}<br>
+        <b>Author: </b>{{content.publisher}}<br>
         </v-card-text>  
     </div>    
 </template>

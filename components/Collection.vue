@@ -9,7 +9,7 @@
                         <v-spacer></v-spacer>
                         <p v-if="content.loadingContent==true">Loading</p>
                         <!-- <v-btn v-else small outlined color="green" @click="signMessage(content)">Download</v-btn> -->
-                        <v-btn v-else small outlined color="green" @click="requestContent(content)">Download</v-btn>
+                        <v-btn v-else small outlined color="green" @click="requestContent(content.hash)">Read</v-btn>
                         <v-btn 
                         v-if = "content.isUpForResale === false"
                         small 
@@ -27,6 +27,11 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
+    data: () => ({
+        textFile: null,
+        ipfsPath: null
+
+    }),
     computed: {
         ...mapState('web3', [
             'collectedContent',
@@ -37,7 +42,16 @@ export default {
             signMessage: 'web3/signMessage',
             putForResale: 'web3/putForResale',
             requestContent: 'ipfs/requestContent'
-        })
+        }),
+        readFile(hash){
+            this.ipfsPath = 'https://ipfs.io/ipfs/'+ hash
+            var reader = new FileReader()
+            reader.readAsArrayBuffer(ipfsPath);
+            reader.onloadend = () => {
+            this.textFile = Buffer(reader.result)
+            console.log(this.textFile)
+            }
+        }
     }
 }
 </script>

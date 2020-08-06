@@ -1,6 +1,5 @@
 <template>
     <v-col>
-        <h3>Collectable Works</h3>
         <v-card>
         <v-tabs
           v-model="tabs"
@@ -97,7 +96,7 @@ export default {
     data () {
       return {
         tabs: null,
-        titles: ['DIRECT PURCHASE', 'FOR RESALE']
+        titles: ['BUY FROM AUTHOR', 'BUY FROM OTHER READERS']
       }
     },
 }

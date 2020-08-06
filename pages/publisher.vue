@@ -8,8 +8,8 @@
         <v-row>
           <v-col>
             <v-btn-toggle mandatory >
-              <v-btn small outlined color="green" @click="publisherPageSwitchFlip(false)">Publish</v-btn>
-              <v-btn small outlined color="green" @click="publisherPageSwitchFlip(true)">Published</v-btn>
+              <v-btn small outlined color="green" @click="publisherPageSwitchFlip(false)">Publish a new work</v-btn>
+              <v-btn small outlined color="green" @click="publisherPageSwitchFlip(true)">My Published works</v-btn>
             </v-btn-toggle>
           </v-col>
         </v-row>

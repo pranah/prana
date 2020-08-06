@@ -20,12 +20,12 @@
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/publisher">Publisher</v-btn>
+              <v-btn outlined color="green" to="/publisher">As an author </v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/collector">Collector</v-btn>
+              <v-btn outlined color="green" to="/collector">As a reader</v-btn>
             </v-col>            
           </v-row>
         </v-flex>
@@ -73,15 +73,11 @@ export default {
   },
   methods: {
       ...mapActions({
-        // initLibP2P: 'libp2p/initLibP2P',
         fetchProvider: 'web3/fetchProvider',
-        // initSpaceClient: 'fleek/initSpaceClient',
         getAccount: 'web3/getAccount',
       })
   },
   created() {
-    // this.initLibP2P();
-    // this.initSpaceClient();
     this.fetchProvider();
     this.getAccount();
   },

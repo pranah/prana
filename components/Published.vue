@@ -13,7 +13,7 @@
                             small
                             color="green"
                             >
-                            Download
+                            Read
                             </v-btn> 
                         </v-card-actions>
                     </v-card>

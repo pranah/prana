@@ -8,8 +8,8 @@
         <v-row>
           <v-col>
             <v-btn-toggle mandatory >
-              <v-btn small outlined color="green" @click="collectorPageSwitchFlip(false)">Collect</v-btn>
-              <v-btn small outlined color="green" @click="collectorPageSwitchFlip(true)">Collection</v-btn>
+              <v-btn small outlined color="green" @click="collectorPageSwitchFlip(false)">Buy a new book</v-btn>
+              <v-btn small outlined color="green" @click="collectorPageSwitchFlip(true)">My Library</v-btn>
             </v-btn-toggle>
           </v-col>
         </v-row>
