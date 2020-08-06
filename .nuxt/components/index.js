@@ -8,6 +8,7 @@ export { default as Login } from '../../components/Login.vue'
 export { default as MyCopy } from '../../components/MyCopy.vue'
 export { default as Publish } from '../../components/Publish.vue'
 export { default as Published } from '../../components/Published.vue'
+export { default as ResaleDialog } from '../../components/ResaleDialog.vue'
 export { default as ResaleToken } from '../../components/ResaleToken.vue'
 export { default as Welcome } from '../../components/Welcome.vue'
 
@@ -21,5 +22,6 @@ export const LazyLogin = import('../../components/Login.vue' /* webpackChunkName
 export const LazyMyCopy = import('../../components/MyCopy.vue' /* webpackChunkName: "components/MyCopy'}" */).then(c => c.default || c)
 export const LazyPublish = import('../../components/Publish.vue' /* webpackChunkName: "components/Publish'}" */).then(c => c.default || c)
 export const LazyPublished = import('../../components/Published.vue' /* webpackChunkName: "components/Published'}" */).then(c => c.default || c)
+export const LazyResaleDialog = import('../../components/ResaleDialog.vue' /* webpackChunkName: "components/ResaleDialog'}" */).then(c => c.default || c)
 export const LazyResaleToken = import('../../components/ResaleToken.vue' /* webpackChunkName: "components/ResaleToken'}" */).then(c => c.default || c)
 export const LazyWelcome = import('../../components/Welcome.vue' /* webpackChunkName: "components/Welcome'}" */).then(c => c.default || c)

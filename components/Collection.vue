@@ -26,7 +26,7 @@
                                     </v-btn>
                                 </template>
                                 <v-card>
-                                <File v-bind:textFile="textFile"/>
+                                <File v-bind:textFile="textFile" />
                                     
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -36,12 +36,13 @@
                                 </v-card>
                             </v-dialog>
                         </v-row>
-                        <v-btn 
+                        <!-- <v-btn 
                         v-if = "content.isUpForResale === false"
                         small 
                         outlined 
                         color="blue" 
-                        @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn>
+                        @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn> -->
+                        <ResaleDialog v-bind:content="content"/>
                         <Dialog v-bind:content="content"/>
                     </v-card-actions>
                 </v-card>

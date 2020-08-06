@@ -28,7 +28,7 @@
                         color="blue"
                         @click="purchase(content)"
                         >
-                        Collect
+                        BUY
                         </v-btn> 
                     </v-card-actions> 
                 </v-card>
@@ -48,7 +48,7 @@
                         color="blue"
                         @click="purchase(content)"
                         >
-                        Collect
+                        BUY
                         </v-btn> 
                     </v-card-actions> 
                 </v-card>

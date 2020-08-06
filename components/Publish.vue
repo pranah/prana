@@ -15,7 +15,7 @@
                 /> -->
                 <v-text-field 
                     type="number" 
-                    min="0" 
+                    min="1000000000000" 
                     max="9999999999999" 
                     required
                     label="ISBN"

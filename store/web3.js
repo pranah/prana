@@ -68,6 +68,13 @@ export default {
             state.currentAccount = account
             console.log(state.currentAccount)
         },
+        removeMyToken: (state, tokenId) => {
+            for(let i=0; i<state.collectedContent.length; i++){
+                if(state.collectedContent[i].tokenId === tokenId){
+                    state.collectedContent.splice(i, 1)
+                }
+            }
+        }
     },
     actions: {
         fetchProvider: async ({state, dispatch, commit}) => {
@@ -177,7 +184,7 @@ export default {
             }).catch(err => {console.log(err);})
         },
         //Giveaway books to friends
-        giveaway: async ({state},payload) => {
+        giveaway: async ({state, commit},payload) => {
             let address = payload.address
             let tokenId = payload.tokenId
             console.log(address)
@@ -190,6 +197,7 @@ export default {
             .on('transactionHash', (hash) => {
                 console.log("Successfully gaveaway")
                 console.log(hash)
+                commit('removeMyToken', tokenId)
                 })
             .catch(err => {console.log(err);})
             },
@@ -241,6 +249,81 @@ export default {
                 const pathToFile = String
                 commit('collectContent', {tokenId, hash, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile})
             })          
+        },
+        
+        //to put a token for resale
+        putForResale: async({state, commit, dispatch}, resaleData) => {
+            console.log(resaleData)
+            let resalePrice = resaleData.resalePrice
+            let tokenId = resaleData.tokenId
+            await state.pranaContract.methods.putTokenForSale(2, 0)
+            .send({ from: state.currentAccount, gas : 60000000 })
+            .then((receipt) => {
+                console.log('receipt')
+                console.log(receipt)
+                console.log('executing putforresale action...')
+                dispatch('pushResaleToken', tokenId)
+                console.log(tokenId)
+                commit('removeMyToken', tokenId)
+                .then( dispatch('pushMyToken', tokenId))
+            }).catch(err => console.log(err))
+        },
+
+        getResaleTokens: async({state, commit, dispatch}) => {
+            let tokenCount
+            //contract call to get the number of resale tokens 
+            await state.pranaContract.methods.numberofTokensForResale()
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+                console.log(`Number of resale tokens: ${tokenCount}`)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            for(let i=0; i<tokenCount; i++){
+                //contract call to get the resale tokenId at index i
+                await state.pranaContract.methods.tokenForResaleAtIndex(i)
+                .call({ from: state.currentAccount})
+                .then((tokenId) => {
+                    dispatch('pushResaleToken', tokenId)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            }
+        },
+        pushResaleToken: async({state, commit, dispatch}, tokenId) => {
+            console.log('executing pushResaleToken action...')
+            //contract call to get the token details of a tokenId
+            state.pranaContract.methods.viewTokenDetails(tokenId)
+            .call({ from: state.currentAccount})
+            .then((content) => {
+                console.log(`Book details of resale tokenid ${tokenId}:`)
+                console.log(content)
+                let isbn = content[0]
+                let metadata = content[1]
+                let copyNumber = content[2]
+                let resalePrice = content[3]
+                let isUpForResale = content[4]
+                commit('resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale})
+            })
+        },
+        buyToken: async({state, commit, dispatch}, content) => {
+            let resalePrice = content.resalePrice
+            let tokenId = content.tokenId
+            //contract call to mint a new token
+            await state.pranaContract.methods.buyTokenFromPrana(tokenId)
+            .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(resalePrice, 'ether') })
+            .on('transactionHash', (hash) => {
+                console.log("Transaction Successful!")
+                console.log(hash)
+                })
+            .then(receipt => {
+                console.log(receipt);
+                let tokenId = receipt.events.Transfer.returnValues.tokenId
+                dispatch('pushMyToken', tokenId)
+            }).catch(err => {console.log(err);})
         },
         signMessage: ({state, dispatch, commit}, signThis) => {
             state.web3.eth.getBlock("latest")
@@ -315,66 +398,6 @@ export default {
                 });
             } 
         },
-        //to put a token for resale
-        putForResale: async({state, commit, dispatch}, resaleData) => {
-            let resalePrice = resaleData.resalePrice
-            let tokenId = resaleData.tokenId
-            await state.pranaContract.methods.putTokenForSale(resalePrice, tokenId)
-            .send({ from: state.currentAccount, gas : 6000000 })
-            .on('TokenForSale', (event) => {
-                console.log('TokenForSale')
-                console.log(event)
-            }).then((receipt) => {
-                console.log('receipt')
-                console.log(receipt)
-            console.log('executing putforresale action...')
-                dispatch('pushResaleToken', tokenId)
-                console.log(tokenId)
-                // commit('fleek/removeMyToken', tokenId)
-                // .then( dispatch('pushMyToken', tokenId))
-            }).catch(err => console.log(err))
-        },
-
-        getResaleTokens: async({state, commit, dispatch}) => {
-            let tokenCount
-            //contract call to get the number of resale tokens 
-            await state.pranaContract.methods.numberofTokensForResale()
-            .call({from: state.currentAccount})
-            .then(count => {
-                tokenCount = count
-                console.log(`Number of resale tokens: ${tokenCount}`)
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-            for(let i=0; i<tokenCount; i++){
-                //contract call to get the resale tokenId at index i
-                await state.pranaContract.methods.tokenForResaleAtIndex(i)
-                .call({ from: state.currentAccount})
-                .then((tokenId) => {
-                    dispatch('pushResaleToken', tokenId)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-            }
-        },
-        pushResaleToken: async({state, commit, dispatch}, tokenId) => {
-            console.log('executing pushResaleToken action...')
-            //contract call to get the token details of a tokenId
-            state.pranaContract.methods.viewTokenDetails(tokenId)
-            .call({ from: state.currentAccount})
-            .then((content) => {
-                console.log(`Book details of resale tokenid ${tokenId}:`)
-                console.log(content)
-                let isbn = content[0]
-                let metadata = content[1]
-                let copyNumber = content[2]
-                let resalePrice = content[3]
-                let isUpForResale = content[4]
-                commit('resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale})
-            })
-        }
 
     }
 }

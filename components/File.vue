@@ -1,7 +1,7 @@
 <template>
     
       <div>
-        <v-card-title>Select Country</v-card-title>
+        <v-card-title>Book Content</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           {{textFile}}
