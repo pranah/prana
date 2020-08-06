@@ -17,7 +17,8 @@
       "name": "buyToken",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -35,7 +36,8 @@
       "name": "buyTokenAsTheSpecialBuyer",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x40a6a04f5711cbbe6d73d05a14e0615b2a81606316c8f56c104fa7e26cd3246e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2d0f8363b1c43331a84bd5c9b7d18ab528d90fb3a06c0a073ed0326aebf23655\",\"dweb:/ipfs/QmcPYveLCirskjCDKEkMgijrnm8GTNPw2pZDLUTt5vEurq\"]}},\"version\":1}",
@@ -2693,9 +2695,17 @@
     "name": "solc",
     "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0xE41Fa380C1d8dd1E03FB9F525691805DdC56c509",
+      "transactionHash": "0xbacf417426b7092d24c4ba297dfc406952fc9b7ba3f2bc066ca85202c077e6eb"
+    }
+  },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-08-06T20:42:40.432Z",
+  "updatedAt": "2020-08-06T21:53:18.384Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -15,6 +15,7 @@
     "@metamask/detect-provider": "^1.1.0",
     "@nuxtjs/axios": "^5.11.0",
     "@openzeppelin/contracts": "^3.1.0",
+    "@truffle/hdwallet-provider": "^1.0.40",
     "child_process": "^1.0.2",
     "eth-sig-util": "^2.5.3",
     "ethereumjs-util": "^7.0.3",
