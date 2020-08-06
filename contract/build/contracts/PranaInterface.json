@@ -38,16 +38,16 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/mansoor/Desktop/Prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/mansoor/Desktop/Prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x4dd2a364776b97c2c4a82984038cc808c2e94455bbd4e4948acc6d7bd7f65918\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b2ee6b985f38ad3459af0fb2705fbe072d29df22d5b3f30353f1b49b7ee0099e\",\"dweb:/ipfs/QmfB64CYuJzrzczX2iXzT2DwZXrcUuhc3a4vfNkRSw8bNU\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060ff8061001f6000396000f3fe60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea26469706673582212209122c2bfe1c65eb141f3bbb7f3ca49ed929e1d60619f254b89b084a1a00694e364736f6c634300060c0033",
-  "deployedBytecode": "0x60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea26469706673582212209122c2bfe1c65eb141f3bbb7f3ca49ed929e1d60619f254b89b084a1a00694e364736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x4dd2a364776b97c2c4a82984038cc808c2e94455bbd4e4948acc6d7bd7f65918\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b2ee6b985f38ad3459af0fb2705fbe072d29df22d5b3f30353f1b49b7ee0099e\",\"dweb:/ipfs/QmfB64CYuJzrzczX2iXzT2DwZXrcUuhc3a4vfNkRSw8bNU\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ff8061001f6000396000f3fe60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220296839a6c072a0adcb14be314527863f91495bb4950093724b1a1d35d9dfdb9b64736f6c634300060c0033",
+  "deployedBytecode": "0x60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220296839a6c072a0adcb14be314527863f91495bb4950093724b1a1d35d9dfdb9b64736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "59:206:2:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "59:206:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;169:94;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;88:76;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;169:94;;;:::o;88:76::-;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.6.0;\n\n\ncontract PranaInterface{\n    function buyToken(uint256 tokenid, address _tokenRecipient) public payable{}\n    function  buyTokenAsTheSpecialBuyer(uint256 tokenid, address _tokenRecipient) public payable{}\n}\n\ncontract pranaHelper {\n\n\n    constructor () public {\n        owner = msg.sender;\n    }\n\n    //address of the contract deployer.\n    address owner;\n\n    //address of the prana contract\n    address pranaAddress;\n\n    //Modifier for onlyOwner functions\n    modifier onlyOwner {\n       require(msg.sender == owner, 'You are not the contract owner to call this function!');\n       _;\n    }\n\n    function setPranaAddress(address _pranaAddress) public onlyOwner{\n        pranaAddress = _pranaAddress;\n    }\n\n    function buyTokenFromPrana(uint256 tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyToken{value:msg.value}(tokenId, msg.sender);\n    }\n\n    function buyTokenFromPranaAsSpecialBuyer(uint256 _tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyTokenAsTheSpecialBuyer{value:msg.value}(_tokenId, msg.sender);\n    }\n\n}",
-  "sourcePath": "/home/mansoor/Desktop/Prana/contract/contracts/pranaHelper.sol",
+  "sourcePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
   "ast": {
-    "absolutePath": "/home/mansoor/Desktop/Prana/contract/contracts/pranaHelper.sol",
+    "absolutePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
     "exportedSymbols": {
       "PranaInterface": [
         1085
@@ -1366,7 +1366,7 @@
     "src": "33:1141:2"
   },
   "legacyAST": {
-    "absolutePath": "/home/mansoor/Desktop/Prana/contract/contracts/pranaHelper.sol",
+    "absolutePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
     "exportedSymbols": {
       "PranaInterface": [
         1085
@@ -2689,8 +2689,8 @@
     "version": "0.6.12+commit.27d51765.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.2.3",
-  "updatedAt": "2020-08-06T18:01:27.119Z",
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-08-06T18:30:33.575Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

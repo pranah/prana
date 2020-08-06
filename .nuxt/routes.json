@@ -2,22 +2,22 @@
   {
     "name": "collector",
     "path": "/collector",
-    "component": "/home/mansoor/Desktop/Prana/pages/collector.vue",
+    "component": "/Users/user/Desktop/prana/pages/collector.vue",
     "chunkName": "pages/collector",
-    "_name": "_5e34f186"
+    "_name": "_38fa6686"
   },
   {
     "name": "publisher",
     "path": "/publisher",
-    "component": "/home/mansoor/Desktop/Prana/pages/publisher.vue",
+    "component": "/Users/user/Desktop/prana/pages/publisher.vue",
     "chunkName": "pages/publisher",
-    "_name": "_e3dde5a8"
+    "_name": "_13b42716"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/home/mansoor/Desktop/Prana/pages/index.vue",
+    "component": "/Users/user/Desktop/prana/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_df4375fc"
+    "_name": "_5e5030cb"
   }
 ]
