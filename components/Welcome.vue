@@ -1,10 +1,9 @@
 <template>
 <div>
   
-  <v-row>
-    
-    <v-btn small outlined color="blue" to="/publisher">as an author</v-btn>
-    <v-btn small outlined color="blue" to="/collector">as a reader</v-btn>
+  <v-row class= "text-center">
+    <v-btn small outlined color="blue" to="/publisher">interact as an author</v-btn>
+    <v-btn small outlined color="blue" to="/collector">interact as a reader</v-btn> 
   </v-row>
 
 

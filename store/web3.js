@@ -256,8 +256,8 @@ export default {
             console.log(resaleData)
             let resalePrice = resaleData.resalePrice
             let tokenId = resaleData.tokenId
-            await state.pranaContract.methods.putTokenForSale(2, 0)
-            .send({ from: state.currentAccount, gas : 60000000 })
+            await state.pranaContract.methods.putTokenForSale(resalePrice, tokenId)
+            .send({ from: state.currentAccount, gas : 6000000 })
             .then((receipt) => {
                 console.log('receipt')
                 console.log(receipt)
@@ -268,7 +268,6 @@ export default {
                 .then( dispatch('pushMyToken', tokenId))
             }).catch(err => console.log(err))
         },
-
         getResaleTokens: async({state, commit, dispatch}) => {
             let tokenCount
             //contract call to get the number of resale tokens 
