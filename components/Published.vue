@@ -11,9 +11,9 @@
                             <v-btn
                             outlined
                             small
-                            color="green"
+                            color="blue"
                             >
-                            Download
+                            Read
                             </v-btn> 
                         </v-card-actions>
                     </v-card>
@@ -28,7 +28,7 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
     computed: {
-        ...mapState("fleek",[
+        ...mapState("web3",[
             'publishedContent'
         ])
     },

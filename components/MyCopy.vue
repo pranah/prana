@@ -2,8 +2,9 @@
 <div>
     <v-list-item>
         <v-list-item-content>
-          <v-list-item-title><b>Token ID: {{content.tokenId}}</b></v-list-item-title>
-          <v-list-item-subtitle>ISBN: {{content.isbn}}</v-list-item-subtitle>
+          <v-list-item-title><b>TITLE: {{content.metadata}}</b></v-list-item-title><br><br>
+          <v-list-item-title class="text-left"><b>Copy Number: {{ content.copyNumber }}</b></v-list-item-title>
+          <!-- <v-list-item-subtitle>TITLE: {{content.metadata}}</v-list-item-subtitle> -->
         </v-list-item-content>
     </v-list-item>
         <!-- https://cdn.vuetifyjs.com/images/cards/mountain.jpg -->
@@ -13,11 +14,10 @@
         ></v-img> -->
 
     <v-card-text class="text-left">
-      <b>Copy Number: {{ content.copyNumber }}</b><br><br>
-      <b>Bucket: </b>{{ content.bucket }}<br><br>
+      <b>ISBN: {{content.isbn}}</b><br><br>
     </v-card-text>
-    <v-card-subtitle v-if="content.pathToFile.length> 1" class="text-left"><b>Path to file: </b>{{ "file://" + content.pathToFile }}</v-card-subtitle>
-    <v-card-subtitle v-else class="text-left"><b>Path to file:</b> Please Download Content</v-card-subtitle>
+    <!-- <v-card-subtitle v-if="content.pathToFile.length> 1" class="text-left"><b>Path to file: </b>{{ "file://" + content.pathToFile }}</v-card-subtitle>
+    <v-card-subtitle v-else class="text-left"><b>Path to file:</b> Please Download Content</v-card-subtitle> -->
 </div>
   
 </template>
@@ -28,23 +28,10 @@ import { mapActions } from 'vuex'
 export default {
     props: ['content'],
     methods: {
-        ...mapActions('libp2p', [
-            'subscribeToContent'
-        ])
+
     },
     created() {
-        this.subscribeToContent(this.content.bucket);
     },
-    data: () => ({
-      items: [
-        {
-          color: '#1F7087',
-          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
-          artist: 'Foster the People',
-        },
-      ],
-    }),
 }
 </script>
 

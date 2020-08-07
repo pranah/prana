@@ -1,10 +1,15 @@
 <template>
-
-  <v-row>
-    <v-col><v-btn small outlined color="green" to="/publisher">Publisher</v-btn></v-col>
-    <v-spacer/>
-    <v-col><v-btn small outlined color="green" to="/collector">Collector</v-btn></v-col>
+<div>
+  
+  <v-row class= "text-center">
+    <v-btn small outlined color="blue" to="/publisher">interact as an author</v-btn>
+    <v-btn small outlined color="blue" to="/collector">interact as a reader</v-btn> 
   </v-row>
+
+
+</div>
+
+  
  
 </template>
 
@@ -12,8 +17,7 @@
 import { mapActions, mapState } from 'vuex'
 export default {
     computed: {
-      ...mapState('libp2p', [
-      ]),
+ 
     },
 }
 </script>

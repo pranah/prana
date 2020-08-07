@@ -19,8 +19,7 @@ let store = {};
   // Enforce store modules
   store.modules = store.modules || {}
 
-  resolveStoreModules(require('../store/fleek.js'), 'fleek.js')
-  resolveStoreModules(require('../store/libp2p.js'), 'libp2p.js')
+  resolveStoreModules(require('../store/ipfs.js'), 'ipfs.js')
   resolveStoreModules(require('../store/web3.js'), 'web3.js')
 
   // If the environment supports hot reloading...
@@ -28,9 +27,8 @@ let store = {};
   if (process.client && module.hot) {
     // Whenever any Vuex module is updated...
     module.hot.accept([
-      '../store/fleek.js',
       '../store/index.js',
-      '../store/libp2p.js',
+      '../store/ipfs.js',
       '../store/web3.js',
     ], () => {
       // Update `root.modules` with the latest definitions.

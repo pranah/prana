@@ -8,6 +8,13 @@ import ethUtil from 'ethereumjs-util'
 
 export default {
     state: () => ({
+        collectorPageSwitch: false,
+        publisherPageSwitch: false,
+        publishedContent: [],
+        collectedContent: [],
+        collectableContent: [],
+        resaleTokens: [],
+
         isMetaMaskProvided: Boolean,
         currentAccount: null,
         web3: null,
@@ -19,6 +26,30 @@ export default {
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
+        publisherPageSwitchFlip: (state, page) => {
+            state.publisherPageSwitch = page;
+        },
+        collectorPageSwitchFlip: (state, page) => {
+            state.collectorPageSwitch = page;
+        },
+        publishedContent: (state, contentList) => {
+            state.publishedContent = contentList
+        },
+        collectableContent: (state, contentList) => {
+            state.collectableContent = contentList
+        },
+        collectContent: (state, token) => {
+            state.collectedContent.push(token)
+            console.log(state.collectedContent)
+        },
+        resaleTokens: (state, token) => {
+            state.resaleTokens.push(token)
+            console.log('resaleTokens')
+            console.log(state.resaleTokens)
+        },
+        loadingContent: (state, content) => {
+            state.collectedContent[state.collectedContent.indexOf(content)].loadingContent = !state.collectedContent[state.collectedContent.indexOf(content)].loadingContent
+        },
         setWeb3: (state, provider) => {
             state.web3 = provider;
             console.log(state.web3);
@@ -37,6 +68,13 @@ export default {
             state.currentAccount = account
             console.log(state.currentAccount)
         },
+        removeMyToken: (state, tokenId) => {
+            for(let i=0; i<state.collectedContent.length; i++){
+                if(state.collectedContent[i].tokenId === tokenId){
+                    state.collectedContent.splice(i, 1)
+                }
+            }
+        }
     },
     actions: {
         fetchProvider: async ({state, dispatch, commit}) => {
@@ -70,9 +108,9 @@ export default {
             }
         },
         publish: async ({state, dispatch}, toPublish) => {
-            const bucketAdresses = toPublish.bucket.getAddressesList();
+            // const bucketAdresses = toPublish.bucket.getAddressesList();
             await state.pranaContract.methods.publishBook(
-                bucketAdresses[0].slice(-116),
+                toPublish.hash,
                 toPublish.content.isbn,
                 toPublish.content.price,
                 toPublish.content.title,
@@ -104,10 +142,10 @@ export default {
                     .call({ from: state.currentAccount})
                     .then((content) => {
                         bucketHash = content[0]
-                        contentList.push({isbn, publisher, price, transactionCut, metadata, bucketHash});
-                        commit('fleek/publishedContent', contentList, { root: true })
                     })
+                    contentList.push({isbn, publisher, price, transactionCut, metadata, bucketHash});
                 }
+                commit('publishedContent', contentList)
             });
         },
         getCollectables: async ({state, commit}) => {
@@ -125,7 +163,7 @@ export default {
                     transactionCut = events[i].returnValues.transactionCut
                     contentList.push({isbn, publisher, price, transactionCut, metadata});
                 }
-                commit('fleek/collectableContent', contentList, {root: true})
+                commit('collectableContent', contentList)
             }).catch(err => {console.log(err);})
         },
         //mints a new token and pushes the tokendata to collectedContent array
@@ -145,6 +183,24 @@ export default {
                 dispatch('pushMyToken', tokenId)
             }).catch(err => {console.log(err);})
         },
+        //Giveaway books to friends
+        giveaway: async ({state, commit},payload) => {
+            let address = payload.address
+            let tokenId = payload.tokenId
+            console.log(address)
+            console.log(tokenId)
+
+            let owner = state.currentAccount;
+            //contract call to safe transfer token from
+            await state.pranaContract.methods.safeTransferFrom(owner,address,tokenId)
+            .send({ from: state.currentAccount, gas : 6000000 })
+            .on('transactionHash', (hash) => {
+                console.log("Successfully gaveaway")
+                console.log(hash)
+                commit('removeMyToken', tokenId)
+                })
+            .catch(err => {console.log(err);})
+            },
         //pushes token data of all the tokens owned by an address to collectedContent array
         myCollection: async({state, commit, dispatch}) => {
             let tokenCount
@@ -172,12 +228,12 @@ export default {
         },
         //pushes the token details of a tokenId to collectedContent array
         pushMyToken: async({state, commit}, tokenId) => {
-            let bucket
+            let hash
             //contract call to get the encrypted cid of a tokenId
             await state.pranaContract.methods.consumeContent(tokenId)
             .call({ from: state.currentAccount})
-            .then((hash) => {
-                bucket = hash
+            .then((bookHash) => {
+                hash = bookHash
                 console.log(`EncryptedCID of tokenid ${tokenId}: ${hash}`)
             })
             //contract call to get the token details of a tokenId
@@ -191,8 +247,82 @@ export default {
                 let isUpForResale = content[4]
                 const loadingContent = false
                 const pathToFile = String
-                commit('fleek/collectContent', {tokenId, bucket, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile}, {root: true})
+                commit('collectContent', {tokenId, hash, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile})
             })          
+        },
+        
+        //to put a token for resale
+        putForResale: async({state, commit, dispatch}, resaleData) => {
+            console.log(resaleData)
+            let resalePrice = resaleData.resalePrice
+            let tokenId = resaleData.tokenId
+            await state.pranaContract.methods.putTokenForSale(resalePrice, tokenId)
+            .send({ from: state.currentAccount, gas : 6000000 })
+            .then((receipt) => {
+                console.log('receipt')
+                console.log(receipt)
+                console.log('executing putforresale action...')
+                dispatch('pushResaleToken', tokenId)
+                console.log(tokenId)
+                commit('removeMyToken', tokenId)
+                .then( dispatch('pushMyToken', tokenId))
+            }).catch(err => console.log(err))
+        },
+        getResaleTokens: async({state, commit, dispatch}) => {
+            let tokenCount
+            //contract call to get the number of resale tokens 
+            await state.pranaContract.methods.numberofTokensForResale()
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+                console.log(`Number of resale tokens: ${tokenCount}`)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            for(let i=0; i<tokenCount; i++){
+                //contract call to get the resale tokenId at index i
+                await state.pranaContract.methods.tokenForResaleAtIndex(i)
+                .call({ from: state.currentAccount})
+                .then((tokenId) => {
+                    dispatch('pushResaleToken', tokenId)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            }
+        },
+        pushResaleToken: async({state, commit, dispatch}, tokenId) => {
+            console.log('executing pushResaleToken action...')
+            //contract call to get the token details of a tokenId
+            state.pranaContract.methods.viewTokenDetails(tokenId)
+            .call({ from: state.currentAccount})
+            .then((content) => {
+                console.log(`Book details of resale tokenid ${tokenId}:`)
+                console.log(content)
+                let isbn = content[0]
+                let metadata = content[1]
+                let copyNumber = content[2]
+                let resalePrice = content[3]
+                let isUpForResale = content[4]
+                commit('resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale})
+            })
+        },
+        buyToken: async({state, commit, dispatch}, content) => {
+            let resalePrice = content.resalePrice
+            let tokenId = content.tokenId
+            //contract call to mint a new token
+            await state.pranaContract.methods.buyTokenFromPrana(tokenId)
+            .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(resalePrice, 'ether') })
+            .on('transactionHash', (hash) => {
+                console.log("Transaction Successful!")
+                console.log(hash)
+                })
+            .then(receipt => {
+                console.log(receipt);
+                let tokenId = receipt.events.Transfer.returnValues.tokenId
+                dispatch('pushMyToken', tokenId)
+            }).catch(err => {console.log(err);})
         },
         signMessage: ({state, dispatch, commit}, signThis) => {
             state.web3.eth.getBlock("latest")
@@ -200,13 +330,13 @@ export default {
                 state.web3.eth.personal.sign(block.hash, state.currentAccount)
                 .then(sig => {
                     const content = {
-                        bucket: signThis.bucket,
+                        hash: signThis.hash,
                         signature: sig,
                         block: block.number,
                         tokenId: signThis.tokenId
                     }
-                    commit('fleek/loadingContent', signThis, {root:true})
-                    dispatch('libp2p/requestContentKey', content, {root: true})        
+                    commit('loadingContent', signThis)
+                    // dispatch('libp2p/requestContentKey', content, {root: true})        
                 });
             });            
         },
@@ -257,7 +387,7 @@ export default {
                         if(i+1 >= tokenCount && owned == true) {
                             state.pranaContract.methods.viewTokenDetails(tokenId).call({from: state.currentAccount})
                             .then(details => {
-                                dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
+                                // dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
                             })
                         }
                     })
@@ -267,67 +397,6 @@ export default {
                 });
             } 
         },
-        //to put a token for resale
-        putForResale: async({state, commit, dispatch}, resaleData) => {
-            let resalePrice = resaleData.resalePrice
-            let tokenId = resaleData.tokenId
-            await state.pranaContract.methods.putTokenForSale(resalePrice, tokenId)
-            .send({ from: state.currentAccount, gas : 6000000 })
-            .on('TokenForSale', (event) => {
-                console.log('TokenForSale')
-                console.log(event)
-            }).then((receipt) => {
-                console.log('receipt')
-                console.log(receipt)
-            console.log('executing putforresale action...')
-                dispatch('pushResaleToken', tokenId)
-                console.log(tokenId)
-                // commit('fleek/removeMyToken', tokenId)
-                // .then( dispatch('pushMyToken', tokenId))
-            }).catch(err => console.log(err))
-        },
-
-        getResaleTokens: async({state, commit, dispatch}) => {
-            let tokenCount
-            //contract call to get the number of resale tokens 
-            await state.pranaContract.methods.numberofTokensForResale()
-            .call({from: state.currentAccount})
-            .then(count => {
-                tokenCount = count
-                console.log(`Number of resale tokens: ${tokenCount}`)
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-            for(let i=0; i<tokenCount; i++){
-                //contract call to get the resale tokenId at index i
-                await state.pranaContract.methods.tokenForResaleAtIndex(i)
-                .call({ from: state.currentAccount})
-                .then((tokenId) => {
-                    dispatch('pushResaleToken', tokenId)
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-            }
-        },
-
-        pushResaleToken: async({state, commit, dispatch}, tokenId) => {
-            console.log('executing pushResaleToken action...')
-            //contract call to get the token details of a tokenId
-            state.pranaContract.methods.viewTokenDetails(tokenId)
-            .call({ from: state.currentAccount})
-            .then((content) => {
-                console.log(`Book details of resale tokenid ${tokenId}:`)
-                console.log(content)
-                let isbn = content[0]
-                let metadata = content[1]
-                let copyNumber = content[2]
-                let resalePrice = content[3]
-                let isUpForResale = content[4]
-                commit('fleek/resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale}, {root: true})
-            })
-        }
 
     }
 }

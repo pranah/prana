@@ -1,9 +1,10 @@
 <template>
-  <v-app dark>
+  <v-app light>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      color="blue"
       fixed
       app
     >
@@ -15,17 +16,17 @@
         <v-flex>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/">Prana</v-btn>
+              <v-btn outlined color="white" to="/">Prana</v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/publisher">Publisher</v-btn>
+              <v-btn outlined color="white" to="/publisher">As an author </v-btn>
             </v-col>            
           </v-row>
           <v-row>
             <v-col>
-              <v-btn outlined color="green" to="/collector">Collector</v-btn>
+              <v-btn outlined color="white" to="/collector">As a reader</v-btn>
             </v-col>            
           </v-row>
         </v-flex>
@@ -49,7 +50,7 @@
       :absolute="!fixed"
       app
     >
-      <span><a href="https://mit-license.org/">MIT License {{ new Date().getFullYear() }}</a></span>
+      <!-- <span><a href="https://mit-license.org/">MIT License {{ new Date().getFullYear() }}</a></span> -->
     </v-footer>
   </v-app>
 </template>
@@ -73,17 +74,15 @@ export default {
   },
   methods: {
       ...mapActions({
-        initLibP2P: 'libp2p/initLibP2P',
         fetchProvider: 'web3/fetchProvider',
-        initSpaceClient: 'fleek/initSpaceClient',
-        getAccount: 'web3/getAccount'
+        getAccount: 'web3/getAccount',
       })
   },
   created() {
-    this.initLibP2P();
     this.fetchProvider();
-    this.initSpaceClient();
     this.getAccount();
-  } 
+  },
+  async fetch() {
+  }
 }
 </script>

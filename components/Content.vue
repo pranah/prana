@@ -2,7 +2,8 @@
     <div>
         <v-list-item>
         <v-list-item-content>
-            <v-list-item-title><b>ISBN: {{content.isbn}}</b></v-list-item-title>
+            <v-list-item-title><b>{{content.metadata}}</b></v-list-item-title><br><br>
+            <v-list-item-title class="text-left"><b>ISBN: {{content.isbn}}</b></v-list-item-title>
         </v-list-item-content>
         </v-list-item>
         <!-- https://cdn.vuetifyjs.com/images/cards/mountain.jpg -->
@@ -13,7 +14,7 @@
 
         <v-card-text class="text-left">
         <b>Price: </b>{{content.price}} ETH<br><br>
-        <b>Publisher: </b>{{content.publisher}}<br>
+        <b>Author: </b>{{content.publisher}}<br>
         </v-card-text>  
     </div>    
 </template>

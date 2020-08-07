@@ -17,6 +17,18 @@
   "LazyContent": {
     "description": "Auto imported from components/Content.vue"
   },
+  "Dialog": {
+    "description": "Auto imported from components/Dialog.vue"
+  },
+  "LazyDialog": {
+    "description": "Auto imported from components/Dialog.vue"
+  },
+  "File": {
+    "description": "Auto imported from components/File.vue"
+  },
+  "LazyFile": {
+    "description": "Auto imported from components/File.vue"
+  },
   "Hud": {
     "description": "Auto imported from components/Hud.vue"
   },
@@ -46,6 +58,12 @@
   },
   "LazyPublished": {
     "description": "Auto imported from components/Published.vue"
+  },
+  "ResaleDialog": {
+    "description": "Auto imported from components/ResaleDialog.vue"
+  },
+  "LazyResaleDialog": {
+    "description": "Auto imported from components/ResaleDialog.vue"
   },
   "ResaleToken": {
     "description": "Auto imported from components/ResaleToken.vue"

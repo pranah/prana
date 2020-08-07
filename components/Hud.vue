@@ -1,12 +1,12 @@
 <template>
   <v-layout row wrap>
-    <v-flex >
+    <!-- <v-flex >
       <v-row v-if="p2pNode != null">
         <v-col>Peer ID: {{ p2pNode.peerId.toB58String() }}</v-col>
         <v-col>Peers: {{ p2pNode.registrar.connectionManager.connections.size }}</v-col>
       </v-row>
       <v-row v-else>Loading</v-row>
-    </v-flex>
+    </v-flex> -->
   </v-layout>
 </template>
 
@@ -19,12 +19,9 @@ export default {
       ])
     },
     computed: {
-      ...mapState('libp2p', [
-        'p2pNode'
-      ]),
-      ...mapState('web3', [
-        'web3'
-      ])
+      // ...mapState('web3', [
+      //   'web3'
+      // ])
     },
     created() {
     }      
