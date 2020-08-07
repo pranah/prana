@@ -1,6 +1,5 @@
 # prana:
 
-## Digital Content Distribution using NFTs
 
 ## Build Setup
 
@@ -22,7 +21,7 @@ $ npm run generate
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
 
-### The Idea
+## Digital Content Distribution using NFTs
 
 We humans have a unique way of adding value to entities just by interacting with it: a particular DVD of Star Wars once owned by Mark Hamill fetches more than its MRP (Maximum Retail Price), you attach sentimental value to the watch that your dad gave you (so much so that you’re not willing to part with it for any sum of money). This level of interaction and sentiment-attachment is only
 possible in the physical realm, precisely because there is no uniqueness attached with digital copies. Until the advent of blockchain and Non-Fungible Tokens.
