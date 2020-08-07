@@ -19,10 +19,10 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        pranaAddress: pranaJson.networks['5777'].address,
+        pranaAddress: pranaJson.networks['3'].address,
         pranaAbi: pranaJson.abi,
         pranahelperContract: null,
-        pranahelperAddress: pranahelperJson.networks['5777'].address,
+        pranahelperAddress: pranahelperJson.networks['3'].address,
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
@@ -108,13 +108,13 @@ export default {
             }
         },
         publish: async ({state, dispatch}, toPublish) => {
-            // const bucketAdresses = toPublish.bucket.getAddressesList();
+            let price = state.web3.utils.toWei(toPublish.content.price, 'ether')
             await state.pranaContract.methods.publishBook(
                 toPublish.hash,
                 toPublish.content.isbn,
-                toPublish.content.price,
+                price,
                 toPublish.content.title,
-                1 // Transacation cut
+                toPublish.content.transactionCut
             ).send({ from: state.currentAccount, gas : 6000000 })
             .on('BookPublished', (event) => {
                 console.log(event)
@@ -134,7 +134,7 @@ export default {
                 let contentList = []
                 for(let i=0; i<events.length; i++){
                     isbn = events[i].returnValues.isbn
-                    price = events[i].returnValues.price
+                    price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
                     publisher = events[i].returnValues.publisher
                     metadata = events[i].returnValues.bookCoverAndDetails
                     transactionCut = events[i].returnValues.transactionCut
@@ -157,7 +157,7 @@ export default {
                 let contentList = []
                 for(let i=0; i<events.length; i++){
                     isbn = events[i].returnValues.isbn
-                    price = events[i].returnValues.price
+                    price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
                     publisher = events[i].returnValues.publisher
                     metadata = events[i].returnValues.bookCoverAndDetails
                     transactionCut = events[i].returnValues.transactionCut
@@ -243,7 +243,7 @@ export default {
                 let isbn = content[0]
                 let metadata = content[1]
                 let copyNumber = content[2]
-                let resalePrice = content[3]
+                let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
                 let isUpForResale = content[4]
                 const loadingContent = false
                 const pathToFile = String
@@ -254,7 +254,7 @@ export default {
         //to put a token for resale
         putForResale: async({state, commit, dispatch}, resaleData) => {
             console.log(resaleData)
-            let resalePrice = resaleData.resalePrice
+            let resalePrice = state.web3.utils.toWei(resaleData.resalePrice, 'ether')
             let tokenId = resaleData.tokenId
             await state.pranaContract.methods.putTokenForSale(resalePrice, tokenId)
             .send({ from: state.currentAccount, gas : 6000000 })
@@ -265,7 +265,7 @@ export default {
                 dispatch('pushResaleToken', tokenId)
                 console.log(tokenId)
                 commit('removeMyToken', tokenId)
-                .then( dispatch('pushMyToken', tokenId))
+                dispatch('pushMyToken', tokenId)
             }).catch(err => console.log(err))
         },
         getResaleTokens: async({state, commit, dispatch}) => {
@@ -303,7 +303,7 @@ export default {
                 let isbn = content[0]
                 let metadata = content[1]
                 let copyNumber = content[2]
-                let resalePrice = content[3]
+                let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
                 let isUpForResale = content[4]
                 commit('resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale})
             })
@@ -312,7 +312,7 @@ export default {
             let resalePrice = content.resalePrice
             let tokenId = content.tokenId
             //contract call to mint a new token
-            await state.pranaContract.methods.buyTokenFromPrana(tokenId)
+            await state.pranahelperContract.methods.buyTokenFromPrana(tokenId)
             .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(resalePrice, 'ether') })
             .on('transactionHash', (hash) => {
                 console.log("Transaction Successful!")

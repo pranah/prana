@@ -72,7 +72,8 @@ export default {
     methods: {
         ...mapActions('web3', [
             'getCollectables',
-            'purchase'
+            'purchase',
+            'buyToken'
         ]),
     },
     data () {

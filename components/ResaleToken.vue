@@ -2,7 +2,7 @@
     <div>
         <v-list-item>
         <v-list-item-content>
-            <v-list-item-title><b>ISBN: {{content.isbn}}</b></v-list-item-title>
+            <v-list-item-title><b>{{content.metadata}}</b></v-list-item-title>
         </v-list-item-content>
         </v-list-item>
         <!-- https://cdn.vuetifyjs.com/images/cards/mountain.jpg -->
@@ -12,8 +12,8 @@
         ></v-img> -->
 
         <v-card-text class="text-left">
-        <b>Copy Number: </b>{{content.copyNumber}} <br><br>
-        <b>Token ID: </b>{{content.tokenId}} <br><br>
+        <b>Copy Number: {{content.copyNumber}} </b><br><br>
+        <b>ISBN: {{content.isbn}}</b><br><br>
         <b>Resale Price: </b>{{content.resalePrice}} ETH<br><br>
         </v-card-text>  
     </div>    

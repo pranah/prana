@@ -7,9 +7,6 @@
                     <MyCopy v-bind:content="content"/> 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <!-- <p v-if="content.loadingContent==true">Loading</p> -->
-                        <!-- <v-btn v-else small outlined color="blue" @click="signMessage(content)">Download</v-btn> -->
-                        <!-- <v-btn v-else small outlined color="blue" @click="requestFile(content.hash)">Read</v-btn> -->
                         <v-row justify="center">
                             <v-dialog v-model="dialog" scrollable max-width="600px">
                                 <template v-slot:activator="{ on, attrs }">
@@ -31,17 +28,10 @@
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-btn small outlined color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                                        <v-btn small outlined color="blue darken-1" text @click="dialog = false">Save</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
                         </v-row>
-                        <!-- <v-btn 
-                        v-if = "content.isUpForResale === false"
-                        small 
-                        outlined 
-                        color="blue" 
-                        @click="putForResale({resalePrice: 2, tokenId: content.tokenId})">Put for Sale</v-btn> -->
                         <ResaleDialog v-bind:content="content"/>
                         <Dialog v-bind:content="content"/>
                     </v-card-actions>

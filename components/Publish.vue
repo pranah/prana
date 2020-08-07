@@ -21,13 +21,7 @@
                     label="ISBN"
                     v-model="content.isbn"
                 />
-                <v-file-input
-                accept=".txt, .rtf, .pdf"
-                placeholder="Content to Publish"
-                label="File"
-                v-model="file"
-                v-on:change="fileUpload()"
-                ></v-file-input>
+                
 
                 <v-text-field 
                     type="number"
@@ -37,6 +31,21 @@
                     label="Price in ETH"
                     v-model="content.price"
                 />
+                <v-text-field 
+                    type="number"
+                    min="0" 
+                    max="999999" 
+                    required
+                    label="Transaction Cut (Your cut in percentage of any secondary transactions)"
+                    v-model="content.transactionCut"
+                />
+                <v-file-input
+                accept=".txt, .rtf, .pdf"
+                placeholder="Content to Publish"
+                label="File"
+                v-model="file"
+                v-on:change="fileUpload()"
+                ></v-file-input>
                 <!-- <v-btn small outlined color="blue" @click="publish(content)">Publish</v-btn> -->
                 <v-btn small outlined color="blue" @click="publish(content)">Publish</v-btn>
             </v-form>

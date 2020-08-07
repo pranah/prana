@@ -3,18 +3,21 @@
     "name": "collector",
     "path": "/collector",
     "component": "/Users/user/Desktop/prana/pages/collector.vue",
-    "chunkName": "pages/collector"
+    "chunkName": "pages/collector",
+    "_name": "_38fa6686"
   },
   {
     "name": "publisher",
     "path": "/publisher",
     "component": "/Users/user/Desktop/prana/pages/publisher.vue",
-    "chunkName": "pages/publisher"
+    "chunkName": "pages/publisher",
+    "_name": "_13b42716"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/user/Desktop/prana/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_5e5030cb"
   }
 ]
