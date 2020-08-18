@@ -36,9 +36,17 @@
                     min="0" 
                     max="999999" 
                     required
-                    label="Transaction Cut (Your cut in percentage of any secondary transactions)"
+                    label="Creator's Cut (Your cut in percentage of any secondary transactions)"
                     v-model="content.transactionCut"
                 />
+                <v-file-input
+                accept=".jpg, .png"
+                placeholder="Cover Image"
+                label="File"
+                v-model="image"
+                v-on:change="imageUpload()"
+                ></v-file-input>
+
                 <v-file-input
                 accept=".txt, .rtf, .pdf"
                 placeholder="Content to Publish"
@@ -60,12 +68,14 @@ export default {
     data: () => ({
         content: {
             title: '',
+            image: null,
             file: null,
             isbn: 0,
             price: 0,
             transactionCut: 0
         },
-        file: null
+        file: null,
+        image: null,
     }),
     computed: {
         ...mapState('fleek',[
@@ -85,6 +95,14 @@ export default {
             reader.onloadend = () => {
             this.content.file = Buffer(reader.result)
             console.log(this.content.file)
+            }
+        },
+        imageUpload(){
+            var reader = new FileReader()
+            reader.readAsArrayBuffer(this.image);
+            reader.onloadend = () => {
+            this.content.image = Buffer(reader.result)
+            console.log(this.content.image)
             }
         }
     },

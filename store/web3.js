@@ -19,10 +19,10 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        pranaAddress: pranaJson.networks['3'].address,
+        pranaAddress: pranaJson.networks['5777'].address,
         pranaAbi: pranaJson.abi,
         pranahelperContract: null,
-        pranahelperAddress: pranahelperJson.networks['3'].address,
+        pranahelperAddress: pranahelperJson.networks['5777'].address,
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
@@ -110,10 +110,10 @@ export default {
         publish: async ({state, dispatch}, toPublish) => {
             let price = state.web3.utils.toWei(toPublish.content.price, 'ether')
             await state.pranaContract.methods.publishBook(
-                toPublish.hash,
+                toPublish.bookHash,
                 toPublish.content.isbn,
                 price,
-                toPublish.content.title,
+                toPublish.metadataHash,
                 toPublish.content.transactionCut
             ).send({ from: state.currentAccount, gas : 6000000 })
             .on('BookPublished', (event) => {
@@ -130,38 +130,51 @@ export default {
                 fromBlock:0,
                 toBlock:'latest'
             },(err, events)=>{
-                let isbn, price, publisher, metadata, transactionCut, bucketHash
+                let isbn, price, publisher, metadata, transactionCut, bookHash
                 let contentList = []
                 for(let i=0; i<events.length; i++){
-                    isbn = events[i].returnValues.isbn
-                    price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
-                    publisher = events[i].returnValues.publisher
-                    metadata = events[i].returnValues.bookCoverAndDetails
-                    transactionCut = events[i].returnValues.transactionCut
-                    state.pranaContract.methods.viewBookDetails(isbn)
+                    state.pranaContract.methods.viewMyBookDetails(events[i].returnValues.isbn)
                     .call({ from: state.currentAccount})
                     .then((content) => {
-                        bucketHash = content[0]
+                        console.log(content[0])
+                        isbn = events[i].returnValues.isbn
+                        price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
+                        publisher = events[i].returnValues.publisher
+                        metadata = events[i].returnValues.bookCoverAndDetails
+                        transactionCut = events[i].returnValues.transactionCut
+                        bookHash = content[0]
+                        contentList.push({isbn, publisher, price, transactionCut, metadata, bookHash});
                     })
-                    contentList.push({isbn, publisher, price, transactionCut, metadata, bucketHash});
                 }
                 commit('publishedContent', contentList)
             });
         },
-        getCollectables: async ({state, commit}) => {
+        getCollectables: async ({state, commit, dispatch}) => {
             await state.pranaContract.getPastEvents('BookPublished', {
                 fromBlock: 0,
                 toBlock: 'latest'
             }).then(events => {
-                let isbn, price, publisher, metadata, transactionCut
+                let isbn, price, publisher, metadataHash, transactionCut, title, imageHash
                 let contentList = []
                 for(let i=0; i<events.length; i++){
-                    isbn = events[i].returnValues.isbn
-                    price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
-                    publisher = events[i].returnValues.publisher
-                    metadata = events[i].returnValues.bookCoverAndDetails
-                    transactionCut = events[i].returnValues.transactionCut
-                    contentList.push({isbn, publisher, price, transactionCut, metadata});
+                    metadataHash = events[i].returnValues.bookCoverAndDetails 
+                    dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                    .then(res => {
+                        console.log(res)
+                        const metadata = JSON.parse(res.toString())
+                        console.log(metadata)
+                        isbn = events[i].returnValues.isbn
+                        publisher = events[i].returnValues.publisher
+                        price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
+                        transactionCut = events[i].returnValues.transactionCut
+                        metadataHash = events[i].returnValues.bookCoverAndDetails
+                        title = metadata.title
+                        imageHash = metadata.imageHash
+                        console.log(metadataHash)
+                        console.log(title)
+                        console.log(imageHash)
+                        contentList.push({isbn, publisher, price, transactionCut, metadataHash, title, imageHash});
+                    })
                 }
                 commit('collectableContent', contentList)
             }).catch(err => {console.log(err);})
