@@ -1,27 +1,17 @@
 <template>
     
       <div>
-        <v-card-title>Book Content</v-card-title>
-        <v-divider></v-divider>
-        <v-card-text style="height: 300px;">
-          {{textFile}}
-        </v-card-text>
-        <v-divider></v-divider>
+          <span>
+              {{textFile}}
+          </span>
     </div>
         
 
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 export default {
-    props: ['textFile'],
-    computed: {
-        ...mapState('web3', [
-            'currentAccount'
-        ]),
-        
-    },
+    props: ['textFile']
    
 }
 </script>
