@@ -8,13 +8,31 @@
                         <Content v-bind:content="content"/> 
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn
-                            outlined
-                            small
-                            color="blue"
-                            >
-                            Read
-                            </v-btn> 
+                            <v-row justify="center">
+                            <v-dialog v-model="dialog" scrollable max-width="600px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                    color="blue"
+                                    dark
+                                    small
+                                    outlined
+                                    v-bind="attrs"
+                                    v-on="on"
+                                    
+                                    >
+                                    Read
+                                    </v-btn>
+                                </template>
+                                <v-card>
+                                <File v-bind:textFile="content.bookContent" />
+                                    
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn small outlined color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-row>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -27,6 +45,10 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
+    data: () => ({
+        fileRequested: false,
+        dialog: false,
+    }),
     computed: {
         ...mapState("web3",[
             'publishedContent'

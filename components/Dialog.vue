@@ -1,6 +1,7 @@
 <template>
   <v-row justify="center">
     <v-btn
+    v-if = "content.isUpForResale === false"
       outlined 
       small
       color="blue" 

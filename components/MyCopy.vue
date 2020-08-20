@@ -1,8 +1,12 @@
 <template>
 <div>
+  <v-img
+        :src= "`https://ipfs.io/ipfs/${content.imageHash}`"
+        height="500px"
+        ></v-img>
     <v-list-item>
         <v-list-item-content>
-          <v-list-item-title><b>{{content.metadata}}</b></v-list-item-title><br><br><br>
+          <v-list-item-title><b>{{content.title}}</b></v-list-item-title><br><br><br>
           <v-list-item-title class="text-left"><b>Copy Number: {{ content.copyNumber }}</b></v-list-item-title>
           <!-- <v-list-item-subtitle>TITLE: {{content.metadata}}</v-list-item-subtitle> -->
         </v-list-item-content>

@@ -17,13 +17,12 @@
                                     outlined
                                     v-bind="attrs"
                                     v-on="on"
-                                    @click="requestFile(content.hash)"
                                     >
                                     Read
                                     </v-btn>
                                 </template>
                                 <v-card>
-                                <File v-bind:textFile="textFile" />
+                                <File v-bind:textFile="content.bookContent" />
                                     
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -49,21 +48,12 @@ export default {
         dialog: false,
     }),
     computed: {
-        // ...mapState({
-        //     collectedContent: 'web3/collectedContent',
-        //     textFile: 'ipfs/textFile'
-        // }),
         ...mapState('web3', [
             'collectedContent'
         ] ),
         ...mapState('ipfs', [
             'textFile'
         ])
-
-        // ...mapState({
-        //     collectedContent: state => state.web3.collectedContent,
-        //     textFile: state => state.ipfs.textFile
-        // })
     },
     methods: {
         ...mapActions({

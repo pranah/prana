@@ -124,26 +124,47 @@ export default {
                 dispatch('getCollectables')
             }).catch(err => console.log(err))
         },
-        myPublished: async ({state, commit}) => {
+        myPublished: async ({state, commit, dispatch}) => {
             await state.pranaContract.getPastEvents('BookPublished',{
                 filter:{publisher:state.currentAccount},
                 fromBlock:0,
                 toBlock:'latest'
             },(err, events)=>{
-                let isbn, price, publisher, metadata, transactionCut, bookHash
+                let isbn, price, publisher, metadataHash, transactionCut, title, imageHash, bookHash, bookContent
                 let contentList = []
                 for(let i=0; i<events.length; i++){
                     state.pranaContract.methods.viewMyBookDetails(events[i].returnValues.isbn)
                     .call({ from: state.currentAccount})
                     .then((content) => {
-                        console.log(content[0])
-                        isbn = events[i].returnValues.isbn
-                        price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
-                        publisher = events[i].returnValues.publisher
-                        metadata = events[i].returnValues.bookCoverAndDetails
-                        transactionCut = events[i].returnValues.transactionCut
-                        bookHash = content[0]
-                        contentList.push({isbn, publisher, price, transactionCut, metadata, bookHash});
+                        metadataHash = events[i].returnValues.bookCoverAndDetails 
+
+                        //action to get metadata from ipfs
+                        dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                        .then(res1 => {
+                            bookHash = content[0]
+
+                            //action to get book content from ipfs
+                            dispatch('ipfs/getBookContent', bookHash, { root: true })
+                            .then(res2 => {
+                                if(res2.readable) {
+                                    console.error('unhandled: cat result is a pipe', res2);
+                                } 
+                                else {
+                                    const metadata = JSON.parse(res1.toString())
+                                    title = metadata.title
+                                    imageHash = metadata.imageHash
+                                    metadataHash = events[i].returnValues.bookCoverAndDetails
+                                    bookHash = content[0]
+                                    bookContent = res2.toString()
+                                    isbn = events[i].returnValues.isbn
+                                    publisher = events[i].returnValues.publisher
+                                    price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
+                                    transactionCut = events[i].returnValues.transactionCut
+                                    contentList.push({isbn, publisher, price, transactionCut, metadataHash, title, imageHash, bookHash, bookContent})
+                                }
+                            })   
+                        })
+                        // contentList.push({isbn, publisher, price, transactionCut, metadataHash, bookHash});
                     })
                 }
                 commit('publishedContent', contentList)
@@ -160,19 +181,16 @@ export default {
                     metadataHash = events[i].returnValues.bookCoverAndDetails 
                     dispatch('ipfs/getMetadata', metadataHash, { root: true })
                     .then(res => {
-                        console.log(res)
+                        // console.log(res)
                         const metadata = JSON.parse(res.toString())
-                        console.log(metadata)
+                        title = metadata.title
+                        imageHash = metadata.imageHash
                         isbn = events[i].returnValues.isbn
                         publisher = events[i].returnValues.publisher
                         price = state.web3.utils.fromWei(events[i].returnValues.price, 'ether')
                         transactionCut = events[i].returnValues.transactionCut
                         metadataHash = events[i].returnValues.bookCoverAndDetails
-                        title = metadata.title
-                        imageHash = metadata.imageHash
-                        console.log(metadataHash)
-                        console.log(title)
-                        console.log(imageHash)
+                        
                         contentList.push({isbn, publisher, price, transactionCut, metadataHash, title, imageHash});
                     })
                 }
@@ -240,28 +258,65 @@ export default {
             }   
         },
         //pushes the token details of a tokenId to collectedContent array
-        pushMyToken: async({state, commit}, tokenId) => {
-            let hash
+        pushMyToken: async({state, commit, dispatch}, tokenId) => {
+            let title, imageHash, bookHash, bookContent
             //contract call to get the encrypted cid of a tokenId
             await state.pranaContract.methods.consumeContent(tokenId)
             .call({ from: state.currentAccount})
-            .then((bookHash) => {
-                hash = bookHash
-                console.log(`EncryptedCID of tokenid ${tokenId}: ${hash}`)
+            .then((hash) => {
+                bookHash = hash
+                console.log(`EncryptedCID of tokenid ${tokenId}: ${bookHash}`)
+                state.pranaContract.methods.viewTokenDetails(tokenId)
+                .call({ from: state.currentAccount})
+                .then((content) => {
+                    let metadataHash = content[1]
+
+                    //action to get metadata from ipfs
+                    dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                    .then(res1 => {
+                        console.log(res1)
+
+                        //action to get book content from ipfs
+                        dispatch('ipfs/getBookContent', bookHash, { root: true })
+                        .then(res2 => {
+                        console.log(res2)
+
+                            if(res2.readable) {
+                                console.error('unhandled: cat result is a pipe', res2);
+                            } 
+                            else {
+                                const metadata = JSON.parse(res1.toString())
+                                title = metadata.title
+                                imageHash = metadata.imageHash
+                                bookContent = res2.toString()
+                                let isbn = content[0]
+                                let copyNumber = content[2]
+                                let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                let isUpForResale = content[4]
+                                const loadingContent = false
+                                commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, bookContent, copyNumber, resalePrice, isUpForResale, loadingContent})
+                            }
+                        })   
+                    })
+
+
+
+
+                    
+                })
             })
             //contract call to get the token details of a tokenId
-            await state.pranaContract.methods.viewTokenDetails(tokenId)
-            .call({ from: state.currentAccount})
-            .then((content) => {
-                let isbn = content[0]
-                let metadata = content[1]
-                let copyNumber = content[2]
-                let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-                let isUpForResale = content[4]
-                const loadingContent = false
-                const pathToFile = String
-                commit('collectContent', {tokenId, hash, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent, pathToFile})
-            })          
+            // await state.pranaContract.methods.viewTokenDetails(tokenId)
+            // .call({ from: state.currentAccount})
+            // .then((content) => {
+            //     let isbn = content[0]
+            //     let metadata = content[1]
+            //     let copyNumber = content[2]
+            //     let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+            //     let isUpForResale = content[4]
+            //     const loadingContent = false
+            //     commit('collectContent', {tokenId, bookHash, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent})
+            // })          
         },
         
         //to put a token for resale
@@ -307,18 +362,28 @@ export default {
         },
         pushResaleToken: async({state, commit, dispatch}, tokenId) => {
             console.log('executing pushResaleToken action...')
+            let isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale
+
             //contract call to get the token details of a tokenId
             state.pranaContract.methods.viewTokenDetails(tokenId)
             .call({ from: state.currentAccount})
             .then((content) => {
                 console.log(`Book details of resale tokenid ${tokenId}:`)
                 console.log(content)
-                let isbn = content[0]
-                let metadata = content[1]
-                let copyNumber = content[2]
-                let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-                let isUpForResale = content[4]
-                commit('resaleTokens', {tokenId, isbn, metadata, copyNumber, resalePrice, isUpForResale})
+                metadataHash = content[1]
+
+                dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                .then(res => {
+                    // console.log(res)
+                    const metadata = JSON.parse(res.toString())
+                    title = metadata.title
+                    imageHash = metadata.imageHash
+                    isbn = content[0]
+                    copyNumber = content[2]
+                    resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                    isUpForResale = content[4]
+                    commit('resaleTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale})
+                })   
             })
         },
         buyToken: async({state, commit, dispatch}, content) => {

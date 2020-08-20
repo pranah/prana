@@ -44,6 +44,7 @@ export default {
                     console.log(metadataBuffer)
                     let temp = JSON.parse(metadataBuffer.toString())
                     console.log(temp)
+                    //uploading metadata to ipfs
                     ipfs.files.add(metadataBuffer, (err, files) => {
                         if (err) { throw err }
                         console.log(files)
@@ -76,39 +77,23 @@ export default {
                   }
                 })
         },
-        getContent: async({state, commit, dispatch}, bookHash) => {
-            let textFile
-            let ipfsPath = `https://ipfs.io/ipfs/${hash}`
-            console.log(ipfsPath);
-            ipfs.cat(hash, function(err, res) {
-                if(err || !res) return console.error("ipfs cat error", err, res);
-                if(res.readable) {
-                console.error('unhandled: cat result is a pipe', res);
-                } else {
-                console.log(res)
-                textFile = res.toString()
-                commit('getFile', textFile)
-                }
-            })
+        getBookContent: async({state, commit, dispatch}, bookHash) => {
+            return ipfs.cat(bookHash)
+            // let textFile
+            // let ipfsPath = `https://ipfs.io/ipfs/${hash}`
+            // console.log(ipfsPath);
+            // ipfs.cat(hash, function(err, res) {
+            //     if(err || !res) return console.error("ipfs cat error", err, res);
+            //     if(res.readable) {
+            //     console.error('unhandled: cat result is a pipe', res);
+            //     } else {
+            //     console.log(res)
+            //     textFile = res.toString()
+            //     commit('getFile', textFile)
+            //     }
+            // })
         },
         getMetadata: async({state, commit, dispatch}, metadataHash) => {
-            // let metadata
-            // let ipfsPath = `https://ipfs.io/ipfs/${metadataHash}`
-            // console.log(ipfsPath);
-                // await ipfs.cat(metadataHash, function(err, res) {
-                //   if(err || !res) return console.error("ipfs cat error", err, res);
-                //   if(res.readable) {
-                //     console.error('unhandled: cat result is a pipe', res);
-                //   } else {
-                //     console.log(res)
-                //     metadata = JSON.parse(res.toString())
-                //     console.log(metadata)
-                //     console.log(metadata.title)
-                //     console.log(metadata.image)
-                //     return {title: metadata.title, imgHash: metadata.image}
-                //     // commit('getFile', metadata)
-                //   }
-                // })
                 return ipfs.cat(metadataHash)
         },
     }
