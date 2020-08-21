@@ -9,7 +9,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-row justify="center">
-                            <v-dialog v-model="dialog" scrollable max-width="600px">
+                            <!-- <v-dialog v-model="dialog" scrollable max-width="600px">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn
                                     color="blue"
@@ -31,7 +31,10 @@
                                         <v-btn small outlined color="blue darken-1" text @click="dialog = false">Close</v-btn>
                                     </v-card-actions>
                                 </v-card>
-                            </v-dialog>
+                            </v-dialog> -->
+                            <nuxt-link to="/readPage">
+                            <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" >Read</v-btn>
+                            </nuxt-link>
                         </v-row>
                         </v-card-actions>
                     </v-card>
@@ -52,16 +55,27 @@ export default {
     computed: {
         ...mapState("web3",[
             'publishedContent'
+        ]),
+        ...mapState('ipfs', [
+            'textFile'
         ])
     },
     methods: {
-        ...mapActions('web3', [
-            'myPublished'
-        ])
+        ...mapActions({
+            signMessage: 'web3/signMessage',
+            putForResale: 'web3/putForResale',
+            requestContent: 'ipfs/requestContent'
+        }),
+        requestFile(hash){
+            console.log(hash)
+            this.requestContent(hash)
+            console.log(this.textFile)
+        }
     }
 }
 </script>
 
 <style>
+a {  text-decoration: none}
 
 </style>

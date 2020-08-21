@@ -1,14 +1,9 @@
 <template>
     
       <div>
-        <!-- <v-card-title>Book Content</v-card-title>
-        <v-divider></v-divider> -->
-        <!-- <v-card-text style="height: 300px;"> -->
-            <pre>
+        <pre>
           {{textFile}}
-          </pre>
-        <!-- </v-card-text> -->
-        <!-- <v-divider></v-divider> -->
+        </pre>
     </div>
         
 

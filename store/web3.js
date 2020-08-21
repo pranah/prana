@@ -19,10 +19,10 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        pranaAddress: pranaJson.networks['5777'].address,
+        pranaAddress: pranaJson.networks['3'].address,
         pranaAbi: pranaJson.abi,
         pranahelperContract: null,
-        pranahelperAddress: pranahelperJson.networks['5777'].address,
+        pranahelperAddress: pranahelperJson.networks['3'].address,
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
@@ -34,6 +34,7 @@ export default {
         },
         publishedContent: (state, contentList) => {
             state.publishedContent = contentList
+            console.log(state.publishedContent)
         },
         collectableContent: (state, contentList) => {
             state.collectableContent = contentList
@@ -294,15 +295,11 @@ export default {
                                 let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
                                 let isUpForResale = content[4]
                                 const loadingContent = false
+                                // commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, copyNumber, resalePrice, isUpForResale, loadingContent})
                                 commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, bookContent, copyNumber, resalePrice, isUpForResale, loadingContent})
                             }
                         })   
-                    })
-
-
-
-
-                    
+                    }) 
                 })
             })
             //contract call to get the token details of a tokenId
@@ -398,6 +395,7 @@ export default {
                 })
             .then(receipt => {
                 console.log(receipt);
+                //error
                 let tokenId = receipt.events.Transfer.returnValues.tokenId
                 dispatch('pushMyToken', tokenId)
             }).catch(err => {console.log(err);})

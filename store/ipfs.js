@@ -17,7 +17,12 @@ export default {
             state.textFile = file
             console.log(state.textFile)
             console.log('getFile')
-        }
+        },
+        clearBookContent: (state) => {
+            state.textFile = null
+            console.log(state.textFile)
+            console.log('clearBookContent')
+        },
     },
     actions: {
         publish: async({state, commit, dispatch}, content) => {

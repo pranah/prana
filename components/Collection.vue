@@ -31,7 +31,10 @@
                                 <File v-bind:textFile="content.bookContent" />    
                                 </v-card>
                             </v-dialog> -->
-                            <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" to="/readPage">Read</v-btn>
+                            <!-- <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" to="/readPage">Read</v-btn> -->
+                            <nuxt-link to="/readPage">
+                            <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" >Read</v-btn>
+                            </nuxt-link>
                         </v-row>
                         <ResaleDialog v-bind:content="content"/>
                         <Dialog v-bind:content="content"/>
@@ -46,7 +49,6 @@
 import { mapState, mapActions } from 'vuex'
 export default {
     data: () => ({
-        fileRequested: false,
         dialog: false,
     }),
     computed: {
@@ -64,7 +66,7 @@ export default {
             requestContent: 'ipfs/requestContent'
         }),
         requestFile(hash){
-            this.fileRequested = true
+            console.log(hash)
             this.requestContent(hash)
             console.log(this.textFile)
         }
@@ -73,5 +75,6 @@ export default {
 </script>
 
 <style>
+a {  text-decoration: none}
 
 </style>

@@ -16,7 +16,7 @@
         <v-flex>
           <v-row>
             <v-col>
-              <v-btn outlined color="white" to="/">Prana</v-btn>
+              <v-btn outlined color="white" to="/">Prana:</v-btn>
             </v-col>            
           </v-row>
           <v-row>
@@ -86,3 +86,6 @@ export default {
   }
 }
 </script>
+<style >
+
+</style>
