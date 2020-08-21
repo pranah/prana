@@ -40,15 +40,16 @@
       "payable": true
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x40a6a04f5711cbbe6d73d05a14e0615b2a81606316c8f56c104fa7e26cd3246e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2d0f8363b1c43331a84bd5c9b7d18ab528d90fb3a06c0a073ed0326aebf23655\",\"dweb:/ipfs/QmcPYveLCirskjCDKEkMgijrnm8GTNPw2pZDLUTt5vEurq\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060ff8061001f6000396000f3fe60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220807a04f32064c1bee631b6feec1952f731bb336e930bc583609833242210a05064736f6c634300060c0033",
-  "deployedBytecode": "0x60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220807a04f32064c1bee631b6feec1952f731bb336e930bc583609833242210a05064736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyToken\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_tokenRecipient\",\"type\":\"address\"}],\"name\":\"buyTokenAsTheSpecialBuyer\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":\"PranaInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol\":{\"keccak256\":\"0x40a6a04f5711cbbe6d73d05a14e0615b2a81606316c8f56c104fa7e26cd3246e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2d0f8363b1c43331a84bd5c9b7d18ab528d90fb3a06c0a073ed0326aebf23655\",\"dweb:/ipfs/QmcPYveLCirskjCDKEkMgijrnm8GTNPw2pZDLUTt5vEurq\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060ff8061001f6000396000f3fe60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220faee7110b60ab1de59e3eed154588e43140b3697a0d22f730b2274ab5b47fa9364736f6c634300060c0033",
+  "deployedBytecode": "0x60806040526004361060265760003560e01c80635437c7fa14602b5780639134709e146076575b600080fd5b607460048036036040811015603f57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c1565b005b60bf60048036036040811015608a57600080fd5b8101908080359060200190929190803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505060c5565b005b5050565b505056fea2646970667358221220faee7110b60ab1de59e3eed154588e43140b3697a0d22f730b2274ab5b47fa9364736f6c634300060c0033",
+  "immutableReferences": {},
   "sourceMap": "68:206:2:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "68:206:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;178:94;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;97:76;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;178:94;;;:::o;97:76::-;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity >=0.4.16 <0.8.0;\n\n\ncontract PranaInterface{\n    function buyToken(uint256 tokenid, address _tokenRecipient) public payable{}\n    function  buyTokenAsTheSpecialBuyer(uint256 tokenid, address _tokenRecipient) public payable{}\n}\n\ncontract pranaHelper {\n\n\n    constructor () public {\n        owner = msg.sender;\n    }\n\n    //address of the contract deployer.\n    address owner;\n\n    //address of the prana contract\n    address pranaAddress;\n\n    //Modifier for onlyOwner functions\n    modifier onlyOwner {\n       require(msg.sender == owner, 'You are not the contract owner to call this function!');\n       _;\n    }\n\n    function setPranaAddress(address _pranaAddress) public onlyOwner{\n        pranaAddress = _pranaAddress;\n    }\n\n    function buyTokenFromPrana(uint256 tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyToken{value:msg.value}(tokenId, msg.sender);\n    }\n\n    function buyTokenFromPranaAsSpecialBuyer(uint256 _tokenId) public payable{\n        PranaInterface P = PranaInterface(pranaAddress);\n        P.buyTokenAsTheSpecialBuyer{value:msg.value}(_tokenId, msg.sender);\n    }\n\n}",
-  "sourcePath": "/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol",
+  "sourcePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
   "ast": {
-    "absolutePath": "/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol",
+    "absolutePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
     "exportedSymbols": {
       "PranaInterface": [
         1154
@@ -1370,7 +1371,7 @@
     "src": "33:1150:2"
   },
   "legacyAST": {
-    "absolutePath": "/home/richuak/Blockchain/prana/contract/contracts/pranaHelper.sol",
+    "absolutePath": "/Users/user/Desktop/prana/contract/contracts/pranaHelper.sol",
     "exportedSymbols": {
       "PranaInterface": [
         1154
@@ -2701,10 +2702,16 @@
       "links": {},
       "address": "0xE41Fa380C1d8dd1E03FB9F525691805DdC56c509",
       "transactionHash": "0xbacf417426b7092d24c4ba297dfc406952fc9b7ba3f2bc066ca85202c077e6eb"
+    },
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x0bbaef9E08CCb9d4F85752B692ffD1732FF644Cb",
+      "transactionHash": "0x00db1e69f78139a9e085242739695ff13155f59a8eefc7090ed40edbd941fef7"
     }
   },
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-08-06T21:53:18.384Z",
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-08-21T07:00:06.028Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

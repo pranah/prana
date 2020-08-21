@@ -15,7 +15,7 @@ export default {
     mutations: {
         getFile: (state, file) => {
             state.textFile = file
-            console.log(typeof(state.textFile))
+            console.log(state.textFile)
             console.log('getFile')
         }
     },

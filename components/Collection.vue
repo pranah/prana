@@ -8,7 +8,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-row justify="center">
-                            <v-dialog v-model="dialog" scrollable max-width="600px">
+                            <!-- <v-dialog v-model="dialog" fullscreen scrollable max-width="600px">
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn
                                     color="blue"
@@ -17,19 +17,21 @@
                                     outlined
                                     v-bind="attrs"
                                     v-on="on"
+                                    @click = 'requestFile(content.bookHash)'
                                     >
                                     Read
                                     </v-btn>
                                 </template>
                                 <v-card>
-                                <File v-bind:textFile="content.bookContent" />
-                                    
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
                                         <v-btn small outlined color="blue darken-1" text @click="dialog = false">Close</v-btn>
                                     </v-card-actions>
+                                <File v-bind:textFile="textFile" />    
+                                <File v-bind:textFile="content.bookContent" />    
                                 </v-card>
-                            </v-dialog>
+                            </v-dialog> -->
+                            <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" to="/readPage">Read</v-btn>
                         </v-row>
                         <ResaleDialog v-bind:content="content"/>
                         <Dialog v-bind:content="content"/>
