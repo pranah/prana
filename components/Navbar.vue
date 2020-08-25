@@ -1,6 +1,8 @@
 <template>
   <div class="navbar">
     <img class="logo" height="30" @click="open = !open" src="~/assets/Logo.svg" alt="logo">
+    <v-spacer></v-spacer>
+    <!-- <img class="logo" height="30" src="~/assets/pranaFinalLogo.svg" alt="logo"> -->
     <div class="navbar-drawer" :class="{ isOpen: open }">
       <nuxt-link
         v-for="link of links"
@@ -40,7 +42,8 @@ export default {
 .navbar {
   z-index: 20;
   position: relative;
-  background: #455A64;
+  background: #0D47A1;
+  /* background: #455A64; */
   color: white;
   padding: 10px;
 }
@@ -53,7 +56,8 @@ export default {
   top: 100%;
   left: -500px;
   padding: 0 10px 20px;
-  background: #455A64;
+  background: #0D47A1;
+  /* background: #455A64; */
   text-align: center;
   transition: left 0.35s;
 }

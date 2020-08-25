@@ -2,7 +2,7 @@
   <v-row justify="right">
     <v-btn
     v-if = "content.isUpForResale === false"
-      filled 
+      outlined 
       small
       color="blue" 
       @click.stop="dialog = true"

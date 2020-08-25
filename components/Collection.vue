@@ -4,7 +4,7 @@
         <h3>Personal Collection</h3>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="content in collectedContent" :key="collectedContent.indexOf(content)">
-                <v-card max-width="344" class="ma-3" color = "#90A4AE">
+                <v-card max-width="344" class="ma-3" color = "">
                     <MyCopy v-bind:content="content"/> 
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -12,13 +12,15 @@
                         <v-col>
                         <v-row justify="center">
                             <nuxt-link to="/readPage">
-                            <v-btn small filled color="blue" @click="requestFile(content.bookHash)" >Read</v-btn>
+                            <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" >Read</v-btn>
                             </nuxt-link>
                         </v-row>
                         </v-col>
+                        <v-spacer></v-spacer>
                         <v-col>
                         <ResaleDialog v-bind:content="content"/>
                         </v-col>
+                        <v-spacer></v-spacer>
                         <v-col>
                         <Dialog v-bind:content="content"/>
                         </v-col>
@@ -62,6 +64,10 @@ export default {
 
 <style>
 a {  text-decoration: none}
+
+.container{
+    background-color: #ECEFF1;
+}
 
 </style>
 

@@ -5,6 +5,7 @@
           v-model="tabs"
           centered
           grow
+         
         
         >
           <v-tab
@@ -17,9 +18,9 @@
 
     <v-tabs-items v-model="tabs">
       <v-tab-item>
-        <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
-                <v-card max-width="344" class="ma-3" color = "grey darken-3">
+        <v-layout row wrap >
+            <v-flex background-color = "#ECEFF1" xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
+                <v-card max-width="344" class="ma-3" color = "">
                     <Content v-bind:content="content"/>  
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -39,7 +40,7 @@
       <v-tab-item>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
-                <v-card max-width="344" class="ma-3" color = "grey darken-3">
+                <v-card max-width="344" class="ma-3" color = "">
                     <ResaleToken v-bind:content="content"/>  
                     <v-card-actions>
                         <v-spacer></v-spacer>

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class = "main">
     <v-row>
               <v-col>
                 <v-btn small outlined x-large color="blue" to="/publisher">interact as an author</v-btn>
@@ -25,5 +25,8 @@ export default {
 </script>
 
 <style>
+.main{
+  background-color: #ECEFF1;
+}
 
 </style>
