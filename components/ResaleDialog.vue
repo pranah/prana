@@ -3,12 +3,12 @@
     <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
+        
         <v-btn
         v-if = "content.isUpForResale === false"
         small
         outlined
-          color="primary"
-          dark
+        color="blue"
           v-bind="attrs"
           v-on="on"
         >

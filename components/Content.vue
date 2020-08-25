@@ -4,7 +4,7 @@
         <!-- https://images.unsplash.com/photo-1558677949-260173506bbf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80 -->
         <v-img
         :src= "`https://ipfs.io/ipfs/${content.imageHash}`"
-        height="500px"
+        height="300px"
         ></v-img>
         <v-list-item>
         <v-list-item-content>

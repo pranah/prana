@@ -1,26 +1,37 @@
 [
   {
+    "name": "about",
+    "path": "/about",
+    "component": "/home/mansoor/Desktop/newer prana/prana/pages/about.vue",
+    "chunkName": "pages/about",
+    "_name": "_9824a566"
+  },
+  {
     "name": "collector",
     "path": "/collector",
-    "component": "/Users/user/Desktop/prana/pages/collector.vue",
-    "chunkName": "pages/collector"
+    "component": "/home/mansoor/Desktop/newer prana/prana/pages/collector.vue",
+    "chunkName": "pages/collector",
+    "_name": "_6c967b66"
   },
   {
     "name": "publisher",
     "path": "/publisher",
-    "component": "/Users/user/Desktop/prana/pages/publisher.vue",
-    "chunkName": "pages/publisher"
+    "component": "/home/mansoor/Desktop/newer prana/prana/pages/publisher.vue",
+    "chunkName": "pages/publisher",
+    "_name": "_f23f6f88"
   },
   {
     "name": "readPage",
     "path": "/readPage",
-    "component": "/Users/user/Desktop/prana/pages/readPage.vue",
-    "chunkName": "pages/readPage"
+    "component": "/home/mansoor/Desktop/newer prana/prana/pages/readPage.vue",
+    "chunkName": "pages/readPage",
+    "_name": "_5846d6b5"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/user/Desktop/prana/pages/index.vue",
-    "chunkName": "pages/index"
+    "component": "/home/mansoor/Desktop/newer prana/prana/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_58b4efdc"
   }
 ]

@@ -2,7 +2,7 @@
 <div>
   <v-img
         :src= "`https://ipfs.io/ipfs/${content.imageHash}`"
-        height="500px"
+        height="300px"
         ></v-img>
     <v-list-item>
         <v-list-item-content>
