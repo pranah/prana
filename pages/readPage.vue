@@ -10,7 +10,8 @@
         <v-card-title>Book Content</v-card-title>
         <v-divider></v-divider>
         <!-- <File v-bind:textFile="textFile" /> -->
-        <File/>
+        <Progressbar :progress="progress" />
+        <File @progressUpdate="setProgress" />
         <v-divider></v-divider>
     </div>
 
@@ -20,6 +21,15 @@
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
+    data () {
+    return {
+      progress: 0
+    }
+    },
+    // components: {
+    //             File,
+    //             Progressbar
+    // },
     computed: {
         ...mapState('web3', [
             'currentAccount'
@@ -29,6 +39,9 @@ export default {
         ])    
     },
     methods: {
+        setProgress (progress) {
+        this.progress = progress;
+    },
         ...mapMutations({
             clearBookContent: 'ipfs/clearBookContent',
         }),
@@ -39,5 +52,8 @@ export default {
 </script>
 
 <style>
+.container {
+    background-color: white;
+}
 a {  text-decoration: none}
 </style>

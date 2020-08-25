@@ -10,6 +10,7 @@
         v-text="link.name"
       />
     </div>
+    <!-- <img class="logo" height="30" src="~/assets/Prananav.svg" alt="logo"> -->
   </div>
 </template>
 

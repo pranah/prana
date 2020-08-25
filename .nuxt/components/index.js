@@ -6,6 +6,7 @@ export { default as File } from '../../components/File.vue'
 export { default as Login } from '../../components/Login.vue'
 export { default as MyCopy } from '../../components/MyCopy.vue'
 export { default as Navbar } from '../../components/Navbar.vue'
+export { default as Progressbar } from '../../components/Progressbar.vue'
 export { default as Publish } from '../../components/Publish.vue'
 export { default as Published } from '../../components/Published.vue'
 export { default as ResaleDialog } from '../../components/ResaleDialog.vue'
@@ -20,6 +21,7 @@ export const LazyFile = import('../../components/File.vue' /* webpackChunkName: 
 export const LazyLogin = import('../../components/Login.vue' /* webpackChunkName: "components/Login'}" */).then(c => c.default || c)
 export const LazyMyCopy = import('../../components/MyCopy.vue' /* webpackChunkName: "components/MyCopy'}" */).then(c => c.default || c)
 export const LazyNavbar = import('../../components/Navbar.vue' /* webpackChunkName: "components/Navbar'}" */).then(c => c.default || c)
+export const LazyProgressbar = import('../../components/Progressbar.vue' /* webpackChunkName: "components/Progressbar'}" */).then(c => c.default || c)
 export const LazyPublish = import('../../components/Publish.vue' /* webpackChunkName: "components/Publish'}" */).then(c => c.default || c)
 export const LazyPublished = import('../../components/Published.vue' /* webpackChunkName: "components/Published'}" */).then(c => c.default || c)
 export const LazyResaleDialog = import('../../components/ResaleDialog.vue' /* webpackChunkName: "components/ResaleDialog'}" */).then(c => c.default || c)

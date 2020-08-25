@@ -47,6 +47,12 @@
   "LazyNavbar": {
     "description": "Auto imported from components/Navbar.vue"
   },
+  "Progressbar": {
+    "description": "Auto imported from components/Progressbar.vue"
+  },
+  "LazyProgressbar": {
+    "description": "Auto imported from components/Progressbar.vue"
+  },
   "Publish": {
     "description": "Auto imported from components/Publish.vue"
   },
