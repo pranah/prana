@@ -1,25 +1,24 @@
 <template>
-  <v-layout
+  <!-- <v-layout
     justify-center
     align-center
-  >
+  > -->
+  <section class="container">
     <v-flex class="text-center">
-      <v-card>
         <v-row>
           <v-col>
             <v-btn-toggle mandatory >
-              <v-btn small outlined color="blue" @click="collectorPageSwitchFlip(true)">My Library</v-btn>
-              <v-btn small outlined color="blue" @click="collectorPageSwitchFlip(false)">Buy a new book</v-btn>
+              <v-btn small outlined color="blue" @click="collectorPageSwitchFlip(false)">My Library</v-btn>
+              <v-btn small outlined color="blue" @click="collectorPageSwitchFlip(true)">Buy a new book</v-btn>
             </v-btn-toggle>
           </v-col>
         </v-row>
         <v-row>
-          <Collect v-if="collectorPageSwitch == false"/>
+          <Collect v-if="collectorPageSwitch == true"/>
           <Collection v-else/>
         </v-row>
-      </v-card>
     </v-flex>
-  </v-layout>
+  </section>
 </template>
 
 <script>
@@ -40,5 +39,32 @@ export default {
 </script>
 
 <style>
+  .container {
+  /* min-height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
+.title {
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 26px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
+}
 </style>

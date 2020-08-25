@@ -1,17 +1,19 @@
 <template>
-<div>
-  
-  <v-row class= "text-center">
-    <v-btn small outlined color="blue" to="/publisher">interact as an author</v-btn>
-    <v-btn small outlined color="blue" to="/collector">interact as a reader</v-btn> 
-  </v-row>
+  <v-container>
+    <v-row>
+              <v-col>
+                <v-btn small outlined x-large color="blue" to="/publisher">interact as an author</v-btn>
+              </v-col>
+              <v-col
 
-
-</div>
-
-  
- 
+            >
+                <v-btn small outlined x-large color="blue" to="/collector">interact as a reader</v-btn> 
+                </v-col>
+        </v-row>
+  </v-container>
 </template>
+
+
 
 <script>
 import { mapActions, mapState } from 'vuex'

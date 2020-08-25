@@ -1,5 +1,5 @@
 <template>
-
+<section class="container">
       <div>
         <nuxt-link to = "/collector">
         <v-btn small outlined color="blue" @click = "clearBookContent">Close</v-btn>
@@ -14,7 +14,7 @@
         <v-divider></v-divider>
     </div>
 
-
+</section>
 </template>
 
 <script>

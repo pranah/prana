@@ -1,4 +1,5 @@
 <template>
+<section class="container">
   <v-layout
     justify-center
     align-center
@@ -18,6 +19,7 @@
       </v-card>
     </v-flex>
   </v-layout>
+  </section>
 </template>
 
 <script>

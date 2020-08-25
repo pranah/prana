@@ -1,11 +1,10 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="right">
     <v-btn
     v-if = "content.isUpForResale === false"
-      outlined 
+      filled 
       small
       color="blue" 
-      dark
       @click.stop="dialog = true"
     >
       Giveaway

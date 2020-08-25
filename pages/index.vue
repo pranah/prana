@@ -1,37 +1,21 @@
 <template>
-  <v-layout
-    justify-center
-    align-center
-    column
-  >
-    <v-flex xs12 sm12 md12 lg12>
-      <!-- <v-row> -->
-        <v-col>
-          <v-card
-          class="mx-auto"
-          dark
-          max-width="800"
-          >
-            <v-card-title class="text-center">
-              Welcome!
-            </v-card-title>
-            <v-card-text>
-              <Welcome v-if="currentAccount != null"/>
-              <Login v-else />              
-            </v-card-text>
-            <v-card-text class="text-justify">
-
+  <section class="container">
+    <div>
+      <img class="logo" height="70" src="~/assets/pranaFinalLogo.svg" alt="logo">
+      <h1 class="title">
+        WELCOME
+      </h1>
+        <Welcome v-if="currentAccount != null"/>
+              <Login v-else />   
+            <p class="subtitle"> 
             eBook Publishing Using NFTs <br> <br>
 
-            An eBook publishing platform where each copy of each title are represented by NFTs, thereby making them unique to enable new behaviors for the readers and giving them more freedom over the content they own.
+            An eBook publishing platform where each copy of each title are represented by NFTs,<br>
+             thereby making them unique to enable new behaviors for the readers and giving them more <br>freedom over the content they own.
            
-            </v-card-text>
-            
-          </v-card>
-        </v-col>
-      <!-- </v-row> -->
-    </v-flex>
-  </v-layout>
+              </p>
+      </div>
+  </section>
 </template>
 
 <script>
@@ -47,5 +31,33 @@ export default {
 </script>
 
 <style>
+  .container {
+  /* min-height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+   background-color: #ECEFF1;
+}
 
+.title {
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 26px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
+}
 </style>

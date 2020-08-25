@@ -1,10 +1,11 @@
 <template>
+<section class="container">
     <v-col>
-        <v-card>
         <v-tabs
           v-model="tabs"
           centered
           grow
+        
         >
           <v-tab
             v-for="title in titles"
@@ -56,8 +57,8 @@
         </v-layout>
       </v-tab-item>
     </v-tabs-items>
-  </v-card>
     </v-col>
+</section>
 </template>
 
 <script>

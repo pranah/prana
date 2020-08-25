@@ -29,12 +29,6 @@
   "LazyFile": {
     "description": "Auto imported from components/File.vue"
   },
-  "Hud": {
-    "description": "Auto imported from components/Hud.vue"
-  },
-  "LazyHud": {
-    "description": "Auto imported from components/Hud.vue"
-  },
   "Login": {
     "description": "Auto imported from components/Login.vue"
   },
@@ -46,6 +40,12 @@
   },
   "LazyMyCopy": {
     "description": "Auto imported from components/MyCopy.vue"
+  },
+  "Navbar": {
+    "description": "Auto imported from components/Navbar.vue"
+  },
+  "LazyNavbar": {
+    "description": "Auto imported from components/Navbar.vue"
   },
   "Publish": {
     "description": "Auto imported from components/Publish.vue"
