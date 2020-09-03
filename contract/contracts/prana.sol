@@ -36,6 +36,8 @@ contract prana is ERC721 {
 
     EnumerableSet.UintSet upForResaleTokens;
 
+    EnumerableSet.UintSet upForRentingTokens;
+
     //Modifier for onlyOwner functions
     //this could be figured out with AccessControl if there's enough time
     modifier onlyOwner {
@@ -248,6 +250,7 @@ contract prana is ERC721 {
         tokenData[tokenId].rentingPrice = _newPrice;
         tokenData[tokenId].isUpForRenting = true;
         tokenData[tokenId].rentee = address(0);//No one's rented it as of now
+        upForRentingTokens.add(tokenId);
         emit TokenForRenting(_newPrice, tokenData[tokenId].isbn, tokenId);
     }
 
@@ -265,6 +268,8 @@ contract prana is ERC721 {
         tokenData[tokenId].isUpForRenting = false;
 
         _updateAccountBalances(tokenId);
+
+        upForRentingTokens.remove(tokenId);
 
         emit TokenRented(tokenData[tokenId].isbn, tokenId, msg.sender);
 
