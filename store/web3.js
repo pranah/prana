@@ -19,10 +19,10 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        pranaAddress: pranaJson.networks['3'].address,
+        pranaAddress: pranaJson.networks['5777'].address,
         pranaAbi: pranaJson.abi,
         pranahelperContract: null,
-        pranahelperAddress: pranahelperJson.networks['3'].address,
+        pranahelperAddress: pranahelperJson.networks['5777'].address,
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
@@ -399,79 +399,6 @@ export default {
                 let tokenId = receipt.events.Transfer.returnValues.tokenId
                 dispatch('pushMyToken', tokenId)
             }).catch(err => {console.log(err);})
-        },
-        signMessage: ({state, dispatch, commit}, signThis) => {
-            state.web3.eth.getBlock("latest")
-            .then(block => {
-                state.web3.eth.personal.sign(block.hash, state.currentAccount)
-                .then(sig => {
-                    const content = {
-                        hash: signThis.hash,
-                        signature: sig,
-                        block: block.number,
-                        tokenId: signThis.tokenId
-                    }
-                    commit('loadingContent', signThis)
-                    // dispatch('libp2p/requestContentKey', content, {root: true})        
-                });
-            });            
-        },
-        verifySig: ({state, dispatch}, verifyThis) => {
-            state.web3.eth.getBlock("latest")
-            .then(block => {
-                // If the signature is greater than 20blocks, ~5min, ignore
-                if(block.number - verifyThis.block <= 20) {
-                    state.web3.eth.personal.ecRecover(
-                        verifyThis.bucket, 
-                        verifyThis.sig
-                    ).then(from => {
-                        const verifyOwner = {
-                            owner: from,
-                            content: verifyThis.bucket,
-                            requester: verifyThis.requester,
-                            tokenId: verifyThis.tokenId
-                        }
-                        dispatch('verifyOwner', verifyOwner)
-                    })
-                }
-            })
-            
-        },
-        verifyOwner: async ({state, dispatch}, verifyOwner) => {
-            let tokenCount;
-            let tokenId;
-            let owned = false;
-            await state.pranaContract.methods.balanceOf(verifyOwner.owner)
-            .call({from: state.currentAccount})
-            .then(count => {
-                tokenCount = count
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-            for (let i=0; i<=tokenCount; i++){
-                state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
-                .call({ from: state.currentAccount})
-                .then((id) => {
-                    tokenId = id
-                    state.pranaContract.methods.consumeContent(id)
-                    .call({ from: state.currentAccount})
-                    .then((hash) => {
-                        if(hash == verifyOwner.content) {
-                            owned = true;                    
-                        }
-                        if(i+1 >= tokenCount && owned == true) {
-                            state.pranaContract.methods.viewTokenDetails(tokenId).call({from: state.currentAccount})
-                            .then(details => {
-                                // dispatch('fleek/shareBucket', {bucket: details[1], requester: verifyOwner.requester, tokenId: verifyOwner.tokenId}, {root: true});    
-                            })
-                        }
-                    })
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-            } 
         },
 
     }
