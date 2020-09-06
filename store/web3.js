@@ -14,6 +14,8 @@ export default {
         collectedContent: [],
         collectableContent: [],
         resaleTokens: [],
+        rentTokens: [],
+        rentedTokens: [],
 
         isMetaMaskProvided: Boolean,
         currentAccount: null,
@@ -47,6 +49,11 @@ export default {
             state.resaleTokens.push(token)
             console.log('resaleTokens')
             console.log(state.resaleTokens)
+        },
+        rentTokens: (state, token) => {
+            state.rentTokens.push(token)
+            console.log('rentTokens')
+            console.log(state.rentTokens)
         },
         loadingContent: (state, content) => {
             state.collectedContent[state.collectedContent.indexOf(content)].loadingContent = !state.collectedContent[state.collectedContent.indexOf(content)].loadingContent
@@ -294,26 +301,16 @@ export default {
                                 let copyNumber = content[2]
                                 let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
                                 let isUpForResale = content[4]
+                                let rentingPrice = null
+                                let isUpForRenting = null
                                 const loadingContent = false
                                 // commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, copyNumber, resalePrice, isUpForResale, loadingContent})
-                                commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, bookContent, copyNumber, resalePrice, isUpForResale, loadingContent})
+                                commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, bookContent, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting, loadingContent})
                             }
                         })   
                     }) 
                 })
-            })
-            //contract call to get the token details of a tokenId
-            // await state.pranaContract.methods.viewTokenDetails(tokenId)
-            // .call({ from: state.currentAccount})
-            // .then((content) => {
-            //     let isbn = content[0]
-            //     let metadata = content[1]
-            //     let copyNumber = content[2]
-            //     let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-            //     let isUpForResale = content[4]
-            //     const loadingContent = false
-            //     commit('collectContent', {tokenId, bookHash, isbn, metadata, copyNumber, resalePrice, isUpForResale, loadingContent})
-            // })          
+            })         
         },
         
         //to put a token for resale
@@ -379,14 +376,16 @@ export default {
                     copyNumber = content[2]
                     resalePrice = state.web3.utils.fromWei(content[3], 'ether')
                     isUpForResale = content[4]
-                    commit('resaleTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale})
+                    let rentingPrice = null
+                    let isUpForRenting = null
+                    commit('resaleTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting})
                 })   
             })
         },
         buyToken: async({state, commit, dispatch}, content) => {
             let resalePrice = content.resalePrice
             let tokenId = content.tokenId
-            //contract call to mint a new token
+            //contract call to buy a token
             await state.pranahelperContract.methods.buyTokenFromPrana(tokenId)
             .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(resalePrice, 'ether') })
             .on('transactionHash', (hash) => {
@@ -400,49 +399,123 @@ export default {
                 dispatch('pushMyToken', tokenId)
             }).catch(err => {console.log(err);})
         },
-
         //to put a token for rent
         putForRent: async({state, commit, dispatch}, rentData) => {
+            // putForRent: async({state, commit, dispatch}) => {
             console.log(rentData)
             let rentingPrice = state.web3.utils.toWei(rentData.rentingPrice, 'ether')
             let tokenId = rentData.tokenId
+
+            // let rentingPrice = state.web3.utils.toWei(0.5, 'ether')
+            // let tokenId = 0
             await state.pranaContract.methods.putForRent(rentingPrice, tokenId)
             .send({ from: state.currentAccount, gas : 6000000 })
             .then((receipt) => {
                 console.log('receipt')
                 console.log(receipt)
                 console.log('executing putforrent action...')
-                // dispatch('pushRentToken', tokenId)
+                dispatch('pushRentToken', tokenId)
                 console.log(tokenId)
                 commit('removeMyToken', tokenId)
                 dispatch('pushMyToken', tokenId)
             }).catch(err => console.log(err))
         },
-        // pushRentToken: async({state, commit, dispatch}, tokenId) => {
-        //     console.log('executing pushResaleToken action...')
-        //     let isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale
+        //to get the tokens which are put for renting
+        getRentTokens: async({state, commit, dispatch}) => {
+            let tokenCount
+            //contract call to get the number of rent tokens 
+            await state.pranaContract.methods.numberofTokensForRenting()
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+                console.log(`Number of tokens put for renting: ${tokenCount}`)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            for(let i=0; i<tokenCount; i++){
+                //contract call to get the rent tokenId at index i
+                await state.pranaContract.methods.tokenForRentingAtIndex(i)
+                .call({ from: state.currentAccount})
+                .then((tokenId) => {
+                    dispatch('pushRentToken', tokenId)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            }
+        },
+        //to push a token to the rentTokens array
+        pushRentToken: async({state, commit, dispatch}, tokenId) => {
+            console.log('executing pushRentToken action...')
+            let isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting
 
-        //     //contract call to get the token details of a tokenId
-        //     state.pranaContract.methods.viewTokenDetails(tokenId)
-        //     .call({ from: state.currentAccount})
-        //     .then((content) => {
-        //         console.log(`Book details of resale tokenid ${tokenId}:`)
-        //         console.log(content)
-        //         metadataHash = content[1]
+            //contract call to get the token details of a tokenId
+            state.pranaContract.methods.viewTokenDetails(tokenId)
+            .call({ from: state.currentAccount})
+            .then((content) => {
+                console.log(`Book details of rent tokenid ${tokenId}:`)
+                console.log(content)
+                metadataHash = content[1]
 
-        //         dispatch('ipfs/getMetadata', metadataHash, { root: true })
-        //         .then(res => {
-        //             // console.log(res)
-        //             const metadata = JSON.parse(res.toString())
-        //             title = metadata.title
-        //             imageHash = metadata.imageHash
-        //             isbn = content[0]
-        //             copyNumber = content[2]
-        //             resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-        //             isUpForResale = content[4]
-        //             commit('resaleTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale})
-        //         })   
+                dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                .then(res => {
+                    // console.log(res)
+                    const metadata = JSON.parse(res.toString())
+                    title = metadata.title
+                    imageHash = metadata.imageHash
+                    isbn = content[0]
+                    copyNumber = content[2]
+                    resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                    isUpForResale = content[4]
+                    rentingPrice = null
+                    isUpForRenting = null
+                    commit('rentTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting})
+                })   
+            })
+        },
+        //to rent a token
+        rentToken: async({state, commit, dispatch}, content) => {
+            let rentingPrice = content.rentingPrice
+            let tokenId = content.tokenId
+            //contract call to rent a token
+            await state.pranaContract.methods.rentToken(tokenId)
+            .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(rentingPrice, 'ether') })
+            .on('transactionHash', (hash) => {
+                console.log("Transaction Successful!")
+                console.log(hash)
+                })
+            .then(receipt => {
+                console.log(receipt);
+                //error
+                let tokenId = receipt.events.Transfer.returnValues.tokenId
+                dispatch('pushMyToken', tokenId)
+            }).catch(err => {console.log(err);})
+        },
+        // pushes token data of all the tokens rented by an address to rentedTokens array
+        // myRentedTokens: async({state, commit, dispatch}) => {
+        //     let tokenCount
+        //     //contract call to get the number of tokens owned by an address
+        //     await state.pranaContract.methods.balanceOf(state.currentAccount)
+        //     .call({from: state.currentAccount})
+        //     .then(count => {
+        //         tokenCount = count
+        //         console.log(`Number of tokens: ${tokenCount}`)
         //     })
+        //     .catch((err) => {
+        //         console.error(err);
+        //     })
+        //     for(let i=0; i<tokenCount; i++){
+        //         //contract call to get the tokenId at index i
+        //         await state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
+        //         .call({ from: state.currentAccount})
+        //         .then((tokenId) => {
+        //             dispatch('pushMyToken', tokenId)
+        //         })
+        //         .catch((err) => {
+        //             console.error(err)
+        //         })
+        //     }   
         // },
 
     }
