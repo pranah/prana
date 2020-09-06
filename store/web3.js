@@ -401,5 +401,49 @@ export default {
             }).catch(err => {console.log(err);})
         },
 
+        //to put a token for rent
+        putForRent: async({state, commit, dispatch}, rentData) => {
+            console.log(rentData)
+            let rentingPrice = state.web3.utils.toWei(rentData.rentingPrice, 'ether')
+            let tokenId = rentData.tokenId
+            await state.pranaContract.methods.putForRent(rentingPrice, tokenId)
+            .send({ from: state.currentAccount, gas : 6000000 })
+            .then((receipt) => {
+                console.log('receipt')
+                console.log(receipt)
+                console.log('executing putforrent action...')
+                // dispatch('pushRentToken', tokenId)
+                console.log(tokenId)
+                commit('removeMyToken', tokenId)
+                dispatch('pushMyToken', tokenId)
+            }).catch(err => console.log(err))
+        },
+        // pushRentToken: async({state, commit, dispatch}, tokenId) => {
+        //     console.log('executing pushResaleToken action...')
+        //     let isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale
+
+        //     //contract call to get the token details of a tokenId
+        //     state.pranaContract.methods.viewTokenDetails(tokenId)
+        //     .call({ from: state.currentAccount})
+        //     .then((content) => {
+        //         console.log(`Book details of resale tokenid ${tokenId}:`)
+        //         console.log(content)
+        //         metadataHash = content[1]
+
+        //         dispatch('ipfs/getMetadata', metadataHash, { root: true })
+        //         .then(res => {
+        //             // console.log(res)
+        //             const metadata = JSON.parse(res.toString())
+        //             title = metadata.title
+        //             imageHash = metadata.imageHash
+        //             isbn = content[0]
+        //             copyNumber = content[2]
+        //             resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+        //             isUpForResale = content[4]
+        //             commit('resaleTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale})
+        //         })   
+        //     })
+        // },
+
     }
 }

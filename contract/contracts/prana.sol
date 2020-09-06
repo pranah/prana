@@ -275,6 +275,13 @@ contract prana is ERC721 {
 
     }
 
+    // To set tokenURI, by the token owner.
+    // _uniqueCIDfortoken is a CID of a JSON object with all the extradetails like a personal note
+    function setTokenURI(uint256 tokenId, string memory _uniqueCIDfortoken) public {
+        require(ownerOf(_tokenId)==msg.sender, "You are not the token owner");
+        _setTokenURI(tokenId, _uniqueCIDfortoken);
+    }
+
     //function to actually consume the content  you've bought/rented
     function consumeContent(uint256 tokenId) public view returns(string memory){
         require(ownerOf(tokenId) == msg.sender || tokenData[tokenId].rentee == msg.sender,
@@ -339,6 +346,14 @@ contract prana is ERC721 {
 
     function tokenForResaleAtIndex(uint256 index) public view returns (uint256) {
         return upForResaleTokens.at(index);
+    }
+
+    function numberofTokensForRenting() public view returns(uint256){
+        return upForRentingTokens.length();
+    }
+
+    function tokenForRentingAtIndex(uint256 index) public view returns (uint256) {
+        return upForRentingTokens.at(index);
     }
 
     function viewBookDetails(uint256 _isbn) public view returns(string memory, address, uint256, uint256, uint256) {
