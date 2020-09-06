@@ -100,6 +100,10 @@ contract prana is ERC721 {
     // account balances, for everyone involved.
     // mapping (address => uint256) internal accountBalance;
 
+
+    // Mapping from holder address to their (enumerable) set of rented tokens
+    mapping (address => EnumerableSet.UintSet) private _holderRentedTokens;
+    
     // mapping for special buyer for a tokenId
     mapping (uint256 => address) internal specialBuyer;
 
@@ -270,6 +274,10 @@ contract prana is ERC721 {
         _updateAccountBalances(tokenId);
 
         upForRentingTokens.remove(tokenId);
+        
+        // The token gets added to the personal collection of the rentee here.
+        // TODO: figuring out where _holderRentedTokens[msg.sender].remove(tokenId) goes.
+        _holderRentedTokens[msg.sender].add(tokenId);
 
         emit TokenRented(tokenData[tokenId].isbn, tokenId, msg.sender);
 
