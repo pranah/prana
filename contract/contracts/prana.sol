@@ -278,7 +278,7 @@ contract prana is ERC721 {
     // To set tokenURI, by the token owner.
     // _uniqueCIDfortoken is a CID of a JSON object with all the extradetails like a personal note
     function setTokenURI(uint256 tokenId, string memory _uniqueCIDfortoken) public {
-        require(ownerOf(_tokenId)==msg.sender, "You are not the token owner");
+        require(ownerOf(tokenId)==msg.sender, "You are not the token owner");
         _setTokenURI(tokenId, _uniqueCIDfortoken);
     }
 
