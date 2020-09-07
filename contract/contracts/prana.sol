@@ -102,7 +102,7 @@ contract prana is ERC721 {
 
 
     // Mapping from holder address to their (enumerable) set of rented tokens
-    mapping (address => EnumerableSet.UintSet) private _holderRentedTokens;
+    mapping (address => EnumerableSet.UintSet) private _renteeRentedTokens;
     
     // mapping for special buyer for a tokenId
     mapping (uint256 => address) internal specialBuyer;
@@ -276,8 +276,8 @@ contract prana is ERC721 {
         upForRentingTokens.remove(tokenId);
         
         // The token gets added to the personal collection of the rentee here.
-        // TODO: figuring out where _holderRentedTokens[msg.sender].remove(tokenId) goes.
-        _holderRentedTokens[msg.sender].add(tokenId);
+        // TODO: figuring out where _renteeRentedTokens[msg.sender].remove(tokenId) goes.
+        _renteeRentedTokens[msg.sender].add(tokenId);
 
         emit TokenRented(tokenData[tokenId].isbn, tokenId, msg.sender);
 
@@ -362,6 +362,19 @@ contract prana is ERC721 {
 
     function tokenForRentingAtIndex(uint256 index) public view returns (uint256) {
         return upForRentingTokens.at(index);
+    }
+
+    // rented token balance
+    function numberOfRentedTokens(address _rentee) public view returns (uint256) {
+        require(_rentee != address(0), "Zero Address, can't look up.");
+
+        return _renteeRentedTokens[_rentee].length();
+    }
+
+    // rented token at a specific index
+    function tokenOfRenteeByIndex(address _rentee, uint256 index) public view returns (uint256) {
+        require(_rentee != address(0), "Zero Address, can't look up.");
+        return _renteeRentedTokens[_rentee].at(index);
     }
 
     function viewBookDetails(uint256 _isbn) public view returns(string memory, address, uint256, uint256, uint256) {
