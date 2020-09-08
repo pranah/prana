@@ -493,30 +493,30 @@ export default {
             }).catch(err => {console.log(err);})
         },
         // pushes token data of all the tokens rented by an address to rentedTokens array
-        // myRentedTokens: async({state, commit, dispatch}) => {
-        //     let tokenCount
-        //     //contract call to get the number of tokens owned by an address
-        //     await state.pranaContract.methods.balanceOf(state.currentAccount)
-        //     .call({from: state.currentAccount})
-        //     .then(count => {
-        //         tokenCount = count
-        //         console.log(`Number of tokens: ${tokenCount}`)
-        //     })
-        //     .catch((err) => {
-        //         console.error(err);
-        //     })
-        //     for(let i=0; i<tokenCount; i++){
-        //         //contract call to get the tokenId at index i
-        //         await state.pranaContract.methods.tokenOfOwnerByIndex(state.currentAccount, i)
-        //         .call({ from: state.currentAccount})
-        //         .then((tokenId) => {
-        //             dispatch('pushMyToken', tokenId)
-        //         })
-        //         .catch((err) => {
-        //             console.error(err)
-        //         })
-        //     }   
-        // },
+        myRentedTokens: async({state, commit, dispatch}) => {
+            let tokenCount
+            //contract call to get the number of rented tokens owned by an address
+            await state.pranaContract.methods.numberOfRentedTokens(state.currentAccount)
+            .call({from: state.currentAccount})
+            .then(count => {
+                tokenCount = count
+                console.log(`Number of rented tokens: ${tokenCount}`)
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            for(let i=0; i<tokenCount; i++){
+                //contract call to get the rented tokenId at index i
+                await state.pranaContract.methods.tokenOfRenteeByIndex(state.currentAccount, i)
+                .call({ from: state.currentAccount})
+                .then((tokenId) => {
+                    dispatch('pushMyToken', tokenId)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+            }   
+        },
 
     }
 }
