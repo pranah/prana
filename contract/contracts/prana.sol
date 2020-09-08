@@ -345,7 +345,8 @@ contract prana is ERC721 {
     function viewTokenDetails(uint256 _tokenId) public view returns (uint256, string memory, uint256, uint256, bool) {
         require(_exists(_tokenId), "Token doesn't  exist");
         return (tokenData[_tokenId].isbn, booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID,
-        tokenData[_tokenId].copyNumber, tokenData[_tokenId].resalePrice, tokenData[_tokenId].isUpForResale);
+        tokenData[_tokenId].copyNumber, tokenData[_tokenId].resalePrice, tokenData[_tokenId].isUpForResale,
+        tokenData[_tokenId].rentedAtBlock, tokenData[_tokenId].rentingPrice, tokenData[_tokenId].isUpForRenting);
     }
 
     function numberofTokensForResale() public view returns(uint256){
