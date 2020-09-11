@@ -342,15 +342,17 @@ contract prana is ERC721 {
 
     //function to get book details with the tokenId
     //returns CID of coverpic+bookname
-    function viewTokenDetails(uint256 _tokenId) public view returns (uint256, string memory, uint256, uint256, bool, uint256, uint256, bool) {
+    function viewTokenDetails(uint256 _tokenId) public view returns (uint256, string memory, uint256, uint256, bool) {
         require(_exists(_tokenId), "Token doesn't  exist");
         return (tokenData[_tokenId].isbn, booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID,
-        tokenData[_tokenId].copyNumber, tokenData[_tokenId].resalePrice, tokenData[_tokenId].isUpForResale,
+        tokenData[_tokenId].copyNumber, tokenData[_tokenId].resalePrice, tokenData[_tokenId].isUpForResale);
+    }
+    
+    //split up from viewTokenDetails, specifically for renting. To avoid Stack Too Deep Error
+    function viewRentingTokenDetails(uint256 _tokenId) public view returns(uint256, string memory, uint256, uint256, uint256, bool) {
+        require(_exists(_tokenId), "Token doesn't  exist");
+        return(tokenData[_tokenId].isbn, booksInfo[tokenData[_tokenId].isbn].unencryptedBookDetailsCID, tokenData[_tokenId].copyNumber,
         tokenData[_tokenId].rentedAtBlock, tokenData[_tokenId].rentingPrice, tokenData[_tokenId].isUpForRenting);
-        // TokenDetails memory t = tokenData[_tokenId];
-        // return (t.isbn, booksInfo[t.isbn].unencryptedBookDetailsCID,
-        // t.copyNumber, t.resalePrice, t.isUpForResale,
-        // t.rentedAtBlock, t.rentingPrice, t.isUpForRenting);
     }
 
     function numberofTokensForResale() public view returns(uint256){
