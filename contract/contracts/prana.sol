@@ -103,10 +103,6 @@ contract prana is ERC721 {
 
     // Mapping from holder address to their (enumerable) set of rented tokens
     mapping (address => EnumerableSet.UintSet) private _renteeRentedTokens;
-    
-    // mapping for special buyer for a tokenId
-    mapping (uint256 => address) internal specialBuyer;
-
 
     //Event to emit when a new book is published with its ISBN and publisher address
     event BookPublished(address indexed publisher, uint256 indexed isbn,
@@ -305,25 +301,6 @@ contract prana is ERC721 {
             "Your rental period has expired");
         }
         return booksInfo[tokenData[tokenId].isbn].encryptedBookDataHash;
-    }
-
-    //function to sell to someone specific/special
-    function putForSaleForSomeoneSpecial(uint256 _tokenId, uint256 _salePrice, address buyer) public {
-        require(ownerOf(_tokenId) == msg.sender,"You  are not the token owner");
-        require(tokenData[_tokenId].isUpForResale == false,"The token is already put for sale in public");
-        tokenData[_tokenId].resalePrice = _salePrice;
-        specialBuyer[_tokenId] = buyer;
-        approve(pranaHelperAddress, _tokenId);
-    }
-
-    //function to buy token on the special channel
-    function buyTokenAsTheSpecialBuyer(uint256 _tokenId, address _tokenRecipient) public payable {
-        require(_tokenRecipient == specialBuyer[_tokenId], "You are not authorized to buy this token");
-        require(msg.value == tokenData[_tokenId].resalePrice,
-        "Your price doesn't match match what the seller has asked");
-
-        safeTransferFrom(ownerOf(_tokenId), _tokenRecipient, _tokenId);
-        specialBuyer[_tokenId] = address(0);
     }
 
     // function to get the balances stored in contract back into the respective owners' account
