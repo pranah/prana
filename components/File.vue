@@ -1,7 +1,7 @@
 <template>
     <article ref="el">
       <div class="content">
-        <pre class="fileFormat">
+        <pre v-if = "textFile" class="fileFormat">
           {{textFile}}
         </pre>
     </div>

@@ -1,4 +1,10 @@
 {
+  "AnnotationDialog": {
+    "description": "Auto imported from components/AnnotationDialog.vue"
+  },
+  "LazyAnnotationDialog": {
+    "description": "Auto imported from components/AnnotationDialog.vue"
+  },
   "Collect": {
     "description": "Auto imported from components/Collect.vue"
   },

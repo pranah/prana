@@ -12,7 +12,7 @@
                         <v-col>
                         <v-row justify="center">
                             <nuxt-link to="/readPage">
-                            <v-btn small outlined color="blue" @click="requestFile(content.bookHash)" >Read</v-btn>
+                            <v-btn small outlined color="blue" @click="requestFile(content)" >Read</v-btn>
                             </nuxt-link>
                         </v-row>
                         </v-col>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
     data: () => ({
         dialog: false,
@@ -53,10 +53,13 @@ export default {
             putForResale: 'web3/putForResale',
             requestContent: 'ipfs/requestContent'
         }),
-        requestFile(hash){
-            console.log(hash)
-            this.requestContent(hash)
-            console.log(this.textFile)
+        ...mapMutations({
+            getFile: 'ipfs/getFile'
+        }),
+        requestFile(content){
+            console.log(content)
+            // this.requestContent(content.bookHash)
+            this.getFile(content)
         }
     }
 }

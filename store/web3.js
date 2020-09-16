@@ -105,6 +105,7 @@ export default {
             dispatch('myCollection')
             dispatch('getCollectables')
             dispatch('getResaleTokens')
+            // dispatch('ipfs/uploadAnnotations', {id: 0}, { root: true })
 
         },
         initEth: async({commit, dispatch}) => {
@@ -267,48 +268,112 @@ export default {
         },
         //pushes the token details of a tokenId to collectedContent array
         pushMyToken: async({state, commit, dispatch}, tokenId) => {
-            let title, imageHash, bookHash, bookContent
+            let isbn, 
+            metadata, metadataHash, title, imageHash, 
+            annotationHash, annotations, 
+            bookHash, bookContent, copyNumber, 
+            resalePrice, isUpForResale, 
+            rentedAtBlock, rentingPrice, isUpForRenting 
+
             //contract call to get the encrypted cid of a tokenId
             await state.pranaContract.methods.consumeContent(tokenId)
             .call({ from: state.currentAccount})
             .then((hash) => {
                 bookHash = hash
                 console.log(`EncryptedCID of tokenid ${tokenId}: ${bookHash}`)
+
+                //contract call to get the token details
                 state.pranaContract.methods.viewTokenDetails(tokenId)
                 .call({ from: state.currentAccount})
                 .then((content) => {
-                    let metadataHash = content[1]
+                    console.log('content')
+                    console.log(content)
+                    
+                    //contract call to get the renting details
+                    state.pranaContract.methods.viewRentingTokenDetails(tokenId)
+                    .call({ from: state.currentAccount})
+                    .then((rentdata) => {
+                        console.log('rentdata')
+                        console.log(rentdata)
 
-                    //action to get metadata from ipfs
-                    dispatch('ipfs/getMetadata', metadataHash, { root: true })
-                    .then(res1 => {
-                        console.log(res1)
+                        metadataHash = content[1]
 
-                        //action to get book content from ipfs
-                        dispatch('ipfs/getBookContent', bookHash, { root: true })
-                        .then(res2 => {
-                        console.log(res2)
+                        //action to get metadata from ipfs
+                        dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                        .then(res1 => {
+                            console.log(res1)
 
-                            if(res2.readable) {
-                                console.error('unhandled: cat result is a pipe', res2);
-                            } 
-                            else {
-                                const metadata = JSON.parse(res1.toString())
-                                title = metadata.title
-                                imageHash = metadata.imageHash
-                                bookContent = res2.toString()
-                                let isbn = content[0]
-                                let copyNumber = content[2]
-                                let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-                                let isUpForResale = content[4]
-                                let rentingPrice = null
-                                let isUpForRenting = null
-                                const loadingContent = false
-                                // commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, copyNumber, resalePrice, isUpForResale, loadingContent})
-                                commit('collectContent', {tokenId, isbn, metadataHash, title, imageHash, bookHash, bookContent, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting, loadingContent})
-                            }
-                        })   
-                    }) 
+                            //action to get book content from ipfs
+                            dispatch('ipfs/getBookContent', bookHash, { root: true })
+                            .then(res2 => {
+                            console.log(res2)
+
+                                if(res2.readable) {
+                                    console.error('unhandled: cat result is a pipe', res2);
+                                } 
+                                else {
+                                    //contract call to get the annotationHash
+                                    state.pranaContract.methods.tokenURI(tokenId)
+                                    .call({ from: state.currentAccount})
+                                    .then((hash) => {
+                                        console.log('URIhash')
+                                        console.log(hash)
+                                        
+                                        if(hash.length>0){
+                                            //action to get Annotations from ipfs
+                                            dispatch('ipfs/getAnnotations', hash, { root: true })
+                                            .then(arr => {
+                                                console.log(arr)
+                                                annotations = arr
+                                                annotationHash = hash
+                                                metadata = JSON.parse(res1.toString())
+                                                title = metadata.title
+                                                imageHash = metadata.imageHash
+                                                bookContent = res2.toString()
+                                                isbn = content[0]
+                                                copyNumber = content[2]
+                                                resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                                isUpForResale = content[4]
+                                                rentedAtBlock = rentdata[3]
+                                                rentingPrice = rentdata[4]
+                                                isUpForRenting = rentdata[5]
+                                                commit('collectContent', {tokenId, isbn, 
+                                                    metadataHash, title, imageHash, 
+                                                    annotationHash, annotations, 
+                                                    bookHash, bookContent, copyNumber, 
+                                                    resalePrice, isUpForResale, 
+                                                    rentedAtBlock, rentingPrice, isUpForRenting 
+                                                })
+                                                
+                                            })
+                                        }
+                                        else {
+                                            let annotations = null
+                                            let annotationHash = null
+                                            const metadata = JSON.parse(res1.toString())
+                                            title = metadata.title
+                                            imageHash = metadata.imageHash
+                                            bookContent = res2.toString()
+                                            let isbn = content[0]
+                                            let copyNumber = content[2]
+                                            let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                            let isUpForResale = content[4]
+                                            let rentedAtBlock = rentdata[3]
+                                            let rentingPrice = rentdata[4]
+                                            let isUpForRenting = rentdata[5]
+                                            commit('collectContent', {tokenId, isbn, 
+                                                metadataHash, title, imageHash, 
+                                                annotationHash, annotations, 
+                                                bookHash, bookContent, copyNumber, 
+                                                resalePrice, isUpForResale, 
+                                                rentedAtBlock, rentingPrice, isUpForRenting 
+                                            })
+                                        }
+                                    })
+                                }
+                            })   
+                        }) 
+                    })
                 })
             })         
         },

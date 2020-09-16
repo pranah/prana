@@ -10,17 +10,22 @@ if (process.server) {
 
 export default {
     state: () => ({
-        textFile: null
+        textFile: null,
+        content: null
     }),
     mutations: {
-        getFile: (state, file) => {
-            state.textFile = file
-            console.log(state.textFile)
+        getFile: (state, content) => {
+            state.textFile = content.bookContent
+            state.content = content
+            // console.log(state.textFile)
+            console.log(state.content)
             console.log('getFile')
         },
         clearBookContent: (state) => {
             state.textFile = null
+            state.content = null
             console.log(state.textFile)
+            console.log(state.content)
             console.log('clearBookContent')
         },
     },
@@ -72,13 +77,6 @@ export default {
                     console.log(res)
                     textFile = res.toString()
                     commit('getFile', textFile)
-
-                    // console.log(Buffer(res))
-                    // let json = JSON.stringify(res)
-                    // console.log(json)
-                    // let bufferOriginal = Buffer.from(JSON.parse(json).data);
-                    // console.log(bufferOriginal) 
-                    // console.log(bufferOriginal.toString('utf8'))
                   }
                 })
         },
@@ -100,6 +98,39 @@ export default {
         },
         getMetadata: async({state, commit, dispatch}, metadataHash) => {
                 return ipfs.cat(metadataHash)
+        },
+        uploadAnnotations: async({state, commit, dispatch}, data) => {
+            const annotations = [
+                {
+                note: 'annotation1',
+                from: '1x000'
+                },
+                {
+                    note: 'annotation2',
+                    from: '2x000'
+                },
+                {
+                    note: 'annotation3',
+                    from: '3x000'
+                },
+            ]
+            console.log(annotations)
+            let annotationsBuffer = Buffer.from(JSON.stringify(annotations))
+            console.log(annotationsBuffer)
+            let temp = JSON.parse(annotationsBuffer.toString())
+            console.log(temp)
+            //uploading annotations to ipfs
+            ipfs.files.add(annotationsBuffer, (err, res) => {
+                if (err) { throw err }
+                console.log(res)
+                let annotationsHash = res[0].hash
+                console.log(annotationsHash)
+                // dispatch('web3/publish', {content, bookHash, metadataHash}, { root: true })
+            })
+        
+        },
+        getAnnotations: async({state, commit, dispatch}, annotationHash) => {
+            return ipfs.cat(annotationHash)
         },
     }
 }

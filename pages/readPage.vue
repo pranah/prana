@@ -4,10 +4,13 @@
         <nuxt-link to = "/collector">
         <v-btn small outlined color="blue" @click = "clearBookContent">Close</v-btn>
         </nuxt-link>
+        <br>
         <!-- <nuxt-link to = "/publisher">
         <v-btn v-if="publisherPage == true" small outlined color="blue" @click = "clearBookContent">Close</v-btn>
         </nuxt-link> -->
-        <v-card-title>Book Content</v-card-title>
+        <v-card-title v-if = "content" class = "title">{{content.title}}</v-card-title>
+        <!-- <v-btn small color="blue" class = "note">Add annotation</v-btn> -->
+        <AnnotationDialog v-bind:content="content"/>
         <v-divider></v-divider>
         <!-- <File v-bind:textFile="textFile" /> -->
         <Progressbar :progress="progress" />
@@ -35,7 +38,7 @@ export default {
             'currentAccount'
         ]),
         ...mapState('ipfs', [
-            'textFile'
+            'textFile', 'content'
         ])    
     },
     methods: {
@@ -55,5 +58,20 @@ export default {
 .container {
     background-color: white;
 }
-a {  text-decoration: none}
+a {
+    text-decoration: none
+}
+.title {
+    align-content: center;
+}
+.note{
+    margin-right: 50;
+    margin-left:auto;
+    display:block;
+}
+.border {
+  border: 2px blue dashed;
+}
+
+
 </style>

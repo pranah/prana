@@ -1,3 +1,4 @@
+export { default as AnnotationDialog } from '../../components/AnnotationDialog.vue'
 export { default as Collect } from '../../components/Collect.vue'
 export { default as Collection } from '../../components/Collection.vue'
 export { default as Content } from '../../components/Content.vue'
@@ -13,6 +14,7 @@ export { default as ResaleDialog } from '../../components/ResaleDialog.vue'
 export { default as ResaleToken } from '../../components/ResaleToken.vue'
 export { default as Welcome } from '../../components/Welcome.vue'
 
+export const LazyAnnotationDialog = import('../../components/AnnotationDialog.vue' /* webpackChunkName: "components/AnnotationDialog'}" */).then(c => c.default || c)
 export const LazyCollect = import('../../components/Collect.vue' /* webpackChunkName: "components/Collect'}" */).then(c => c.default || c)
 export const LazyCollection = import('../../components/Collection.vue' /* webpackChunkName: "components/Collection'}" */).then(c => c.default || c)
 export const LazyContent = import('../../components/Content.vue' /* webpackChunkName: "components/Content'}" */).then(c => c.default || c)
