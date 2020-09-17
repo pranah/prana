@@ -82,6 +82,12 @@ export default {
                     state.collectedContent.splice(i, 1)
                 }
             }
+        },
+        updateAnnotations: (state, data) => {
+            console.log(state.collectedContent[data.index].annotations)
+            state.collectedContent[data.index].annotations = data.annotations
+            state.collectedContent[data.index].annotationHash = data.annotationHash
+            console.log(state.collectedContent[data.index].annotations)
         }
     },
     actions: {
@@ -97,6 +103,7 @@ export default {
                 } 
             });
         },
+
         //getting account details
         getAccount: async ({commit, dispatch}) => {
             const accounts = await ethereum.enable()
@@ -108,6 +115,7 @@ export default {
             // dispatch('ipfs/uploadAnnotations', {id: 0}, { root: true })
 
         },
+
         initEth: async({commit, dispatch}) => {
             if (window.ethereum) {        
                 dispatch('getAccount')
@@ -348,19 +356,19 @@ export default {
                                             })
                                         }
                                         else {
-                                            let annotations = null
-                                            let annotationHash = null
+                                            annotations = []
+                                            annotationHash = ''
                                             const metadata = JSON.parse(res1.toString())
                                             title = metadata.title
                                             imageHash = metadata.imageHash
                                             bookContent = res2.toString()
-                                            let isbn = content[0]
-                                            let copyNumber = content[2]
-                                            let resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-                                            let isUpForResale = content[4]
-                                            let rentedAtBlock = rentdata[3]
-                                            let rentingPrice = rentdata[4]
-                                            let isUpForRenting = rentdata[5]
+                                            isbn = content[0]
+                                            copyNumber = content[2]
+                                            resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                            isUpForResale = content[4]
+                                            rentedAtBlock = rentdata[3]
+                                            rentingPrice = rentdata[4]
+                                            isUpForRenting = rentdata[5]
                                             commit('collectContent', {tokenId, isbn, 
                                                 metadataHash, title, imageHash, 
                                                 annotationHash, annotations, 
@@ -582,6 +590,46 @@ export default {
                 })
             }   
         },
+
+        setAnnotationHash: async({state, commit, dispatch}, data) => {
+            let index = data.index
+            let annotationHash = data.annotationHash
+            let tokenId = data.tokenId
+
+            //contract call to set the annotation Hash
+            state.pranaContract.methods.setTokenURI(tokenId, annotationHash)
+            .send({ from: state.currentAccount, gas : 6000000 })
+            .then((receipt) => {
+                console.log('setAnnotationHash receipt')
+                console.log(receipt)
+                
+                //action to get Annotations from ipfs
+                dispatch('ipfs/getAnnotations', annotationHash, { root: true })
+                .then(arr => {
+                    console.log(arr)
+                    let annotations = JSON.parse(arr.toString())
+                    console.log(annotations)
+                    commit('updateAnnotations', {index, annotations, annotationHash})
+                })
+            }).catch(err => console.log(err))
+        },
+
+        // getAnnotationHash: async({state, commit, dispatch}, data) => {
+
+        //     //contract call to get the annotation Hash
+        //     state.pranaContract.methods.tokenURI(tokenId)
+        //     .call({ from: state.currentAccount})
+        //     .then((hash) => {
+        //         console.log('AnnotationHash')
+        //         console.log(hash)
+                
+        //         // if(hash.length>0){
+        //         //     //action to get Annotations from ipfs
+        //         //     dispatch('ipfs/getAnnotations', hash, { root: true })
+        //         //     .then(arr => {})
+        //         // }
+        //     }).catch(err => console.log(err))
+        // },
 
     }
 }

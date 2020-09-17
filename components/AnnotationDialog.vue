@@ -27,6 +27,7 @@
                     label="Add annotation"
                     :rules="rules"
                     :value="value"
+                    v-model= "value"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -35,7 +36,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
+          <v-btn color="blue darken-1" text @click="addAnnotation()">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -80,22 +81,33 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data: () => ({
       dialog: false,
-      resalePrice: null,
       rules: [v => v.length <= 500 || 'Max 500 characters'],
-      value: 'Hello!',
+      value: '',
     }),
-    props: ['content'],
+    // props: ['content', 'index'],
     computed: { 
+      
+      ...mapState('ipfs', [
+            'textFile', 'content', 'index'
+        ]) 
     },
     methods: {
         ...mapActions({
             putForResale: 'web3/putForResale',
         }),
-        forSale(){
+        ...mapActions({
+            uploadAnnotations: 'ipfs/uploadAnnotations',
+        }),
+        addAnnotation(){
             this.dialog = false
-            console.log(this.resalePrice)
-            console.log(this.content.tokenId)
-            this.putForResale({resalePrice: this.resalePrice, tokenId: this.content.tokenId})
+            console.log(this.value)
+            console.log(this.index)
+            this.uploadAnnotations({
+              annotation: this.value, 
+              content: this.content, 
+              index: this.index
+              })
+            this.value= ''
         }
     } 
 }

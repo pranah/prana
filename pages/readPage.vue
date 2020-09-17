@@ -10,7 +10,7 @@
         </nuxt-link> -->
         <v-card-title v-if = "content" class = "title">{{content.title}}</v-card-title>
         <!-- <v-btn small color="blue" class = "note">Add annotation</v-btn> -->
-        <AnnotationDialog v-bind:content="content"/>
+        <AnnotationDialog/>
         <v-divider></v-divider>
         <!-- <File v-bind:textFile="textFile" /> -->
         <Progressbar :progress="progress" />
@@ -38,7 +38,7 @@ export default {
             'currentAccount'
         ]),
         ...mapState('ipfs', [
-            'textFile', 'content'
+            'textFile', 'content', 'index'
         ])    
     },
     methods: {
