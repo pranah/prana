@@ -5,17 +5,29 @@
             <h3>Published Works : {{ publishedContent.length }}</h3>
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 lg4 v-for="content in publishedContent" :key="publishedContent.indexOf(content)">
-                    <v-card max-width="344" class="ma-3" color = "">
+                    <div class="boxContainer">
+                    <v-card max-width="344" class="image" color = "">
                         <Content v-bind:content="content"/> 
                         <v-card-actions>
-                            <v-spacer></v-spacer>
+                            <!-- <v-spacer></v-spacer> -->
                             <v-row justify="center">
+                            <div class="middleButtons">
                             <nuxt-link to="/readPage">
-                            <v-btn small outlined color="blue" @click="requestFile(content)" >Read</v-btn>
+                            <v-btn large color="green" @click="requestFile(content)" >Read</v-btn>
                             </nuxt-link>
+                            </div>
+                            <div class="middle">
+                            <div class="text">
+                                <h1><b>{{content.title}}</b></h1><br>
+                                <b>Price: </b>{{content.price}} ETH
+                                <b>ISBN: </b>{{content.isbn}}<br>
+                                <b>Author: </b>{{content.publisher}}<br>
+                            </div>  
+                            </div>
                         </v-row>
                         </v-card-actions>
                     </v-card>
+                    </div>
                 </v-flex>
             </v-layout>
         </v-col>
@@ -58,7 +70,61 @@ export default {
 </script>
 
 <style>
-a {  text-decoration: none}
+/* a {  text-decoration: none} */
+.boxContainer {
+
+  position: relative;
+  width: 90%;
+}
+
+.image {
+
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility:visible;
+}
+
+.middle {
+
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 87.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.middleButtons {
+
+  transition: .5s ease;
+  opacity: 5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.boxContainer:hover .image {
+  opacity: 0.3;
+}
+
+.boxContainer:hover .middle {
+  opacity: 4;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 13px;
+  padding: 7.5px 16px;
+}
 
 </style>
                             <!-- <v-dialog v-model="dialog" scrollable max-width="600px">

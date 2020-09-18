@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _3e985606 = () => interopDefault(import('../pages/about.vue' /* webpackChunkName: "pages/about" */))
-const _38fa6686 = () => interopDefault(import('../pages/collector.vue' /* webpackChunkName: "pages/collector" */))
-const _13b42716 = () => interopDefault(import('../pages/publisher.vue' /* webpackChunkName: "pages/publisher" */))
-const _220f475c = () => interopDefault(import('../pages/readPage.vue' /* webpackChunkName: "pages/readPage" */))
-const _5e5030cb = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _aaae5434 = () => interopDefault(import('../pages/about.vue' /* webpackChunkName: "pages/about" */))
+const _2707f666 = () => interopDefault(import('../pages/collector.vue' /* webpackChunkName: "pages/collector" */))
+const _37990756 = () => interopDefault(import('../pages/publisher.vue' /* webpackChunkName: "pages/publisher" */))
+const _93bf8908 = () => interopDefault(import('../pages/readPage.vue' /* webpackChunkName: "pages/readPage" */))
+const _6b3e9eaa = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -27,23 +27,23 @@ export const routerOptions = {
 
   routes: [{
     path: "/about",
-    component: _3e985606,
+    component: _aaae5434,
     name: "about"
   }, {
     path: "/collector",
-    component: _38fa6686,
+    component: _2707f666,
     name: "collector"
   }, {
     path: "/publisher",
-    component: _13b42716,
+    component: _37990756,
     name: "publisher"
   }, {
     path: "/readPage",
-    component: _220f475c,
+    component: _93bf8908,
     name: "readPage"
   }, {
     path: "/",
-    component: _5e5030cb,
+    component: _6b3e9eaa,
     name: "index"
   }],
 
