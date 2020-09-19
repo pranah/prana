@@ -1,6 +1,6 @@
 <template>
     <div class="progress-bar">
-        <div :class="(progress == 100) ? 'progress-inner complete' : 'progress-inner'" :style="`width: ${progress}%`"><span :class="(progress > 50) ? 'white' : ''">{{ progress }}%</span></div>
+        <div :class="(progress == 100) ? 'progress-inner complete' : 'progress-inner'" :style="`width: ${progress}%`"><span :class="(progress > 50) ? '' : ''">{{ progress }}%</span></div>
     </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 <style>
     .progress-bar {
         width: 100vw;
-        height: 20px;
+        height: 15px;
         background: #EEE;
         position: relative;
     }
@@ -32,7 +32,7 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         color: #313131;
-        font-size: 14px;
+        font-size: 10px;
     }
     .progress-inner span.white {
         color: #FFF;

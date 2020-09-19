@@ -1,7 +1,26 @@
 <template>
   <div class="navbar">
+    <v-row>
+      <v-col>
     <img class="logo" height="30" @click="open = !open" src="~/assets/Logo.svg" alt="logo">
-    <v-spacer></v-spacer>
+    <!-- <v-spacer></v-spacer> -->
+      </v-col>
+      <div class="logo">
+      <v-col>
+        <img class="logo-prana" height="30"  src="~/assets/Prananav.svg" alt="logo">
+      </v-col>
+      </div>
+      <div class="links">
+      <v-col>
+        <nuxt-link
+        v-for="link of links"
+        :key="link.name"
+        :to="link.to"
+        exact
+        v-text="link.name"
+      />
+      </v-col>
+      </div>
     <!-- <img class="logo" height="30" src="~/assets/pranaFinalLogo.svg" alt="logo"> -->
     <div class="navbar-drawer" :class="{ isOpen: open }">
       <nuxt-link
@@ -12,7 +31,8 @@
         v-text="link.name"
       />
     </div>
-    <!-- <img class="logo" height="30" src="~/assets/Prananav.svg" alt="logo"> -->
+    
+    </v-row>
   </div>
 </template>
 
@@ -39,13 +59,21 @@ export default {
 
 
 <style scoped>
+.links {
+  position: relative;
+  right: 30%;
+}
+.logo-prana {
+  position: relative;
+  right: 540%;
+}
 .navbar {
   z-index: 20;
   position: relative;
   background: #0D47A1;
   /* background: #455A64; */
   color: white;
-  padding: 10px;
+  padding: 2px;
 }
 .navbar-drawer {
   display: flex;

@@ -5,17 +5,19 @@
         <v-btn small outlined color="blue" @click = "clearBookContent">Close</v-btn>
         </nuxt-link>
         <br>
-        <!-- <nuxt-link to = "/publisher">
-        <v-btn v-if="publisherPage == true" small outlined color="blue" @click = "clearBookContent">Close</v-btn>
-        </nuxt-link> -->
         <v-card-title v-if = "content" class = "title">{{content.title}}</v-card-title>
-        <!-- <v-btn small color="blue" class = "note">Add annotation</v-btn> -->
-        <AnnotationDialog/>
-        <v-divider></v-divider>
-        <!-- <File v-bind:textFile="textFile" /> -->
+
         <Progressbar :progress="progress" />
-        <File @progressUpdate="setProgress" />
         <v-divider></v-divider>
+        <div class="app-layout">
+            <div class="annotations">
+                <v-card-title v-if = "content" class = "title">ANNOTATIONS</v-card-title>
+
+            </div>
+            <div class="read-space">
+                <File @progressUpdate="setProgress" />
+            </div>
+        </div>
     </div>
 
 </section>
@@ -29,10 +31,6 @@ export default {
       progress: 0
     }
     },
-    // components: {
-    //             File,
-    //             Progressbar
-    // },
     computed: {
         ...mapState('web3', [
             'currentAccount'
@@ -64,14 +62,19 @@ a {
 .title {
     align-content: center;
 }
-.note{
+/* .note{
     margin-right: 50;
     margin-left:auto;
     display:block;
-}
+} */
 .border {
   border: 2px blue dashed;
 }
-
-
+/* Grid Code */
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 100vh;
+}
+.annotations { background-color: honeydew; }
 </style>

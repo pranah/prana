@@ -1,6 +1,6 @@
 <template>
     <article ref="el">
-      <div class="content">
+      <div class="art">
         <pre v-if = "textFile" class="fileFormat">
           {{textFile}}
         </pre>
@@ -25,7 +25,6 @@ export default {
             this.$emit('progressUpdate', scrollPercentRounded);
         }.bind(this));
     },
-    // props: ['textFile'],
     computed: {
         ...mapState('web3', [
             'currentAccount'
@@ -45,7 +44,7 @@ export default {
     article {
         width: 100%;
         flex: 1 1 100%;
-        max-height: calc(90vh - 120px);
+        max-height: 100%;
         background-color: #FFF;
         overflow: scroll;
     }

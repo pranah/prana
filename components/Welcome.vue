@@ -1,16 +1,16 @@
 <template>
-  <v-container class = "main">
+  <div class="container">
+       <div class="buttons">
     <v-row>
               <v-col>
-                <v-btn small outlined x-large color="blue" to="/publisher">interact as an author</v-btn>
+                <v-btn  outlined x-large color="blue" to="/publisher">interact as an author</v-btn>
               </v-col>
-              <v-col
-
-            >
-                <v-btn small outlined x-large color="blue" to="/collector">interact as a reader</v-btn> 
+              <v-col>
+                <v-btn  outlined x-large color="blue" to="/collector">interact as a reader</v-btn> 
                 </v-col>
-        </v-row>
-  </v-container>
+    </v-row>
+      </div>
+  </div>
 </template>
 
 
@@ -25,8 +25,6 @@ export default {
 </script>
 
 <style>
-.main{
-  background-color: #ECEFF1;
-}
+
 
 </style>

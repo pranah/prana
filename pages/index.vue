@@ -1,10 +1,10 @@
 <template>
   <section class="container">
     <div>
-      <img class="logo" height="70" src="~/assets/pranaFinalLogo.svg" alt="logo">
-      <h1 class="title">
+      <!-- <img class="logo" height="70" src="~/assets/pranaFinalLogo.svg" alt="logo"> -->
+      <!-- <h1 class="title">
         WELCOME
-      </h1>
+      </h1> -->
         <Welcome v-if="currentAccount != null"/>
               <Login v-else />   
             <p class="subtitle"> 
@@ -44,7 +44,7 @@ export default {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
   display: block;
   font-weight: 300;
-  font-size: 100px;
+  font-size: 200px;
   color: #35495e;
   letter-spacing: 1px;
 }

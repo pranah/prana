@@ -55,6 +55,11 @@ export default {
             console.log('rentTokens')
             console.log(state.rentTokens)
         },
+        rentedTokens: (state, token) => {
+            state.rentedTokens.push(token)
+            console.log('rentedTokens')
+            console.log(state.rentedTokens)
+        },
         loadingContent: (state, content) => {
             state.collectedContent[state.collectedContent.indexOf(content)].loadingContent = !state.collectedContent[state.collectedContent.indexOf(content)].loadingContent
         },
