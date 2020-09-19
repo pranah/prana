@@ -18,8 +18,9 @@
 
     <v-tabs-items v-model="tabs">
       <v-tab-item>
+        <!-- <div class="cards"> -->
         <v-layout row wrap >
-            <v-flex background-color = "#ECEFF1" xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
+            <v-flex class="cards" background-color = "#ECEFF1" xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
               <div class="boxContainer">
                 <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
@@ -40,7 +41,7 @@
                             <div class="middle">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.price}} ETH
+                                <b>Price: </b>{{content.price}} ETH<br>
                                 <b>ISBN: </b>{{content.isbn}}<br>
                                 <b>Author: </b>{{content.publisher}}<br>
                             </div>  
@@ -49,6 +50,7 @@
               </div>
             </v-flex>
         </v-layout>
+        <!-- </div> -->
       </v-tab-item>
       <v-tab-item>
         <v-layout row wrap>
@@ -70,7 +72,7 @@
                         </v-btn> 
                         </div>
                     </v-card-actions> 
-                            <div class="middle">
+                            <div class="middle-resale">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
                                 <b>Price: </b>{{content.resalePrice}} ETH<br>
@@ -86,7 +88,7 @@
       </v-tab-item>
        <v-tab-item>
         <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg4 v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
+            <v-flex xs12 sm6 md4 lg4 class="cards" v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
               <div class="boxContainer">
                 <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
@@ -149,7 +151,12 @@ export default {
 </script>
 
 <style>
-  .boxContainer {
+.cards {
+  align-items: center;
+  padding-block: 3%;
+  padding-left: 6%;
+}
+.boxContainer {
 
   position: relative;
   width: 50%;
@@ -170,9 +177,25 @@ export default {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 87.5%;
-  bottom: -20%;
+  top: 70%;
+  bottom: -40%;
   left: 50%;
+  height: 40%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.middle-resale {
+
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 72%;
+  bottom: -40%;
+  left: 50%;
+  height: 0%;
   width: 100%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -196,6 +219,10 @@ export default {
 }
 
 .boxContainer:hover .middle {
+  opacity: 4;
+}
+
+.boxContainer:hover .middle-resale {
   opacity: 4;
 }
 

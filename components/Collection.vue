@@ -25,8 +25,8 @@
                     </div>
                     <v-card-actions>
                         <div class="middleButtons">
-                        <v-row justify="space-between">
-                        <v-col>
+                        <v-row justify="center">
+                        <v-col align-self="center">
                         <v-row justify="center">
                             
                             <nuxt-link to="/readPage">
@@ -37,17 +37,21 @@
                         </v-col>
            
                         <v-col>
-                        
+                        <v-row justify="center">
                         <ResaleDialog v-bind:content="content"/>
+                        </v-row>
                         </v-col>
                         
                         <v-col>
-                        
+                        <v-row justify="center">
                         <RentDialog v-bind:content="content"/>
+                        </v-row>
                         </v-col>
 
                         <v-col>
+                        <v-row justify="center">
                         <GiveawayDialog v-bind:content="content"/>
+                        </v-row>
                         </v-col>
                         </v-row>
                          </div>

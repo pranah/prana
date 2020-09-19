@@ -12,6 +12,7 @@
         <div class="app-layout">
             <div class="annotations">
                 <v-card-title v-if = "content" class = "title">ANNOTATIONS</v-card-title>
+                 <AnnotationDialog/>
 
             </div>
             <div class="read-space">
