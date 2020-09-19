@@ -922,12 +922,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x15978AD779303Db1896Ef1d50E0e4CfF5460813b",
-      "transactionHash": "0x946026c64ff0ab6f90b2ce10bca5e1dcb5f047ff414fd240c9135de6655219eb"
+      "address": "0x8F92d85C7ddAFC79f5065070F993266a3139B2f5",
+      "transactionHash": "0x7269b4c73c13d4771f9feb135a7f8f210e8bbe5be4b802dc48262dfbad3e7047"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-09-18T09:03:14.778Z",
+  "updatedAt": "2020-09-19T10:39:29.530Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

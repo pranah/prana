@@ -20,40 +20,101 @@
       <v-tab-item>
         <v-layout row wrap >
             <v-flex background-color = "#ECEFF1" xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
-                <v-card max-width="344" class="ma-3" color = "">
+              <div class="boxContainer">
+                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                  <div class="image">
                     <Content v-bind:content="content"/>  
+                  </div>
                     <v-card-actions>
                         <v-spacer></v-spacer>
+                        <div class="middleButtons">
                         <v-btn
-                        outlined
-                        small
-                        color="blue"
+                        large
+                        color="green"
                         @click="purchase(content)"
                         >
                         BUY
                         </v-btn> 
-                    </v-card-actions> 
+                        </div>
+                    </v-card-actions>
+                            <div class="middle">
+                            <div class="text">
+                                <h1><b>{{content.title}}</b></h1><br>
+                                <b>Price: </b>{{content.price}} ETH
+                                <b>ISBN: </b>{{content.isbn}}<br>
+                                <b>Author: </b>{{content.publisher}}<br>
+                            </div>  
+                            </div> 
                 </v-card>
+              </div>
             </v-flex>
         </v-layout>
       </v-tab-item>
       <v-tab-item>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
-                <v-card max-width="344" class="ma-3" color = "">
+              <div class="boxContainer">
+                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                  <div class="image">
                     <ResaleToken v-bind:content="content"/>  
+                  </div>
                     <v-card-actions>
                         <v-spacer></v-spacer>
+                        <div class="middleButtons">
                         <v-btn
-                        outlined
-                        small
-                        color="blue"
+                        large
+                        color="green"
                         @click="buyToken(content)"
                         >
                         BUY
                         </v-btn> 
+                        </div>
                     </v-card-actions> 
+                            <div class="middle">
+                            <div class="text">
+                                <h1><b>{{content.title}}</b></h1><br>
+                                <b>Price: </b>{{content.resalePrice}} ETH
+                                <b>ISBN: </b>{{content.isbn}}<br>
+                                <b>Copy Number: </b>{{content.copyNumber}}<br>
+                                <b>Author: </b>{{content.publisher}}<br>
+                            </div>  
+                            </div> 
                 </v-card>
+              </div>
+            </v-flex>
+        </v-layout>
+      </v-tab-item>
+       <v-tab-item>
+        <v-layout row wrap>
+            <v-flex xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
+              <div class="boxContainer">
+                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                  <div class="image">
+                    <ResaleToken v-bind:content="content"/>  
+                  </div>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <div class="middleButtons">
+                        <v-btn
+                        large
+                        color="green"
+                        @click="buyToken(content)"
+                        >
+                        BUY
+                        </v-btn> 
+                        </div>
+                    </v-card-actions> 
+                            <div class="middle">
+                            <div class="text">
+                                <h1><b>{{content.title}}</b></h1><br>
+                                <b>Price: </b>{{content.resalePrice}} ETH
+                                <b>ISBN: </b>{{content.isbn}}<br>
+                                <b>Copy Number: </b>{{content.copyNumber}}<br>
+                                <b>Author: </b>{{content.publisher}}<br>
+                            </div>  
+                            </div> 
+                </v-card>
+              </div>
             </v-flex>
         </v-layout>
       </v-tab-item>
@@ -68,7 +129,8 @@ export default {
     computed: {
         ...mapState('web3', [
             'collectableContent',
-            'resaleTokens'
+            'resaleTokens',
+            ''
         ])
     },
     methods: {
@@ -81,12 +143,72 @@ export default {
     data () {
       return {
         tabs: null,
-        titles: ['BUY FROM AUTHOR', 'BUY FROM OTHER READERS']
+        titles: ['BUY FROM AUTHOR', 'BUY FROM OTHER READERS','RENTING FROM OTHER READERS']
       }
     },
 }
 </script>
 
 <style>
+  .boxContainer {
 
+  position: relative;
+  width: 50%;
+}
+
+.image {
+
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility:visible;
+}
+
+.middle {
+
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 87.5%;
+  bottom: -20%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.middleButtons {
+  
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.boxContainer:hover .image {
+  opacity: 0.3;
+}
+
+.boxContainer:hover .middle {
+  opacity: 4;
+}
+
+.boxContainer:hover .middleButtons {
+  opacity: 4;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 14px;
+  /* width: 95%; */
+  padding: 6px 16px;
+}
 </style>

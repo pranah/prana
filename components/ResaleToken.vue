@@ -15,9 +15,9 @@
         height="194"
         ></v-img> -->
         <v-card-text class="text-left">
-        <b>Copy Number: {{content.copyNumber}} </b><br><br>
-        <b>ISBN: {{content.isbn}}</b><br><br>
-        <b>Resale Price: </b>{{content.resalePrice}} ETH<br><br>
+        <b>Copy Number: {{content.copyNumber}} </b><br>
+        <!-- <b>ISBN: {{content.isbn}}</b><br><br> -->
+        <b>Resale Price: </b>{{content.resalePrice}} ETH<br>
         </v-card-text>  
     </div>    
 </template>

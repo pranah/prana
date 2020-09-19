@@ -1,13 +1,15 @@
 <template>
 <section class="container">
-    <v-row>
+    <v-row justify="center">
         <v-col>       
             <h3>Published Works : {{ publishedContent.length }}</h3>
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 lg4 v-for="content in publishedContent" :key="publishedContent.indexOf(content)">
                     <div class="boxContainer">
-                    <v-card max-width="344" class="image" color = "">
+                    <v-card  max-width="300" :elevation="14" class="ma-3" color = "">
+                        <div class="image">
                         <Content v-bind:content="content"/> 
+                        </div>
                         <v-card-actions>
                             <!-- <v-spacer></v-spacer> -->
                             <v-row justify="center">
@@ -71,10 +73,18 @@ export default {
 
 <style>
 /* a {  text-decoration: none} */
+.container {
+  /* min-height: 100vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+   background-color: #ECEFF1;
+}
 .boxContainer {
 
   position: relative;
-  width: 90%;
+  width: 60%;
 }
 
 .image {
@@ -93,18 +103,20 @@ export default {
   opacity: 0;
   position: absolute;
   top: 87.5%;
+  bottom: -20%;
   left: 50%;
+  width: 100%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
 }
 
 .middleButtons {
-
+  
   transition: .5s ease;
-  opacity: 5;
+  opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -119,11 +131,16 @@ export default {
   opacity: 4;
 }
 
+.boxContainer:hover .middleButtons {
+  opacity: 4;
+}
+
 .text {
   background-color: #4CAF50;
   color: white;
-  font-size: 13px;
-  padding: 7.5px 16px;
+  font-size: 14px;
+  /* width: 95%; */
+  padding: 6px 16px;
 }
 
 </style>

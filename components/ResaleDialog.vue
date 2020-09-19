@@ -6,9 +6,8 @@
         
         <v-btn
         v-if = "content.isUpForResale === false"
-        small
-        outlined
-        color="blue"
+        large
+        color="green"
           v-bind="attrs"
           v-on="on"
         >

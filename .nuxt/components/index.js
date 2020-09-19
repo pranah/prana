@@ -2,8 +2,8 @@ export { default as AnnotationDialog } from '../../components/AnnotationDialog.v
 export { default as Collect } from '../../components/Collect.vue'
 export { default as Collection } from '../../components/Collection.vue'
 export { default as Content } from '../../components/Content.vue'
-export { default as Dialog } from '../../components/Dialog.vue'
 export { default as File } from '../../components/File.vue'
+export { default as GiveawayDialog } from '../../components/GiveawayDialog.vue'
 export { default as Login } from '../../components/Login.vue'
 export { default as MyCopy } from '../../components/MyCopy.vue'
 export { default as Navbar } from '../../components/Navbar.vue'
@@ -18,8 +18,8 @@ export const LazyAnnotationDialog = import('../../components/AnnotationDialog.vu
 export const LazyCollect = import('../../components/Collect.vue' /* webpackChunkName: "components/Collect'}" */).then(c => c.default || c)
 export const LazyCollection = import('../../components/Collection.vue' /* webpackChunkName: "components/Collection'}" */).then(c => c.default || c)
 export const LazyContent = import('../../components/Content.vue' /* webpackChunkName: "components/Content'}" */).then(c => c.default || c)
-export const LazyDialog = import('../../components/Dialog.vue' /* webpackChunkName: "components/Dialog'}" */).then(c => c.default || c)
 export const LazyFile = import('../../components/File.vue' /* webpackChunkName: "components/File'}" */).then(c => c.default || c)
+export const LazyGiveawayDialog = import('../../components/GiveawayDialog.vue' /* webpackChunkName: "components/GiveawayDialog'}" */).then(c => c.default || c)
 export const LazyLogin = import('../../components/Login.vue' /* webpackChunkName: "components/Login'}" */).then(c => c.default || c)
 export const LazyMyCopy = import('../../components/MyCopy.vue' /* webpackChunkName: "components/MyCopy'}" */).then(c => c.default || c)
 export const LazyNavbar = import('../../components/Navbar.vue' /* webpackChunkName: "components/Navbar'}" */).then(c => c.default || c)

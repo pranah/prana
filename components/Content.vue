@@ -10,17 +10,6 @@
             <b>{{content.title}}</b><br>
             <b>Price: </b>{{content.price}} ETH
         </v-card-text>
-        <!-- <v-list-item>
-        <v-list-item-content>
-            <v-list-item-title><b>{{content.title}}</b></v-list-item-title><br>
-            <v-list-item-title class="text-left"><b>ISBN: {{content.isbn}}</b></v-list-item-title>
-        </v-list-item-content>
-        </v-list-item> -->
-<!-- 
-        <v-card-text class="text-left">
-        <b>Price: </b>{{content.price}} ETH -->
-        <!-- <b>Author: </b>{{content.publisher}}<br> -->
-        </v-card-text>  
     </div>    
 </template>
 
