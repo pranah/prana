@@ -71,6 +71,18 @@
   "LazyPublished": {
     "description": "Auto imported from components/Published.vue"
   },
+  "RentDialog": {
+    "description": "Auto imported from components/RentDialog.vue"
+  },
+  "LazyRentDialog": {
+    "description": "Auto imported from components/RentDialog.vue"
+  },
+  "RentToken": {
+    "description": "Auto imported from components/RentToken.vue"
+  },
+  "LazyRentToken": {
+    "description": "Auto imported from components/RentToken.vue"
+  },
   "ResaleDialog": {
     "description": "Auto imported from components/ResaleDialog.vue"
   },

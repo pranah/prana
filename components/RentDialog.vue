@@ -11,7 +11,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          PUT FOR SALE
+          PUT FOR RENT
         </v-btn>
       </template>
       <v-card>
@@ -19,7 +19,7 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="resalePrice" label="Resale Price" type="number" min = '0' required></v-text-field>
+                <v-text-field v-model="rentingPrice" label="Renting Price" type="number" min = '0' required></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -27,7 +27,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn  color="blue darken-1" text @click="forSale()">PUT FOR SALE</v-btn>
+          <v-btn  color="blue darken-1" text @click="forRent()">PUT FOR RENT</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -41,20 +41,20 @@ import { mapState, mapActions } from 'vuex'
 export default {
     data: () => ({
       dialog: false,
-      resalePrice: null
+      rentingPrice: null
     }),
     props: ['content'],
     computed: { 
     },
     methods: {
         ...mapActions({
-            putForResale: 'web3/putForResale',
+            putForRent: 'web3/putForRent',
         }),
-        forSale(){
+        forRent(){
             this.dialog = false
-            console.log(this.resalePrice)
+            console.log(this.rentingPrice)
             console.log(this.content.tokenId)
-            this.putForResale({resalePrice: this.resalePrice, tokenId: this.content.tokenId})
+            this.putForRent({rentingPrice: this.rentingPrice, tokenId: this.content.tokenId})
         }
     } 
 }

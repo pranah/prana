@@ -10,6 +10,8 @@ export { default as Navbar } from '../../components/Navbar.vue'
 export { default as Progressbar } from '../../components/Progressbar.vue'
 export { default as Publish } from '../../components/Publish.vue'
 export { default as Published } from '../../components/Published.vue'
+export { default as RentDialog } from '../../components/RentDialog.vue'
+export { default as RentToken } from '../../components/RentToken.vue'
 export { default as ResaleDialog } from '../../components/ResaleDialog.vue'
 export { default as ResaleToken } from '../../components/ResaleToken.vue'
 export { default as Welcome } from '../../components/Welcome.vue'
@@ -26,6 +28,8 @@ export const LazyNavbar = import('../../components/Navbar.vue' /* webpackChunkNa
 export const LazyProgressbar = import('../../components/Progressbar.vue' /* webpackChunkName: "components/Progressbar'}" */).then(c => c.default || c)
 export const LazyPublish = import('../../components/Publish.vue' /* webpackChunkName: "components/Publish'}" */).then(c => c.default || c)
 export const LazyPublished = import('../../components/Published.vue' /* webpackChunkName: "components/Published'}" */).then(c => c.default || c)
+export const LazyRentDialog = import('../../components/RentDialog.vue' /* webpackChunkName: "components/RentDialog'}" */).then(c => c.default || c)
+export const LazyRentToken = import('../../components/RentToken.vue' /* webpackChunkName: "components/RentToken'}" */).then(c => c.default || c)
 export const LazyResaleDialog = import('../../components/ResaleDialog.vue' /* webpackChunkName: "components/ResaleDialog'}" */).then(c => c.default || c)
 export const LazyResaleToken = import('../../components/ResaleToken.vue' /* webpackChunkName: "components/ResaleToken'}" */).then(c => c.default || c)
 export const LazyWelcome = import('../../components/Welcome.vue' /* webpackChunkName: "components/Welcome'}" */).then(c => c.default || c)

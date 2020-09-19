@@ -21,7 +21,7 @@
         <v-layout row wrap >
             <v-flex background-color = "#ECEFF1" xs12 sm6 md4 lg4 v-for="content in collectableContent" :key="collectableContent.indexOf(content)">
               <div class="boxContainer">
-                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
                     <Content v-bind:content="content"/>  
                   </div>
@@ -54,7 +54,7 @@
         <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
               <div class="boxContainer">
-                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
                     <ResaleToken v-bind:content="content"/>  
                   </div>
@@ -73,10 +73,10 @@
                             <div class="middle">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.resalePrice}} ETH
+                                <b>Price: </b>{{content.resalePrice}} ETH<br>
                                 <b>ISBN: </b>{{content.isbn}}<br>
-                                <b>Copy Number: </b>{{content.copyNumber}}<br>
-                                <b>Author: </b>{{content.publisher}}<br>
+                                <b>Copy Number: </b>{{content.copyNumber}}<br><br>
+                                <!-- <b>Author: </b>{{content.publisher}}<br> -->
                             </div>  
                             </div> 
                 </v-card>
@@ -86,11 +86,11 @@
       </v-tab-item>
        <v-tab-item>
         <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
+            <v-flex xs12 sm6 md4 lg4 v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
               <div class="boxContainer">
-                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
-                    <ResaleToken v-bind:content="content"/>  
+                    <RentToken v-bind:content="content"/>  
                   </div>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -98,19 +98,17 @@
                         <v-btn
                         large
                         color="green"
-                        @click="buyToken(content)"
+                        @click="rentToken(content)"
                         >
-                        BUY
+                        RENT
                         </v-btn> 
                         </div>
                     </v-card-actions> 
                             <div class="middle">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.resalePrice}} ETH
-                                <b>ISBN: </b>{{content.isbn}}<br>
-                                <b>Copy Number: </b>{{content.copyNumber}}<br>
-                                <b>Author: </b>{{content.publisher}}<br>
+                                <b>Price: </b>{{content.rentingPrice}} ETH<br>
+                                <b>ISBN: </b>{{content.isbn}}<br><br>
                             </div>  
                             </div> 
                 </v-card>
@@ -130,20 +128,21 @@ export default {
         ...mapState('web3', [
             'collectableContent',
             'resaleTokens',
-            ''
+            'rentTokens'
         ])
     },
     methods: {
         ...mapActions('web3', [
             'getCollectables',
             'purchase',
-            'buyToken'
+            'buyToken',
+            'rentToken'
         ]),
     },
     data () {
       return {
         tabs: null,
-        titles: ['BUY FROM AUTHOR', 'BUY FROM OTHER READERS','RENTING FROM OTHER READERS']
+        titles: ['BUY FROM AUTHOR', 'BUY FROM OTHER READERS','RENT FROM OTHER READERS']
       }
     },
 }

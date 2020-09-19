@@ -2,10 +2,24 @@
 <section class="container">
     <v-col>
         <h3>Personal Collection</h3>
+        <v-tabs
+          v-model="tabs"
+          centered
+          grow
+         >
+          <v-tab
+            v-for="title in titles"
+            :key="titles.indexOf(title)"
+          >
+            {{title}}
+          </v-tab>
+        </v-tabs>
+    <v-tabs-items v-model="tabs">
+      <v-tab-item>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4 lg4 v-for="content in collectedContent" :key="collectedContent.indexOf(content)">
                 <div class="boxContainer">
-                <v-card max-width="300" :elevation="14" class="ma-3" color = "">
+                <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                     <div class="image">
                     <MyCopy v-bind:content="content"/> 
                     </div>
@@ -26,7 +40,12 @@
                         
                         <ResaleDialog v-bind:content="content"/>
                         </v-col>
-             
+                        
+                        <v-col>
+                        
+                        <RentDialog v-bind:content="content"/>
+                        </v-col>
+
                         <v-col>
                         <GiveawayDialog v-bind:content="content"/>
                         </v-col>
@@ -37,6 +56,40 @@
                 </div>
             </v-flex>
         </v-layout>
+      </v-tab-item>
+      <v-tab-item>
+        <!-- <v-layout row wrap>
+            <v-flex xs12 sm6 md4 lg4 v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
+              <div class="boxContainer">
+                <v-card max-width="300" :elevation="20" class="ma-3" color = "">
+                  <div class="image">
+                    <RentToken v-bind:content="content"/>  
+                  </div>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <div class="middleButtons">
+                        <v-btn
+                        large
+                        color="green"
+                        @click="rentToken(content)"
+                        >
+                        RENT
+                        </v-btn> 
+                        </div>
+                    </v-card-actions> 
+                            <div class="middle">
+                            <div class="text">
+                                <h1><b>{{content.title}}</b></h1><br>
+                                <b>Price: </b>{{content.rentingPrice}} ETH<br>
+                                <b>ISBN: </b>{{content.isbn}}<br><br>
+                            </div>  
+                            </div> 
+                </v-card>
+              </div>
+            </v-flex>
+        </v-layout> -->
+      </v-tab-item>
+    </v-tabs-items>
     </v-col>  
 </section>      
 </template>
@@ -46,10 +99,13 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
     data: () => ({
         dialog: false,
+        tabs: null,
+        titles: ['MY BOOKS', 'RENTED BOOKS']
     }),
     computed: {
         ...mapState('web3', [
-            'collectedContent'
+            'collectedContent',
+            ''
         ] ),
         ...mapState('ipfs', [
             'textFile'

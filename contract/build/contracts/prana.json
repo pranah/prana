@@ -34378,12 +34378,12 @@
         }
       },
       "links": {},
-      "address": "0x47FA79C8c6f2A1A6848c7a7Ebf5c1e63B392c271",
-      "transactionHash": "0x78785c63b2d1e0ff1b978c30908c894af7f80fe1074726c809ac816c836695e6"
+      "address": "0x85C764d0577d4bb9ef7af012A6f47df752D13B1B",
+      "transactionHash": "0x84574cbd2610ccf32aa8079fc18f16fd5d756d97aa7df07633c284d21963cc4c"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-09-19T10:39:28.844Z",
+  "updatedAt": "2020-09-19T16:01:05.926Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

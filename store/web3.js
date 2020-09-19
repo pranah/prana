@@ -112,6 +112,8 @@ export default {
             dispatch('myCollection')
             dispatch('getCollectables')
             dispatch('getResaleTokens')
+            dispatch('getRentTokens')
+            dispatch('myRentedTokens')
             // dispatch('ipfs/uploadAnnotations', {id: 0}, { root: true })
 
         },
@@ -478,6 +480,7 @@ export default {
             console.log(rentData)
             let rentingPrice = state.web3.utils.toWei(rentData.rentingPrice, 'ether')
             let tokenId = rentData.tokenId
+            console.log(rentingPrice);
 
             // let rentingPrice = state.web3.utils.toWei(0.5, 'ether')
             // let tokenId = 0
@@ -524,7 +527,7 @@ export default {
             let isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting
 
             //contract call to get the token details of a tokenId
-            state.pranaContract.methods.viewTokenDetails(tokenId)
+            state.pranaContract.methods.viewRentingTokenDetails(tokenId)
             .call({ from: state.currentAccount})
             .then((content) => {
                 console.log(`Book details of rent tokenid ${tokenId}:`)
@@ -539,10 +542,10 @@ export default {
                     imageHash = metadata.imageHash
                     isbn = content[0]
                     copyNumber = content[2]
-                    resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-                    isUpForResale = content[4]
-                    rentingPrice = null
-                    isUpForRenting = null
+                    resalePrice = null
+                    isUpForResale = null
+                    rentingPrice = state.web3.utils.fromWei(content[4], 'ether')
+                    isUpForRenting = content[5]
                     commit('rentTokens', {tokenId, isbn, metadataHash, title, imageHash, copyNumber, resalePrice, isUpForResale, rentingPrice, isUpForRenting})
                 })   
             })
@@ -552,6 +555,7 @@ export default {
             let rentingPrice = content.rentingPrice
             let tokenId = content.tokenId
             //contract call to rent a token
+            console.log(rentingPrice);
             await state.pranaContract.methods.rentToken(tokenId)
             .send({ from: state.currentAccount, gas: 6000000, value: state.web3.utils.toWei(rentingPrice, 'ether') })
             .on('transactionHash', (hash) => {

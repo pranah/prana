@@ -6,7 +6,7 @@
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 lg4 v-for="content in publishedContent" :key="publishedContent.indexOf(content)">
                     <div class="boxContainer">
-                    <v-card  max-width="300" :elevation="14" class="ma-3" color = "">
+                    <v-card  max-width="300" :elevation="20" class="ma-3" color = "">
                         <div class="image">
                         <Content v-bind:content="content"/> 
                         </div>
