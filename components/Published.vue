@@ -15,7 +15,7 @@
                             <v-row justify="center">
                             <div class="middleButtons">
                             <nuxt-link to="/readPage">
-                            <v-btn large color="green" @click="requestFile(content)" >Read</v-btn>
+                            <v-btn large color="green" @click="requestFile(content, publishedContent.indexOf(content))" >Read</v-btn>
                             </nuxt-link>
                             </div>
                             <div class="middle">
@@ -62,10 +62,11 @@ export default {
         ...mapMutations({
             getFile: 'ipfs/getFile'
         }),
-        requestFile(content){
+        requestFile(content, index){
             console.log(content)
+            console.log(index)
             // this.requestContent(content.bookHash)
-            this.getFile(content)
+            this.getFile({content, index})
         }
     }
 }
