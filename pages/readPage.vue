@@ -13,6 +13,13 @@
             <div class="annotations">
                 <v-card-title v-if = "content" class = "title">ANNOTATIONS</v-card-title>
                  <AnnotationDialog/>
+                 <div v-if = "content">
+                     <ul v-for="i in content.annotations" :key="content.annotations.indexOf(i)">
+                     <li>{{i.annotation}}</li>
+                    </ul>
+
+                 </div>
+                 
 
             </div>
             <div class="read-space">

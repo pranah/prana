@@ -339,7 +339,7 @@ export default {
                                             dispatch('ipfs/getAnnotations', hash, { root: true })
                                             .then(arr => {
                                                 console.log(arr)
-                                                annotations = arr
+                                                annotations = JSON.parse(arr.toString())
                                                 annotationHash = hash
                                                 metadata = JSON.parse(res1.toString())
                                                 title = metadata.title
