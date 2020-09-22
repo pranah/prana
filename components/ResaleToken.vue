@@ -6,7 +6,7 @@
         ></v-img>
         <v-card-text>
             <b>{{content.title}}</b><br>
-            <b>Copy Number: </b>  {{content.copyNumber}} 
+            <b>Copy Number: </b>  {{content.copyNumber}} <br>
             <b> Resale Price: </b>{{content.resalePrice}} ETH
         </v-card-text>
     </div>    

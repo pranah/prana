@@ -75,7 +75,7 @@
                             <div class="middle-resale">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.resalePrice}} ETH<br>
+                                <b>Resale Price: </b>{{content.resalePrice}} ETH<br>
                                 <b>ISBN: </b>{{content.isbn}}<br>
                                 <b>Copy Number: </b>{{content.copyNumber}}<br><br>
                                 <!-- <b>Author: </b>{{content.publisher}}<br> -->
@@ -109,8 +109,9 @@
                             <div class="middle">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.rentingPrice}} ETH<br>
-                                <b>ISBN: </b>{{content.isbn}}<br><br>
+                                <b>Renting Price: </b>{{content.rentingPrice}} ETH<br>
+                                <b>ISBN: </b>{{content.isbn}}<br>
+                                <b>Copy Number: </b>{{content.copyNumber}}<br><br>
                             </div>  
                             </div> 
                 </v-card>

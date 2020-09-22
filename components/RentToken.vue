@@ -6,6 +6,7 @@
         ></v-img>
         <v-card-text>
             <b>{{content.title}}</b><br>
+            <b>Copy Number: </b>  {{content.copyNumber}} <br>
             <b> Renting Price: </b>{{content.rentingPrice}} ETH
         </v-card-text>
     </div>    

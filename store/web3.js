@@ -55,9 +55,9 @@ export default {
             console.log('rentTokens')
             console.log(state.rentTokens)
         },
-        rentedTokens: (state, token) => {
+        myRentedTokens: (state, token) => {
             state.rentedTokens.push(token)
-            console.log('rentedTokens')
+            console.log('myRentedTokens')
             console.log(state.rentedTokens)
         },
         loadingContent: (state, content) => {
@@ -119,7 +119,6 @@ export default {
             dispatch('getResaleTokens')
             dispatch('getRentTokens')
             dispatch('myRentedTokens')
-            // dispatch('ipfs/uploadAnnotations', {id: 0}, { root: true })
 
         },
 
@@ -290,85 +289,123 @@ export default {
             resalePrice, isUpForResale, 
             rentedAtBlock, rentingPrice, isUpForRenting 
 
-            //contract call to get the encrypted cid of a tokenId
-            await state.pranaContract.methods.consumeContent(tokenId)
+            //contract call to get the token details
+            await state.pranaContract.methods.viewTokenDetails(tokenId)
             .call({ from: state.currentAccount})
-            .then((hash) => {
-                bookHash = hash
-                console.log(`EncryptedCID of tokenid ${tokenId}: ${bookHash}`)
+            .then((content) => {
+                console.log('content')
+                console.log(content)
 
-                //contract call to get the token details
-                state.pranaContract.methods.viewTokenDetails(tokenId)
+                //contract call to get the renting details
+                state.pranaContract.methods.viewRentingTokenDetails(tokenId)
                 .call({ from: state.currentAccount})
-                .then((content) => {
-                    console.log('content')
-                    console.log(content)
-                    
-                    //contract call to get the renting details
-                    state.pranaContract.methods.viewRentingTokenDetails(tokenId)
-                    .call({ from: state.currentAccount})
-                    .then((rentdata) => {
-                        console.log('rentdata')
-                        console.log(rentdata)
+                .then((rentdata) => {
+                    console.log('rentdata')
+                    console.log(rentdata)
 
-                        metadataHash = content[1]
+                    metadataHash = content[1]
 
-                        //action to get metadata from ipfs
-                        dispatch('ipfs/getMetadata', metadataHash, { root: true })
-                        .then(res1 => {
-                            console.log(res1)
+                    //action to get metadata from ipfs
+                    dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                    .then(res1 => {
 
-                            //action to get book content from ipfs
-                            dispatch('ipfs/getBookContent', bookHash, { root: true })
-                            .then(res2 => {
-                            console.log(res2)
+                        //contract call to get the annotationHash
+                        state.pranaContract.methods.tokenURI(tokenId)
+                        .call({ from: state.currentAccount})
+                        .then((uriHash) => {
+                            console.log('URIhash')
+                            console.log(uriHash)
 
-                                if(res2.readable) {
-                                    console.error('unhandled: cat result is a pipe', res2);
-                                } 
-                                else {
-                                    //contract call to get the annotationHash
-                                    state.pranaContract.methods.tokenURI(tokenId)
+                            rentedAtBlock = rentdata[3]
+                            let currentBlock
+                            state.web3.eth.getBlockNumber().then(block => {
+                                currentBlock = block
+                                console.log('rentedAtBlock')
+                                console.log(rentedAtBlock)
+                                console.log('currentBlock')
+                                console.log(currentBlock)
+
+                                if(currentBlock > rentedAtBlock+100){
+
+                                    //contract call to get the encrypted cid of a tokenId
+                                    state.pranaContract.methods.consumeContent(tokenId)
                                     .call({ from: state.currentAccount})
                                     .then((hash) => {
-                                        console.log('URIhash')
-                                        console.log(hash)
-                                        
-                                        if(hash.length>0){
-                                            //action to get Annotations from ipfs
-                                            dispatch('ipfs/getAnnotations', hash, { root: true })
-                                            .then(arr => {
-                                                console.log(arr)
-                                                annotations = JSON.parse(arr.toString())
-                                                annotationHash = hash
-                                                metadata = JSON.parse(res1.toString())
-                                                title = metadata.title
-                                                imageHash = metadata.imageHash
-                                                bookContent = res2.toString()
-                                                isbn = content[0]
-                                                copyNumber = content[2]
-                                                resalePrice = state.web3.utils.fromWei(content[3], 'ether')
-                                                isUpForResale = content[4]
-                                                rentedAtBlock = rentdata[3]
-                                                rentingPrice = rentdata[4]
-                                                isUpForRenting = rentdata[5]
-                                                commit('collectContent', {tokenId, isbn, 
-                                                    metadataHash, title, imageHash, 
-                                                    annotationHash, annotations, 
-                                                    bookHash, bookContent, copyNumber, 
-                                                    resalePrice, isUpForResale, 
-                                                    rentedAtBlock, rentingPrice, isUpForRenting 
-                                                })
-                                                
-                                            })
-                                        }
-                                        else {
-                                            annotations = []
-                                            annotationHash = ''
-                                            const metadata = JSON.parse(res1.toString())
+                                        bookHash = hash
+                                        console.log(`EncryptedCID of tokenid ${tokenId}: ${bookHash}`)
+    
+                                        //action to get book content from ipfs
+                                        dispatch('ipfs/getBookContent', bookHash, { root: true })
+                                        .then(res2 => {
+    
+                                            if(res2.readable) {
+                                                console.error('unhandled: cat result is a pipe', res2);
+                                            } 
+                                            else {
+                                                if(uriHash.length>0){
+                                                    //action to get Annotations from ipfs
+                                                    dispatch('ipfs/getAnnotations', uriHash, { root: true })
+                                                    .then(arr => {
+                                                        annotations = JSON.parse(arr.toString())
+                                                        annotationHash = uriHash
+                                                        metadata = JSON.parse(res1.toString())
+                                                        title = metadata.title
+                                                        imageHash = metadata.imageHash
+                                                        bookContent = res2.toString()
+                                                        isbn = content[0]
+                                                        copyNumber = content[2]
+                                                        resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                                        isUpForResale = content[4]
+                                                        rentedAtBlock = rentdata[3]
+                                                        rentingPrice = rentdata[4]
+                                                        isUpForRenting = rentdata[5]
+                                                        commit('collectContent', {tokenId, isbn, 
+                                                            metadataHash, title, imageHash, 
+                                                            annotationHash, annotations, 
+                                                            bookHash, bookContent, copyNumber, 
+                                                            resalePrice, isUpForResale, 
+                                                            rentedAtBlock, rentingPrice, isUpForRenting 
+                                                        })
+                                                        
+                                                    })
+                                                }
+                                                else {
+                                                    annotations = []
+                                                    annotationHash = ''
+                                                    const metadata = JSON.parse(res1.toString())
+                                                    title = metadata.title
+                                                    imageHash = metadata.imageHash
+                                                    bookContent = res2.toString()
+                                                    isbn = content[0]
+                                                    copyNumber = content[2]
+                                                    resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                                    isUpForResale = content[4]
+                                                    rentedAtBlock = rentdata[3]
+                                                    rentingPrice = rentdata[4]
+                                                    isUpForRenting = rentdata[5]
+                                                    commit('collectContent', {tokenId, isbn, 
+                                                        metadataHash, title, imageHash, 
+                                                        annotationHash, annotations, 
+                                                        bookHash, bookContent, copyNumber, 
+                                                        resalePrice, isUpForResale, 
+                                                        rentedAtBlock, rentingPrice, isUpForRenting 
+                                                    })
+                                                }
+                                            }
+                                        })
+                                    })
+                                }
+                                else{
+                                    if(uriHash.length>0){
+                                        //action to get Annotations from ipfs
+                                        dispatch('ipfs/getAnnotations', uriHash, { root: true })
+                                        .then(arr => {
+                                            annotations = JSON.parse(arr.toString())
+                                            annotationHash = uriHash
+                                            metadata = JSON.parse(res1.toString())
                                             title = metadata.title
                                             imageHash = metadata.imageHash
-                                            bookContent = res2.toString()
+                                            bookContent = null
                                             isbn = content[0]
                                             copyNumber = content[2]
                                             resalePrice = state.web3.utils.fromWei(content[3], 'ether')
@@ -383,14 +420,38 @@ export default {
                                                 resalePrice, isUpForResale, 
                                                 rentedAtBlock, rentingPrice, isUpForRenting 
                                             })
-                                        }
-                                    })
+                                            
+                                        })
+                                    }
+                                    else {
+                                        annotations = []
+                                        annotationHash = ''
+                                        const metadata = JSON.parse(res1.toString())
+                                        title = metadata.title
+                                        imageHash = metadata.imageHash
+                                        bookContent = null
+                                        isbn = content[0]
+                                        copyNumber = content[2]
+                                        resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                        isUpForResale = content[4]
+                                        rentedAtBlock = rentdata[3]
+                                        rentingPrice = rentdata[4]
+                                        isUpForRenting = rentdata[5]
+                                        commit('collectContent', {tokenId, isbn, 
+                                            metadataHash, title, imageHash, 
+                                            annotationHash, annotations, 
+                                            bookHash, bookContent, copyNumber, 
+                                            resalePrice, isUpForResale, 
+                                            rentedAtBlock, rentingPrice, isUpForRenting 
+                                        })
+                                    }
                                 }
-                            })   
-                        }) 
+                            })
+   
+                        })
                     })
                 })
-            })         
+            })
         },
         
         //to put a token for resale
@@ -570,8 +631,9 @@ export default {
             .then(receipt => {
                 console.log(receipt);
                 //error
-                let tokenId = receipt.events.Transfer.returnValues.tokenId
-                dispatch('pushMyToken', tokenId)
+                let tokenId = receipt.events.TokenRented.returnValues.tokenId
+                console.log(tokenId)
+                dispatch('pushMyRentedToken', tokenId)
             }).catch(err => {console.log(err);})
         },
         // pushes token data of all the tokens rented by an address to rentedTokens array
@@ -592,12 +654,138 @@ export default {
                 await state.pranaContract.methods.tokenOfRenteeByIndex(state.currentAccount, i)
                 .call({ from: state.currentAccount})
                 .then((tokenId) => {
-                    dispatch('pushMyToken', tokenId)
+                    console.log(tokenId)
+                    dispatch('pushMyRentedToken', tokenId)
                 })
                 .catch((err) => {
                     console.error(err)
                 })
             }   
+        },
+
+        pushMyRentedToken: async({state, commit, dispatch}, tokenId) => {
+            let isbn, 
+                    metadata, metadataHash, title, imageHash, 
+                    annotationHash, annotations, 
+                    bookHash, bookContent, copyNumber, 
+                    resalePrice, isUpForResale, 
+                    rentedAtBlock, rentingPrice, isUpForRenting 
+
+            //contract call to get the renting details
+            await state.pranaContract.methods.viewRentingTokenDetails(tokenId)
+            .call({ from: state.currentAccount})
+            .then((rentdata) => {
+                console.log(`Book details of rented tokenid ${tokenId}:`)
+                console.log(rentdata)
+
+                rentedAtBlock = rentdata[3]
+                let currentBlock
+                state.web3.eth.getBlockNumber()
+                .then(block => {
+                    currentBlock = block
+                    console.log("currentBlock")
+                    console.log(currentBlock)
+
+                    if(currentBlock - rentedAtBlock < 100){
+
+                        //contract call to get the token details
+                        state.pranaContract.methods.viewTokenDetails(tokenId)
+                        .call({ from: state.currentAccount})
+                        .then((content) => {
+                            console.log('content')
+                            console.log(content)
+
+                            //contract call to get the encrypted cid of a tokenId
+                            state.pranaContract.methods.consumeContent(tokenId)
+                            .call({ from: state.currentAccount})
+                            .then((hash) => {
+                                bookHash = hash
+                                console.log(`EncryptedCID of tokenid ${tokenId}: ${bookHash}`)
+
+                                metadataHash = content[1]
+
+                                //action to get metadata from ipfs
+                                dispatch('ipfs/getMetadata', metadataHash, { root: true })
+                                .then(res1 => {
+                                    console.log(res1)
+
+                                    //action to get book content from ipfs
+                                    dispatch('ipfs/getBookContent', bookHash, { root: true })
+                                    .then(res2 => {
+                                    console.log(res2)
+
+                                        if(res2.readable) {
+                                            console.error('unhandled: cat result is a pipe', res2);
+                                        } 
+                                        else {
+                                            //contract call to get the annotationHash
+                                            state.pranaContract.methods.tokenURI(tokenId)
+                                            .call({ from: state.currentAccount})
+                                            .then((hash) => {
+                                                console.log('URIhash')
+                                                console.log(hash)
+                                                
+                                                if(hash.length>0){
+                                                    //action to get Annotations from ipfs
+                                                    dispatch('ipfs/getAnnotations', hash, { root: true })
+                                                    .then(arr => {
+                                                        console.log(arr)
+                                                        annotations = JSON.parse(arr.toString())
+                                                        annotationHash = hash
+                                                        metadata = JSON.parse(res1.toString())
+                                                        title = metadata.title
+                                                        imageHash = metadata.imageHash
+                                                        bookContent = res2.toString()
+                                                        isbn = content[0]
+                                                        copyNumber = content[2]
+                                                        resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                                        isUpForResale = content[4]
+                                                        rentedAtBlock = rentdata[3]
+                                                        rentingPrice = state.web3.utils.fromWei(rentdata[4], 'ether')
+                                                        isUpForRenting = rentdata[5]
+                                                        commit('myRentedTokens', {tokenId, isbn, 
+                                                            metadataHash, title, imageHash, 
+                                                            annotationHash, annotations, 
+                                                            bookHash, bookContent, copyNumber, 
+                                                            resalePrice, isUpForResale, 
+                                                            rentedAtBlock, rentingPrice, isUpForRenting 
+                                                        })
+                                                        
+                                                    })
+                                                }
+                                                else {
+                                                    annotations = []
+                                                    annotationHash = ''
+                                                    const metadata = JSON.parse(res1.toString())
+                                                    title = metadata.title
+                                                    imageHash = metadata.imageHash
+                                                    bookContent = res2.toString()
+                                                    isbn = content[0]
+                                                    copyNumber = content[2]
+                                                    resalePrice = state.web3.utils.fromWei(content[3], 'ether')
+                                                    isUpForResale = content[4]
+                                                    rentedAtBlock = rentdata[3]
+                                                    rentingPrice = state.web3.utils.fromWei(rentdata[4], 'ether')
+                                                    isUpForRenting = rentdata[5]
+                                                    commit('myRentedTokens', {tokenId, isbn, 
+                                                        metadataHash, title, imageHash, 
+                                                        annotationHash, annotations, 
+                                                        bookHash, bookContent, copyNumber, 
+                                                        resalePrice, isUpForResale, 
+                                                        rentedAtBlock, rentingPrice, isUpForRenting 
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    })   
+                                }) 
+
+                            })
+                        })
+                    }
+                })
+                
+            })
         },
 
         setAnnotationHash: async({state, commit, dispatch}, data) => {

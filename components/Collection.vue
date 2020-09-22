@@ -62,8 +62,8 @@
         </v-layout>
       </v-tab-item>
       <v-tab-item>
-        <!-- <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg4 v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
+        <v-layout row wrap>
+            <v-flex xs12 sm6 md4 lg4 v-for="content in rentedTokens" :key="rentedTokens.indexOf(content)">
               <div class="boxContainer">
                 <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
@@ -72,26 +72,30 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <div class="middleButtons">
-                        <v-btn
+                        <!-- <v-btn
                         large
                         color="green"
-                        @click="rentToken(content)"
+                        @click="requestFile(content, rentedTokens.indexOf(content))"
                         >
-                        RENT
-                        </v-btn> 
+                        READ
+                        </v-btn>  -->
+                        <nuxt-link to="/readPage">
+                        <v-btn large color="green" @click="requestFile(content, rentedTokens.indexOf(content))" >Read</v-btn>
+                        </nuxt-link>
                         </div>
                     </v-card-actions> 
                             <div class="middle">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.rentingPrice}} ETH<br>
+                                <!-- <b>Price: </b>{{content.rentingPrice}} ETH<br> -->
+                                <b>Copy Number: </b>{{content.copyNumber}}<br>
                                 <b>ISBN: </b>{{content.isbn}}<br><br>
                             </div>  
                             </div> 
                 </v-card>
               </div>
             </v-flex>
-        </v-layout> -->
+        </v-layout>
       </v-tab-item>
     </v-tabs-items>
     </v-col>  
@@ -109,7 +113,7 @@ export default {
     computed: {
         ...mapState('web3', [
             'collectedContent',
-            ''
+            'rentedTokens'
         ] ),
         ...mapState('ipfs', [
             'textFile'
