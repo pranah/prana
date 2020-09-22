@@ -262,6 +262,7 @@ contract prana is ERC721 {
         "This copy has been rented by someone already");
         require(msg.value >= tokenData[tokenId].rentingPrice,
         "Your price isn't sufficient to rent this copy");
+        require(msg.sender != ownerOf(tokenId), "Token Owner can't rent one's own token");
 
         tokenData[tokenId].rentee = msg.sender;
         tokenData[tokenId].rentedAtBlock = block.number;
