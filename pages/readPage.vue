@@ -10,7 +10,7 @@
         <Progressbar :progress="progress" />
         <v-divider></v-divider>
         <div class="app-layout">
-            <div class="annotations">
+            <div v-if = "!(typeof content.annotations === 'undefined')" class="annotations">
                 <v-card-title v-if = "content" class = "title">ANNOTATIONS</v-card-title>
                  <AnnotationDialog/>
                  <div v-if = "content">
@@ -21,6 +21,8 @@
                  </div>
                  
 
+            </div>
+            <div v-else>
             </div>
             <div class="read-space">
                 <File @progressUpdate="setProgress" />
