@@ -18,7 +18,7 @@
                             <v-btn large color="green" @click="requestFile(content, publishedContent.indexOf(content))" >Read</v-btn>
                             </nuxt-link>
                             </div>
-                            <div class="middle">
+                            <div class="middle-pub">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
                                 <b>Price: </b>{{content.price}} ETH
@@ -98,13 +98,13 @@ export default {
   backface-visibility:visible;
 }
 
-.middle {
+.middle-pub {
 
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 87.5%;
-  bottom: -20%;
+  top: 77.8%;
+  bottom: 10%;
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
@@ -128,7 +128,7 @@ export default {
   opacity: 0.3;
 }
 
-.boxContainer:hover .middle {
+.boxContainer:hover .middle-pub {
   opacity: 4;
 }
 

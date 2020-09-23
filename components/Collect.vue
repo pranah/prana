@@ -5,6 +5,7 @@
           v-model="tabs"
           centered
           grow
+          
          
         
         >
@@ -38,7 +39,7 @@
                         </v-btn> 
                         </div>
                     </v-card-actions>
-                            <div class="middle">
+                            <div class="middle-buy">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
                                 <b>Price: </b>{{content.price}} ETH<br>
@@ -54,7 +55,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
+            <v-flex class="cards" xs12 sm6 md4 lg4 v-for="content in resaleTokens" :key="resaleTokens.indexOf(content)">
               <div class="boxContainer">
                 <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
@@ -88,7 +89,7 @@
       </v-tab-item>
        <v-tab-item>
         <v-layout row wrap>
-            <v-flex xs12 sm6 md4 lg4 class="cards" v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
+            <v-flex  xs12 sm6 md4 lg4 class="cards" v-for="content in rentTokens" :key="rentTokens.indexOf(content)">
               <div class="boxContainer">
                 <v-card max-width="300" :elevation="20" class="ma-3" color = "">
                   <div class="image">
@@ -106,7 +107,7 @@
                         </v-btn> 
                         </div>
                     </v-card-actions> 
-                            <div class="middle">
+                            <div class="middle-rent">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
                                 <b>Renting Price: </b>{{content.rentingPrice}} ETH<br>
@@ -173,15 +174,15 @@ export default {
   backface-visibility:visible;
 }
 
-.middle {
+.middle-buy {
 
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 70%;
+  top: 91%;
   bottom: -40%;
   left: 50%;
-  height: 40%;
+  height: 47.5%;
   width: 100%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -193,7 +194,22 @@ export default {
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 72%;
+  top: 73%;
+  bottom: -40%;
+  left: 50%;
+  height: 0%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.middle-rent {
+
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 73%;
   bottom: -40%;
   left: 50%;
   height: 0%;
@@ -219,11 +235,15 @@ export default {
   opacity: 0.3;
 }
 
-.boxContainer:hover .middle {
+.boxContainer:hover .middle-buy {
   opacity: 4;
 }
 
 .boxContainer:hover .middle-resale {
+  opacity: 4;
+}
+
+.boxContainer:hover .middle-rent {
   opacity: 4;
 }
 

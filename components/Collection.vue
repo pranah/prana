@@ -84,7 +84,7 @@
                         </nuxt-link>
                         </div>
                     </v-card-actions> 
-                            <div class="middle">
+                            <div class="middle-rented">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
                                 <!-- <b>Price: </b>{{content.rentingPrice}} ETH<br> -->
@@ -161,12 +161,12 @@ a {  text-decoration: none}
   backface-visibility:visible;
 }
 
-.middle {
+.middle-rented {
 
   transition: .5s ease;
   opacity: 0;
   position: absolute;
-  top: 87.5%;
+  top: 91.4%;
   bottom: -20%;
   left: 50%;
   width: 100%;
@@ -191,7 +191,7 @@ a {  text-decoration: none}
   opacity: 0.3;
 }
 
-.boxContainer:hover .middle {
+.boxContainer:hover .middle-rented {
   opacity: 4;
 }
 
