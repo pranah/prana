@@ -9,7 +9,7 @@
 
         <Progressbar :progress="progress" />
         <v-divider></v-divider>
-        <div class="app-layout">
+        <div v-if = "content" class="app-layout">
             <div v-if = "!(typeof content.annotations === 'undefined')" class="annotations">
                 <v-card-title v-if = "content" class = "title">ANNOTATIONS</v-card-title>
                  <AnnotationDialog/>
