@@ -21,10 +21,10 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        pranaAddress: pranaJson.networks['5777'].address,
+        pranaAddress: pranaJson.networks['3'].address,
         pranaAbi: pranaJson.abi,
         pranahelperContract: null,
-        pranahelperAddress: pranahelperJson.networks['5777'].address,
+        pranahelperAddress: pranahelperJson.networks['3'].address,
         pranahelperAbi: pranahelperJson.abi,
     }),
     mutations: {
