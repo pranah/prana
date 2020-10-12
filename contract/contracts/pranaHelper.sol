@@ -36,9 +36,4 @@ contract pranaHelper {
         P.buyToken{value:msg.value}(tokenId, msg.sender);
     }
 
-    function buyTokenFromPranaAsSpecialBuyer(uint256 _tokenId) public payable{
-        PranaInterface P = PranaInterface(pranaAddress);
-        P.buyTokenAsTheSpecialBuyer{value:msg.value}(_tokenId, msg.sender);
-    }
-
 }
