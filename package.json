@@ -19,6 +19,7 @@
     "child_process": "^1.0.2",
     "eth-sig-util": "^2.5.3",
     "ethereumjs-util": "^7.0.3",
+    "ethers": "^5.0.24",
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
     "ipfs-api": "^26.1.2",
