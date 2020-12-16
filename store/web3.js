@@ -22,14 +22,13 @@ export default {
         currentAccount: null,
         web3: null,
         pranaContract: null,
-        pranaAddress: pranaJson.networks['3'].address,
+        pranaAddress: '0xFC3e5b1fFb9487b6ce3F719E1Fe95cddD87765E0',
         pranaAbi: pranaJson.abi,
         pranahelperContract: null,
-        pranahelperAddress: pranahelperJson.networks['3'].address,
+        pranahelperAddress: '0xc4BE9CEA83545F5A570450f4F92DC09De86d21CE',
         pranahelperAbi: pranahelperJson.abi,
         signerContract: null,
         provider: null,
-        ens
 
     }),
     mutations: {

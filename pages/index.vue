@@ -14,7 +14,8 @@
              thereby making them unique to enable new behaviors for the readers and giving them more <br>freedom over the content they own.
            
               </p>
-              <p class = 'tag'>(MetaMask needs to be connected to Ropsten Test Network)</p>
+              <p class = 'tag'>(MetaMask needs to be connected to Matic Mumbai Testnet)</p>
+              <a href="https://docs.matic.network/docs/develop/metamask/config-matic">Configure Metamask</a>
       </div>
   </section>
 </template>
