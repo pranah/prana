@@ -8,7 +8,7 @@
         ></v-img>
         <v-card-text>
             <b>{{content.title}}</b><br>
-            <b>Price: </b>{{content.price}} ETH
+            <b>Price: </b>{{content.price}} MATIC
         </v-card-text>
     </div>    
 </template>

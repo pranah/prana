@@ -7,7 +7,7 @@
         <v-card-text>
             <b>{{content.title}}</b><br>
             <b>Copy Number: </b>  {{content.copyNumber}} <br>
-            <b> Resale Price: </b>{{content.resalePrice}} ETH
+            <b> Resale Price: </b>{{content.resalePrice}} MATIC
         </v-card-text>
     </div>    
 </template>
