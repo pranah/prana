@@ -3,6 +3,7 @@ import pranaJson from "../contract/build/contracts/prana.json";
 import pranahelperJson from "../contract/build/contracts/pranaHelper.json";
 import detectEthereumProvider from '@metamask/detect-provider';
 import Vue from 'vue';
+import { ethers } from "ethers";
 var sigUtil = require('eth-sig-util')
 import ethUtil from 'ethereumjs-util'
 
@@ -26,6 +27,10 @@ export default {
         pranahelperContract: null,
         pranahelperAddress: pranahelperJson.networks['3'].address,
         pranahelperAbi: pranahelperJson.abi,
+        signerContract: null,
+        provider: null,
+        ens
+
     }),
     mutations: {
         publisherPageSwitchFlip: (state, page) => {
@@ -67,11 +72,19 @@ export default {
             state.web3 = provider;
             console.log(state.web3);
         },
+        setProvider: (state, provider) => {
+            state.provider = provider;
+            console.log(state.provider);
+        },
         setContract: (state, contracts) => {
             Vue.set(state, 'pranaContract', contracts.pranaContract);
             Vue.set(state, 'pranahelperContract', contracts.pranahelperContract);
             console.log(state.pranaContract);
             console.log(state.pranahelperContract);
+        },
+        setSigner: (state, contract) => {
+            Vue.set(state, 'signerContract', contract.signer);
+            console.log(state.signerContract);
         },
         fetchedProvider: (state, isMetaMask) => {
             state.isMetaMaskProvided = isMetaMask
@@ -105,14 +118,39 @@ export default {
                     const pranaContract = new state.web3.eth.Contract(state.pranaAbi, state.pranaAddress);       
                     const pranahelperContract = new state.web3.eth.Contract(state.pranahelperAbi, state.pranahelperAddress);       
                     commit('setContract', {pranaContract, pranahelperContract});
+
+                    const provider1 = new ethers.providers.Web3Provider(res)
+                    console.log('provider1')
+                    commit('setProvider', provider1)
+                    // console.log(provider1)
+                    const contract = new ethers.Contract(state.pranaAddress, state.pranaAbi, provider1);
+                    console.log('contract')
+                    // console.log(contract)
+                    const signer = provider1.getSigner()
+                    // console.log('signer')
+                    // console.log(signer)
+                    commit('setSigner', {signer})
+                  
+
+                
                 } 
             });
         },
 
         //getting account details
-        getAccount: async ({commit, dispatch}) => {
+        getAccount: async ({state, commit, dispatch}) => {
             const accounts = await ethereum.enable()
             await commit('updateAccountDetails', accounts[0])
+            console.log(state.currentAccount)
+            console.log(state.provider)
+            state.provider.lookupAddress("0x276B820E8382f17ECB9FA77B0952ca4E67287601")
+            .then(name => {
+                console.log(name)
+            })
+            state.provider.resolveName("mswalterepns.eth")
+            .then(name => {
+                console.log(name)
+            })
             dispatch('myPublished')
             dispatch('myCollection')
             dispatch('getCollectables')
