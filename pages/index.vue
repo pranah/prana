@@ -14,7 +14,8 @@
              thereby making them unique to enable new behaviors for the readers and giving them more <br>freedom over the content they own.
            
               </p>
-              <p class = 'tag'>(MetaMask needs to be connected to Ropsten Test Network)</p>
+              <p class = 'tag'>(MetaMask needs to be connected to Binance Smart Chain Testnet)</p>
+              <a href="https://binancex.dev/blog.html?p=making-the-move-from-ethereum-to-bsc">Configure MetaMask</a>
       </div>
   </section>
 </template>
