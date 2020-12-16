@@ -143,11 +143,11 @@ export default {
             await commit('updateAccountDetails', accounts[0])
             console.log(state.currentAccount)
             console.log(state.provider)
-            state.provider.lookupAddress("0x276B820E8382f17ECB9FA77B0952ca4E67287601")
+            state.provider.lookupAddress("0x65179fe435781acd3103185614028009ab0a3d53")
             .then(name => {
                 console.log(name)
             })
-            state.provider.resolveName("mswalterepns.eth")
+            state.provider.resolveName("mansoorop.eth")
             .then(name => {
                 console.log(name)
             })
