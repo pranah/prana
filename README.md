@@ -1,5 +1,7 @@
 # prana:
 
+![prana: cover](prana_cover_pic.png)
+
 
 ## Digital Content Distribution using NFTs
 
