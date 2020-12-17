@@ -41,3 +41,4 @@ The project is deployed on Mumbai Test Network at 0xFC3e5b1fFb9487b6ce3F719E1Fe9
 
 Run the server locally to interact with the contract.
 
+Checkout the [demo video here.](https://youtu.be/rF7ImlA1Qkw)
