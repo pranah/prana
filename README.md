@@ -42,3 +42,5 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 The project is deployed at 0xFC3e5b1fFb9487b6ce3F719E1Fe95cddD87765E0
 
 Run the server locally to interact with the project.
+
+Checkout the project [demo video here.](https://youtu.be/5yXZv7McGZ4)
