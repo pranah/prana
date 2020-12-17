@@ -28,7 +28,7 @@
                     min="0" 
                     max="999999" 
                     required
-                    label="Price in ETH"
+                    label="Price in BNB"
                     v-model="content.price"
                 />
                 <v-text-field 

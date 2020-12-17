@@ -7,7 +7,7 @@
         <v-card-text>
             <b>{{content.title}}</b><br>
             <b>Copy Number: </b>  {{content.copyNumber}} <br>
-            <b> Renting Price: </b>{{content.rentingPrice}} ETH
+            <b> Renting Price: </b>{{content.rentingPrice}} BNB
         </v-card-text>
     </div>    
 </template>

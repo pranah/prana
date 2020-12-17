@@ -21,7 +21,7 @@
                             <div class="middle">
                             <div class="text">
                                 <h1><b>{{content.title}}</b></h1><br>
-                                <b>Price: </b>{{content.price}} ETH
+                                <b>Price: </b>{{content.price}} BNB
                                 <b>ISBN: </b>{{content.isbn}}<br>
                                 <b>Author: </b>{{content.publisher}}<br>
                             </div>  

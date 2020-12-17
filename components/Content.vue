@@ -8,7 +8,7 @@
         ></v-img>
         <v-card-text>
             <b>{{content.title}}</b><br>
-            <b>Price: </b>{{content.price}} ETH
+            <b>Price: </b>{{content.price}} BNB
         </v-card-text>
     </div>    
 </template>
